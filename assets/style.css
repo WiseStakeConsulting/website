@@ -1,0 +1,128 @@
+/* ============ Wise Stake Consulting ============ */
+:root {
+  --navy: #14243f;
+  --navy-2: #1d3358;
+  --gold: #c9a227;
+  --ink: #1c2331;
+  --paper: #f7f8fa;
+  --card: #ffffff;
+  --line: #e3e7ee;
+  --muted: #5c6676;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+a { color: inherit; }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+
+/* Header */
+header { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .5px; color: var(--navy); text-decoration: none; }
+.brand img { height: 34px; width: auto; }
+.brand .wordmark { font-size: 15px; }
+.brand .wordmark small { display: block; font-weight: 400; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+nav.menu { display: flex; gap: 26px; font-size: 14px; }
+nav.menu a { text-decoration: none; color: var(--muted); font-weight: 600; }
+nav.menu a:hover { color: var(--navy); }
+
+/* Hero (professional) */
+.hero { background: linear-gradient(160deg, #ffffff 0%, #eef1f7 100%); border-bottom: 1px solid var(--line); padding: 72px 0 64px; text-align: center; }
+.hero h1 { font-size: 40px; color: var(--navy); letter-spacing: -0.5px; line-height: 1.15; }
+.hero p.sub { max-width: 640px; margin: 16px auto 0; color: var(--muted); font-size: 17px; }
+.eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+
+/* Sections */
+section { padding: 58px 0; }
+h2.sec { font-size: 26px; color: var(--navy); margin-bottom: 6px; }
+p.lede { color: var(--muted); max-width: 660px; margin-bottom: 30px; }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px; }
+.card h3 { color: var(--navy); font-size: 18px; margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: 14.5px; }
+.price { margin: 16px 0 6px; font-weight: 700; color: var(--ink); font-size: 20px; }
+.price small { font-weight: 400; color: var(--muted); font-size: 12px; }
+
+/* Buttons */
+.btn { display: inline-block; padding: 11px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer; border: none; font-family: inherit; }
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--navy-2); }
+.btn-gold { background: var(--gold); color: #1a1405; }
+.btn-outline { background: transparent; border: 1.5px solid var(--line); color: var(--muted); }
+.btn-outline:hover { border-color: var(--muted); }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+/* Wallet panel */
+#paypanel { display: none; margin-top: 16px; background: #f0f3f9; border: 1px solid var(--line); border-radius: 10px; padding: 16px; font-size: 14px; }
+#paypanel .addr { font-family: monospace; font-size: 13px; background: #fff; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); display: block; margin: 8px 0; word-break: break-all; }
+#paypanel .amt { font-size: 18px; font-weight: 800; color: var(--navy); }
+
+/* Stakeholders band */
+.band { background: var(--navy); color: #e8edf6; border-radius: 14px; padding: 40px; }
+.band h2 { color: #fff; font-size: 24px; margin-bottom: 10px; }
+.band p { color: #b9c4d8; max-width: 700px; }
+.band .pull { color: var(--gold); font-weight: 700; margin-top: 14px; font-size: 16px; }
+
+/* About */
+.two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+
+/* Contact */
+.contact-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 30px; }
+.contact-card a.mail { display: inline-block; margin: 6px 0 0; color: var(--navy); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); }
+
+footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 12.5px; }
+footer .fine { margin-top: 8px; color: #98a1af; }
+
+/* ============ PROTOCOL SUBPAGE (dark) ============ */
+body.proto { background: #07090f; color: #cfd8e6; }
+body.proto header { background: rgba(7,9,15,.9); border-bottom: 1px solid #1b2334; backdrop-filter: blur(6px); }
+body.proto .brand { color: #e8eefb; }
+body.proto nav.menu a { color: #7f8ba1; }
+body.proto nav.menu a:hover { color: #e8eefb; }
+.protohero { padding: 84px 0 60px; text-align: center; background: radial-gradient(ellipse at 50% -20%, #16233f 0%, #07090f 62%); border-bottom: 1px solid #131a29; }
+.protohero h1 { font-size: 44px; color: #eef3ff; letter-spacing: 1px; }
+.protohero .tag { color: #7f8ba1; margin-top: 12px; font-size: 16px; }
+.statuspill { display: inline-block; margin-top: 22px; padding: 7px 16px; border: 1px solid #2a3a5c; border-radius: 999px; color: var(--gold); font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+body.proto section { border-bottom: 1px solid #10151f; }
+body.proto h2.sec { color: #eef3ff; }
+body.proto p.lede { color: #7f8ba1; }
+.pcard { background: #0c111c; border: 1px solid #1b2334; border-radius: 12px; padding: 26px; }
+.pcard h3 { color: #eef3ff; font-size: 17px; margin-bottom: 8px; }
+.pcard p { color: #8b97ad; font-size: 14.5px; }
+.nn { border-left: 3px solid var(--gold); padding: 10px 16px; margin-bottom: 12px; background: #0c111c; }
+.nn b { color: #eef3ff; }
+.nn span { color: #8b97ad; font-size: 14px; }
+.stream { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.bigquote { text-align: center; padding: 70px 0; }
+.bigquote p { font-size: 26px; color: #eef3ff; max-width: 760px; margin: 0 auto; line-height: 1.4; }
+.bigquote .who { margin-top: 16px; color: var(--gold); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ============ TERMS COMPOSER ============ */
+.composer { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+@media (max-width: 800px) { .composer { grid-template-columns: 1fr; } }
+.cform { background: #0c111c; border: 1px solid #1b2334; border-radius: 12px; padding: 26px; }
+.cform label { display: block; color: #8b97ad; font-size: 13px; margin: 18px 0 6px; font-weight: 600; }
+.cform label:first-child { margin-top: 0; }
+.cform input[type="text"], .cform input[type="number"] {
+  width: 100%; background: #07090f; border: 1px solid #1b2334; border-radius: 8px;
+  color: #eef3ff; padding: 10px 12px; font-size: 15px; font-family: inherit;
+}
+.cform input[type="range"] { width: 100%; accent-color: #c9a227; }
+.cform .rangeval { color: var(--gold); font-weight: 800; font-size: 20px; }
+.cform .hint { color: #5f6b80; font-size: 12px; margin-top: 4px; }
+.termsheet { background: #f7f8fa; color: #1c2331; border-radius: 12px; padding: 30px; font-size: 13.5px; line-height: 1.55; }
+.termsheet h3 { color: #14243f; font-size: 17px; margin-bottom: 4px; }
+.termsheet .tmeta { color: #5c6676; font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.termsheet h4 { color: #14243f; font-size: 13px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: 1px; }
+.termsheet .bigsplit { font-size: 26px; font-weight: 800; color: #14243f; margin: 8px 0; }
+.termsheet .sig { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.termsheet .sig div { border-top: 1.5px solid #1c2331; padding-top: 4px; font-size: 12px; color: #5c6676; margin-top: 26px; }
+.termsheet .warn { margin-top: 14px; background: #fdf3d7; border: 1px solid #e3cf8a; border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: #5a4a10; }
+@media print {
+  body.proto header, body.proto .protohero, body.proto footer, .noprint, .cform { display: none !important; }
+  body.proto { background: #fff; color: #000; }
+  .termsheet { border-radius: 0; padding: 0; background: #fff; color: #000; }
+}

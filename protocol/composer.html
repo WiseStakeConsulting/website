@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPS-1 Terms Composer | Wise Stake Consulting</title>
+<meta name="description" content="Configure a PPS-1 referral split, preview the plain-English terms, and print the agreement before anything becomes immutable.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="../assets/logo.png">
+</head>
+<body class="proto">
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="../index.html">
+      <img src="../assets/logo.png" alt="Wise Stake Consulting owl logo" onerror="this.style.display='none'">
+      <span class="wordmark">Wise Stake Consulting<small>PPS-1 standard</small></span>
+    </a>
+    <nav class="menu">
+      <a href="index.html">PPS-1</a>
+      <a href="#">Composer</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="protohero" style="padding:60px 0 44px">
+  <div class="wrap">
+    <div class="eyebrow">Tool - client-side, zero backend</div>
+    <h1 style="font-size:36px">Terms Composer</h1>
+    <p class="tag">Configure the split. Read the terms. Print the agreement. Nothing becomes immutable until deployment - and nothing deploys until the terms are signed.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="notice noprint" style="background:#0c111c;border:1px solid #2a3a5c;border-radius:10px;padding:14px 18px;font-size:13.5px;color:#c9a227;margin-bottom:26px">
+      <b>Preview mode.</b> The PPS-1 factory is not yet deployed. This composer produces your configuration and terms record only - it executes no transactions. When the factory goes live, the deployed splitter enforces exactly the split recorded here, and it cannot be changed afterward.
+    </div>
+
+    <div class="composer">
+      <div class="cform noprint">
+        <label for="biz">Business / client name</label>
+        <input type="text" id="biz" placeholder="e.g. Gallery One, LLC">
+
+        <label for="split">Creator share of rail economics <span class="rangeval" id="splitval">70%</span></label>
+        <input type="range" id="split" min="0" max="100" value="70" step="5">
+        <div class="hint">Distributor share (Wise Stake Consulting): <span id="splitval2">30%</span>. The two always total 100%.</div>
+
+        <label for="counter">Splitter index (deterministic derivation counter)</label>
+        <input type="number" id="counter" value="1" min="1" max="999">
+        <div class="hint">Each business gets its own index so derived splitter addresses never collide.</div>
+
+        <label for="amt">Expected aggregate stake (USD equivalent)</label>
+        <input type="number" id="amt" value="10000" min="0" step="500">
+
+        <label for="term">Maximum term of pinned stakes: <span class="rangeval" id="termval">1 year</span></label>
+        <input type="range" id="term" min="1" max="42" value="1">
+        <div class="hint">365 days minimum for referral eligibility; protocol maximum 42 years.</div>
+
+        <div class="btn-row" style="margin-top:22px">
+          <button class="btn btn-gold" onclick="window.print()">Print terms</button>
+          <button class="btn btn-outline" id="dl">Download as .txt</button>
+        </div>
+      </div>
+
+      <div class="termsheet" id="sheet">
+        <h3 id="t-title">Referral Rail Terms - Preview</h3>
+        <div class="tmeta">Patronage Bundle Protocol (PPS-1) &bull; drafted <span id="t-date"></span></div>
+
+        <h4>Parties</h4>
+        <p id="t-parties"></p>
+
+        <h4>Rail split</h4>
+        <div class="bigsplit" id="t-split"></div>
+        <p id="t-splittext"></p>
+
+        <h4>Accumulation &amp; threshold</h4>
+        <p id="t-accum"></p>
+
+        <h4>Custody</h4>
+        <p>The Client's members stake from their own wallets at all times. Wise Stake Consulting, LLC never holds, custodies, trades, or transmits client or member funds. The splitter, once deployed, holds no balances between claims and pays each party directly per the split above.</p>
+
+        <h4>Immutability</h4>
+        <p id="t-immut"></p>
+
+        <h4>Disclosure</h4>
+        <p>Every staker whose stake is pinned to this rail will be informed, in plain language before staking, that referral attribution accrues as described in these terms. This disclosure is a requirement of the PPS-1 standard and may not be waived.</p>
+
+        <h4>No guarantee</h4>
+        <p>Protocol distributions are a feature of the underlying staking protocol and are not promised, guaranteed, or underwritten by either party. Nothing in these terms constitutes investment, financial, legal, or tax advice.</p>
+
+        <div class="warn"><b>Before this splitter deploys:</b> both parties sign this sheet (or a formal agreement containing it). Deployment fixes the split permanently for the life of every stake pinned to the splitter - up to 42 years. There is no edit function after deployment. Read it twice.</div>
+
+        <div class="sig">
+          <div>Client signature / date</div>
+          <div>Wise Stake Consulting, LLC / date</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026 Wise Stake Consulting, LLC &bull; PPS-1 is an open specification: spec CC BY 4.0, reference code MIT.
+    <div class="fine">This tool runs entirely in your browser. No data entered here is transmitted, stored, or seen by anyone.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function termWord(y){ return y === 1 ? "1 year" : y + " years"; }
+  function usd(n){ return "$" + Number(n).toLocaleString("en-US"); }
+  function render(){
+    var biz = $("biz").value.trim() || "[Client name]";
+    var c = parseInt($("split").value,10), d = 100 - c;
+    $("splitval").textContent = c + "%";
+    $("splitval2").textContent = d + "%";
+    var term = parseInt($("term").value,10);
+    $("termval").textContent = termWord(term);
+    var amt = parseFloat($("amt").value) || 0;
+    var ctr = parseInt($("counter").value,10) || 1;
+
+    $("t-date").textContent = new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+    $("t-title").textContent = "Referral Rail Terms - " + biz;
+    $("t-parties").textContent = "Between " + biz + " (\"the Client\") and Wise Stake Consulting, LLC, an Indiana limited liability company (\"the Consultant\"), regarding referral rail economics for stakes attributed to the Client's PPS-1 splitter (derivation index " + ctr + ").";
+    $("t-split").textContent = c + "% Client / " + d + "% Consultant";
+    $("t-splittext").textContent = "Of the referral rail economics attributable to stakes pinned to the Client's splitter, " + c + "% is allocated to the Client and " + d + "% to the Consultant. This ratio is fixed in the splitter at deployment and applies to every stake pinned to it, for the life of each such stake.";
+    $("t-accum").textContent = "Referral eligibility requires stakes of at least 365 days. Critical Mass referrer status is reached when the cumulative value of qualifying stakes attributed to the splitter reaches " + usd(amt === 10000 ? 10000 : amt) + (amt === 10000 ? " (the protocol threshold)" : "") + ", counted cumulatively across all qualifying stakes. Until deployment of the splitter, accrued rail records remain unclaimable; the parties acknowledge the protocol pays rail economics only after the threshold is crossed.";
+    $("t-immut").textContent = "Upon deployment, the split above becomes immutable for the life of every stake pinned to this splitter - up to " + termWord(term) + " per stake (protocol maximum approximately 15,331 days). No party can alter the ratio after deployment. For this reason the parties sign these terms BEFORE deployment, not after.";
+  }
+  ["biz","split","counter","amt","term"].forEach(function(id){
+    $(id).addEventListener("input", render);
+  });
+  $("dl").addEventListener("click", function(){
+    var text = $("sheet").innerText;
+    var blob = new Blob([text], {type:"text/plain"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    var name = ($("biz").value.trim() || "client").replace(/[^a-z0-9]+/gi,"-").toLowerCase();
+    a.download = "pps1-rail-terms-" + name + ".txt";
+    a.click();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
