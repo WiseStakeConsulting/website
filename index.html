@@ -3,152 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wise Stake Consulting, LLC - Stake-Backed Memberships</title>
-<meta name="description" content="Earn As You Live: your people stake from their own wallets and earn full benefits from day one. Free to start. Membership architecture, referral design, consulting when you are ready.">
-<style>/* ============ Wise Stake Consulting ============ */
-:root {
-  --navy: #14243f;
-  --navy-2: #1d3358;
-  --gold: #c9a227;
-  --ink: #1c2331;
-  --paper: #f7f8fa;
-  --card: #ffffff;
-  --line: #e3e7ee;
-  --muted: #5c6676;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
-a { color: inherit; }
-.wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
-
-/* Header */
-header { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
-.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .5px; color: var(--navy); text-decoration: none; }
-.brand img { height: 34px; width: auto; }
-.brand .wordmark { font-size: 15px; }
-.brand .wordmark small { display: block; font-weight: 400; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
-nav.menu { display: flex; gap: 26px; font-size: 14px; }
-nav.menu a { text-decoration: none; color: var(--muted); font-weight: 600; }
-nav.menu a:hover { color: var(--navy); }
-
-/* Hero (professional) */
-.hero { background: linear-gradient(160deg, #ffffff 0%, #eef1f7 100%); border-bottom: 1px solid var(--line); padding: 72px 0 64px; text-align: center; }
-.hero h1 { font-size: 40px; color: var(--navy); letter-spacing: -0.5px; line-height: 1.15; }
-.hero p.sub { max-width: 640px; margin: 16px auto 0; color: var(--muted); font-size: 17px; }
-.eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
-
-/* Sections */
-section { padding: 58px 0; }
-h2.sec { font-size: 26px; color: var(--navy); margin-bottom: 6px; }
-p.lede { color: var(--muted); max-width: 660px; margin-bottom: 30px; }
-
-/* Cards */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px; }
-.card h3 { color: var(--navy); font-size: 18px; margin-bottom: 8px; }
-.card p { color: var(--muted); font-size: 14.5px; }
-.price { margin: 16px 0 6px; font-weight: 700; color: var(--ink); font-size: 20px; }
-.price small { font-weight: 400; color: var(--muted); font-size: 12px; }
-
-/* Buttons */
-.btn { display: inline-block; padding: 11px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer; border: none; font-family: inherit; }
-.btn-primary { background: var(--navy); color: #fff; }
-.btn-primary:hover { background: var(--navy-2); }
-.btn-gold { background: var(--gold); color: #1a1405; }
-.btn-outline { background: transparent; border: 1.5px solid var(--line); color: var(--muted); }
-.btn-outline:hover { border-color: var(--muted); }
-.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-
-/* Wallet panel */
-#paypanel { display: none; margin-top: 16px; background: #f0f3f9; border: 1px solid var(--line); border-radius: 10px; padding: 16px; font-size: 14px; }
-#paypanel .addr { font-family: monospace; font-size: 13px; background: #fff; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); display: block; margin: 8px 0; word-break: break-all; }
-#paypanel .amt { font-size: 18px; font-weight: 800; color: var(--navy); }
-
-/* Stakeholders band */
-.band { background: var(--navy); color: #e8edf6; border-radius: 14px; padding: 40px; }
-.band h2 { color: #fff; font-size: 24px; margin-bottom: 10px; }
-.band p { color: #b9c4d8; max-width: 700px; }
-.band .pull { color: var(--gold); font-weight: 700; margin-top: 14px; font-size: 16px; }
-
-/* About */
-.two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
-@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
-
-/* Contact */
-.contact-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 30px; }
-.contact-card a.mail { display: inline-block; margin: 6px 0 0; color: var(--navy); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); }
-
-footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 12.5px; }
-footer .fine { margin-top: 8px; color: #98a1af; }
-
-/* ============ PROTOCOL SUBPAGE (dark) ============ */
-body.proto { background: #07090f; color: #cfd8e6; }
-body.proto header { background: rgba(7,9,15,.9); border-bottom: 1px solid #1b2334; backdrop-filter: blur(6px); }
-body.proto .brand { color: #e8eefb; }
-body.proto nav.menu a { color: #7f8ba1; }
-body.proto nav.menu a:hover { color: #e8eefb; }
-.protohero { padding: 84px 0 60px; text-align: center; background: radial-gradient(ellipse at 50% -20%, #16233f 0%, #07090f 62%); border-bottom: 1px solid #131a29; }
-.protohero h1 { font-size: 44px; color: #eef3ff; letter-spacing: 1px; }
-.protohero .tag { color: #7f8ba1; margin-top: 12px; font-size: 16px; }
-.statuspill { display: inline-block; margin-top: 22px; padding: 7px 16px; border: 1px solid #2a3a5c; border-radius: 999px; color: var(--gold); font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
-body.proto section { border-bottom: 1px solid #10151f; }
-body.proto h2.sec { color: #eef3ff; }
-body.proto p.lede { color: #7f8ba1; }
-.pcard { background: #0c111c; border: 1px solid #1b2334; border-radius: 12px; padding: 26px; }
-.pcard h3 { color: #eef3ff; font-size: 17px; margin-bottom: 8px; }
-.pcard p { color: #8b97ad; font-size: 14.5px; }
-.nn { border-left: 3px solid var(--gold); padding: 10px 16px; margin-bottom: 12px; background: #0c111c; }
-.nn b { color: #eef3ff; }
-.nn span { color: #8b97ad; font-size: 14px; }
-.stream { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.bigquote { text-align: center; padding: 70px 0; }
-.bigquote p { font-size: 26px; color: #eef3ff; max-width: 760px; margin: 0 auto; line-height: 1.4; }
-.bigquote .who { margin-top: 16px; color: var(--gold); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
-
-/* ============ TERMS COMPOSER ============ */
-.composer { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
-@media (max-width: 800px) { .composer { grid-template-columns: 1fr; } }
-.cform { background: #0c111c; border: 1px solid #1b2334; border-radius: 12px; padding: 26px; }
-.cform label { display: block; color: #8b97ad; font-size: 13px; margin: 18px 0 6px; font-weight: 600; }
-.cform label:first-child { margin-top: 0; }
-.cform input[type="text"], .cform input[type="number"] {
-  width: 100%; background: #07090f; border: 1px solid #1b2334; border-radius: 8px;
-  color: #eef3ff; padding: 10px 12px; font-size: 15px; font-family: inherit;
-}
-.cform input[type="range"] { width: 100%; accent-color: #c9a227; }
-.cform .rangeval { color: var(--gold); font-weight: 800; font-size: 20px; }
-.cform .hint { color: #5f6b80; font-size: 12px; margin-top: 4px; }
-.termsheet { background: #f7f8fa; color: #1c2331; border-radius: 12px; padding: 30px; font-size: 13.5px; line-height: 1.55; }
-.termsheet h3 { color: #14243f; font-size: 17px; margin-bottom: 4px; }
-.termsheet .tmeta { color: #5c6676; font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-.termsheet h4 { color: #14243f; font-size: 13px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: 1px; }
-.termsheet .bigsplit { font-size: 26px; font-weight: 800; color: #14243f; margin: 8px 0; }
-.termsheet .sig { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.termsheet .sig div { border-top: 1.5px solid #1c2331; padding-top: 4px; font-size: 12px; color: #5c6676; margin-top: 26px; }
-.termsheet .warn { margin-top: 14px; background: #fdf3d7; border: 1px solid #e3cf8a; border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: #5a4a10; }
-@media print {
-  body.proto header, body.proto .protohero, body.proto footer, .noprint, .cform { display: none !important; }
-  body.proto { background: #fff; color: #000; }
-  .termsheet { border-radius: 0; padding: 0; background: #fff; color: #000; }
-}
-</style>
+<title>Wise Stake - Earn As You Live</title>
+<meta name="description" content="Earn As You Live: your people stake from their own wallets and earn full benefits from day one. You never pay us a fee. Websites, membership architecture, referral design when you are ready.">
+<link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="assets/logo.png">
+<style>
+.tip{position:relative;border-bottom:1px dashed #c9a227;cursor:help;outline:none}
+.tip::after{content:attr(data-tip);display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:135%;background:#0d1b2a;color:#f5f1e6;border:1px solid #c9a227;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;width:250px;max-width:80vw;white-space:normal;z-index:9;font-weight:400;box-shadow:0 6px 18px rgba(0,0,0,.35);text-align:left}
+.tip:hover::after,.tip:focus::after,.tip:active::after{display:block}
+.tip::before{content:"";display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:calc(135% - 6px);border:6px solid transparent;border-top-color:#c9a227;z-index:10}
+.tip:hover::before,.tip:focus::before,.tip:active::before{display:block}
+.storyimg{width:100%;border-radius:12px;border:1px solid rgba(201,162,39,.35);display:block;margin:0 0 18px}
+@media(min-width:900px){.storygrid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}.storygrid .storyimg{margin:0}}
+</style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html">
-<img src="assets/logo.png" alt="Wise Stake owl" style="height:34px;width:auto">
+      <img src="assets/logo.png" alt="Wise Stake owl logo" onerror="this.style.display='none'">
       <span class="wordmark">Wise Stake<small>Earn As You Live</small></span>
     </a>
     <nav class="menu">
       <a href="#free">Earn As You Live</a>
-      <a href="#how">How it works</a>
+      <a href="#tree">What is a stake</a>
       <a href="#services">Work with us</a>
-      <a href="protocol/">PPS-1</a>
+      <a href="protocol/">PBS-1</a>
       <a href="es/">Español</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -158,25 +39,45 @@ body.proto p.lede { color: #7f8ba1; }
 <div class="hero">
   <div class="wrap">
     <div class="eyebrow">Earn As You Live</div>
-    <h1>Earn as you live.<br>Free to start. Here is why.</h1>
-    <p class="sub">Galleries, charities, shops, creators - if your people are going to stake anyway, route them through our program. They get everything they would get anywhere else, from day one. You pay us nothing. Later, when you are ready to run your own program, we show you how. That is the whole pitch.</p>
+    <h1>Earn as you live.<br>You never pay us. Here is why.</h1>
+    <p class="sub">Galleries, charities, shops, creators - if your people are going to <span class="tip" tabindex="0" data-tip="A stake is money you place once, in a fixed-term position that stays yours the entire time and comes back to you at the end with everything it produced along the way. A fruit tree, not a bill.">stake</span> anyway, route them through our program. They get everything they would get anywhere else, from day one. You pay us nothing. Later, when you are ready to run your own program, we show you how. That is the whole pitch.</p>
     <div class="btn-row" style="justify-content:center">
       <a class="btn btn-gold" style="font-size:16px;padding:14px 28px" href="https://pro.wise.one/r/0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Start earning as you live &rarr;</a>
-      <a class="btn btn-outline" href="#how">How it works</a>
+      <a class="btn btn-outline" href="#tree">Never staked before? Start here</a>
+      <a class="btn btn-outline" href="#diy">Know the steps? Stake directly <a class="btn btn-outline" href="#tree">Never staked before? Start here</a>rarr;</a>
     </div>
-    <p style="margin-top:14px;font-size:12.5px;color:var(--muted)">Full disclosure: stakes placed through our program build our referral credit. That is how we eat. Your stakers still get every benefit they are owed - that part never changes.</p>
+    <p style="margin-top:14px;font-size:12.5px;color:var(--muted)">Full disclosure: stakes placed through our program build our referral credit. That is how we eat. Your stakers still get every benefit they are owed - that part never changes.<br>To be plain about costs: a stake needs a little ETH for the network gas fee, plus the stake amount itself - which stays yours the whole time and comes back at the end. What you never pay is us.</p>
+    <p style="margin-top:6px;font-size:12.5px;color:var(--muted)">New here? Every dotted-underlined word on this page explains itself. Hover it, or tap it.</p>
   </div>
 </div>
 
-<section id="how">
+<section id="tree">
   <div class="wrap">
-    <div class="eyebrow">The free path</div>
+    <div class="eyebrow">No jargon</div>
+    <h2 class="sec">What is a stake? Think of a fruit tree.</h2>
+    <div class="storygrid">
+      <div>
+        <p class="lede">You plant a seed, and the tree grows in <em>your</em> yard - not ours. For up to 42 years it bears fruit. Everything it grows is yours, and when the tree's life ends, its full value comes back to you too.</p>
+        <p>You can pick some fruit along the way, but every early harvest lowers what the tree is worth at the end. That is a <span class="tip" tabindex="0" data-tip="The term is how long the money stays placed. The minimum here is one year.">stake</span>: money you place once, that stays yours while it produces, and comes back to you at the end.</p>
+        <p>And the one we work with is a special tree. You can give it to somebody else, and it grows in their yard just the same. You can even split it - share a slice of everything it produces with a third person, for the life of the tree. That last part is what lets a gallery, a charity, or a dealership put their people's stakes to work without ever holding anybody's money.</p>
+        <p style="color:var(--muted);font-size:13.5px">The analogy stops where promises begin: the tree describes how the <span class="tip" tabindex="0" data-tip="The protocol is the set of public, immutable smart contracts that enforce the rules. No company sits in the middle - the code does.">protocol</span> works, not what it will pay. Nothing on this site is a guarantee.</p>
+      </div>
+      <div>
+        <img class="storyimg" src="assets/img/fruit-tree.png" alt="A fruit tree growing in a home yard at golden hour">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">No fee from us</div>
     <h2 class="sec">How Earn As You Live works</h2>
     <p class="lede">Three steps. The protocol does the enforcing. You never send us a dollar.</p>
     <div class="cards">
       <div class="card">
         <h3>1. Your people stake from their own wallets</h3>
-        They use our link and create their own staking position. Their wallet. Their money. Their keys. The minimum term is a year. We never touch anybody.s funds - not once, not ever.</p>
+        <p>They use our link and create their own <span class="tip" tabindex="0" data-tip="A position is one placement of money in the protocol, with a start date and an end date. It is created from the staker's own wallet and belongs to them from day one.">staking position</span>. Their <span class="tip" tabindex="0" data-tip="A wallet is not an account at a company. It is a program on your own device that holds your money and your keys. Nobody can move your funds without you - including us.">wallet</span>. Their money. Their keys. The minimum term is a year. We never touch anybody's funds - not once, not ever.</p>
       </div>
       <div class="card">
         <h3>2. They earn everything, from day one</h3>
@@ -184,7 +85,7 @@ body.proto p.lede { color: #7f8ba1; }
       </div>
       <div class="card">
         <h3>3. Then leave us. Seriously.</h3>
-        <p>The free program is the on-ramp, not the trap. When our PPS-1 standard goes live, your stakes can point at your own program instead of ours. We help you set it up, the split between us gets agreed on paper before anything goes on-chain, and then it is yours. A membership program where the exit plan comes standard - imagine that.</p>
+        <p>The no-fee program is the on-ramp, not the trap. When our PBS-1 standard goes live, your stakes can point at your own program instead of ours. We help you set it up, the split between us gets agreed on paper before anything goes <span class="tip" tabindex="0" data-tip="On-chain means recorded publicly on the blockchain, where anyone can verify it and nobody can quietly change it.">on-chain</span>, and then it is yours. A membership program where the exit plan comes standard - imagine that.</p>
       </div>
     </div>
     <div class="btn-row" style="justify-content:center;margin-top:26px">
@@ -193,11 +94,29 @@ body.proto p.lede { color: #7f8ba1; }
   </div>
 </section>
 
+<section id="blockbuster" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">The story we are telling</div>
+    <h2 class="sec">Blockbuster knew something Netflix forgot</h2>
+    <div class="storygrid">
+      <div>
+        <img class="storyimg" src="assets/img/blockbuster.png" alt="A retro video rental storefront dissolving into a modern streaming wall">
+      </div>
+      <div>
+        <p class="lede">Blockbuster never charged you a subscription. You were a member: you walked in, you belonged, you walked out with the movie.</p>
+        <p>Netflix kept the convenience and quietly turned belonging into a bill - one you pay forever, for something you never own.</p>
+        <p>We are building the thing Blockbuster understood: a membership you <em>hold</em>, not one that holds you. The <span class="tip" tabindex="0" data-tip="A stake is money you place once, in a fixed-term position that stays yours the entire time and comes back to you at the end with everything it produced along the way.">stake</span> is the membership card - and the card is yours.</p>
+        <p class="pull">Be a stakeholder, not a subscriber.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="services" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow">When you're ready for more</div>
     <h2 class="sec">Work with us</h2>
-    <p class="lede">The free program gets you moving. This is what turns it into a real program - memberships, gallery shows, dealer networks, your own program. It starts with one paid conversation. Quotes come after that, not before.</p>
+    <p class="lede">The program costs you nothing in fees. This is what turns it into a real program - memberships, gallery shows, dealer networks, your own website. It starts with one paid conversation. Quotes come after that, not before.</p>
     <div class="cards">
 
       <div class="card">
@@ -209,6 +128,14 @@ body.proto p.lede { color: #7f8ba1; }
           <a class="btn btn-outline" href="mailto:hello@wisestake.consulting?subject=Initial%20Consultation%20-%20card%20payment">Card / invoice</a>
         </div>
         <div id="paypanel"><div id="paypanel-body"></div></div>
+      </div>
+
+      <div class="card">
+        <h3>Your Website, Your Story</h3>
+        <p>We build your website - the one that tells your story, sells your product or service, and carries the bundle with the stake program wired straight into it. Your people buy from you and stake from you, in one place. And you own the site.</p>
+        <p style="color:var(--muted);font-size:13.5px">What it includes: design and build, your story written, the bundle wired in, a wallet walkthrough for your customers, and launch support.</p>
+        <div class="price">Quoted <small>- after consultation</small></div>
+        <div class="btn-row"><a class="btn btn-outline" href="mailto:hello@wisestake.consulting?subject=Website%20Build%20inquiry">Request quote</a></div>
       </div>
 
       <div class="card">
@@ -229,22 +156,38 @@ body.proto p.lede { color: #7f8ba1; }
   </div>
 </section>
 
-<section id="stakeholders" style="padding-top:0">
+<section id="wallet" style="padding-top:0">
   <div class="wrap">
-    <div class="band">
-      <h2>The Stakeholders movement</h2>
-      <p>A subscription is a bill you pay forever for something you never own. We build the other thing: your people position once, keep their own money the whole time, and get it back when the term ends. The access, the art, the membership - that rides on the stake, not on the invoice.</p>
-      <p class="pull">Be a stakeholder, not a subscriber.</p>
+    <div class="eyebrow">One thing you will need</div>
+    <h2 class="sec">Before anything else: get a wallet</h2>
+    <p class="lede">Even if you pay us by card, your stake lives in a wallet - not in an account at a company. A wallet is a program on your own device that holds your money and your keys. Only you can move your funds. Not a bank. Not us. Nobody.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>MetaMask</h3>
+        <p>The one most people start with. Simple, widely supported, works in your browser and phone. <a href="https://metamask.io/" rel="noopener">metamask.io</a></p>
+      </div>
+      <div class="card">
+        <h3>Rabby</h3>
+        <p>Built for people who end up on more than one network, and it checks every transaction before you sign it. A favorite once you get comfortable. <a href="https://rabby.io/" rel="noopener">rabby.io</a></p>
+      </div>
     </div>
-  </div>
+    <p style="margin-top:16px">Two real costs, neither paid to us: the network gas fee (a few dollars of ETH), and the stake amount itself - the level your program asks for before someone qualifies for your services. That money is not spent. It is placed, it stays theirs, and it comes back when the term ends.</p>
+    <p style="margin-top:16px">Tell us your business and your use case when you reach out - gallery, charity, shop, dealership - and we will walk you through wallet setup step by step, on a call, before any money moves. Your keys, your money. We never hold either.</p>
+
+<div class="band" id="diy" style="margin-top:34px">
+  <h3 style="margin-bottom:8px">Already know your way around?</h3>
+  <p style="font-size:14.5px">Then skip the tour. Connect your wallet, and one button takes you straight to creating your own specialty stake - transferable, in your name, from your wallet - through our Earn As You Live link. Nothing here tutors you, nothing here holds your hand. When the PBS-1 bundle goes live, this same door leads to it. Disclosure: stakes placed through this link build our referral credit - same as everything else on this page, and same day-one benefits for you.</p>
+  <div class="btn-row" style="margin-top:14px"><button class="btn btn-gold" data-stake-link>Connect wallet &amp; create your stake</button></div>
+  <div id="stakepanel" style="display:none;margin-top:14px"><div id="stakepanel-body"></div></div>
+</div>
 </section>
 
-<section id="about">
+<section id="about" style="padding-top:0">
   <div class="wrap two">
     <div>
       <div class="eyebrow">About</div>
-      <h2 class="sec">Built in Indianapolis</h2>
-      <p class="lede" style="margin-bottom:14px">We are a small Indiana LLC with one idea: the shops, galleries, charities and creators people love are all still charging monthly for things people should own a piece of. We build the other version - and the entry-level piece is free, because a standard nobody can use is just a PDF.</p>
+      <h2 class="sec">Built in Indianapolis, for the world</h2>
+      <p class="lede" style="margin-bottom:14px">We are a small company with one idea: the shops, galleries, charities and creators people love are all still charging monthly for things people should own a piece of. We build the other version - and the entry-level piece costs you nothing in fees, because a standard nobody can use is just a PDF.</p>
       <p style="color:var(--muted);font-size:14.5px">Fair warning about the owl: yes, it is a nod to the Wise token community, where we learned this stuff by actually doing it. We are not hiding the lineage. We are building on it.</p>
     </div>
     <div class="contact-card">
@@ -273,7 +216,7 @@ body.proto p.lede { color: #7f8ba1; }
 <footer>
   <div class="wrap">
     &copy; 2026 Wise Stake &bull; wisestake.consulting &bull; wisestake.eth
-    <div class="fine">Wise Stake Consulting, LLC provides business consulting services only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Membership structures described involve self-custodied digital assets; participants retain custody of their own funds at all times. Referral attribution on stakes placed through our Earn As You Live program is disclosed and is a standard feature of the underlying protocol. The owl motif is a heritage homage and an independent mark of Wise Stake Consulting, LLC.</div>
+    <div class="fine">Wise Stake Consulting, LLC provides business consulting services only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Membership structures described involve self-custodied digital assets; participants retain custody of their own funds at all times. Referral attribution on stakes placed through our Earn As You Live program is disclosed and is a standard feature of the underlying protocol. The owl motif is a heritage homage and an independent mark of Wise Stake Consulting, LLC. Third-party wallet links are provided for convenience; we are not affiliated with MetaMask or Rabby.</div>
   </div>
 </footer>
 

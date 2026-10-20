@@ -74,4 +74,33 @@
       });
     });
   });
+  var STAKE_URL = "https://pro.wise.one/r/wisestake.eth";
+  var spanel = document.getElementById("stakepanel");
+  var spanelBody = document.getElementById("stakepanel-body");
+  async function startStake() {
+    if (!haveWallet()) {
+      spanel.style.display = "block";
+      spanelBody.innerHTML =
+        "<b>No wallet detected in this browser.</b><br>" +
+        "Install <a href=https://metamask.io/ target=_blank rel=noopener>MetaMask</a> or <a href=https://rabby.io/ target=_blank rel=noopener>Rabby</a>, then reload.";
+      return;
+    }
+    spanel.style.display = "block";
+    spanelBody.innerHTML = "Connecting wallet...";
+    try {
+      var accts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      var acct = accts[0].slice(0, 6) + "..." + accts[0].slice(-4);
+      spanelBody.innerHTML =
+        "<div>Connected: <b>" + acct + "</b></div>" +
+        "<div style=margin-top:8px>You are set. Creating your stake happens at Wise One, from your own wallet - your keys, your position, transferable, in your name.</div>" +
+        "<div class=btn-row style=margin-top:10px><a class=btn btn-gold href=" + STAKE_URL + " target=_blank rel=noopener>Continue: create your stake &rarr;</a></div>";
+    } catch (e) {
+      spanel.style.display = "block";
+      spanelBody.innerHTML = "Connection declined or failed - no problem. You can still go directly: " +
+        "<div class=btn-row style=margin-top:8px><a class=btn btn-outline href=" + STAKE_URL + " target=_blank rel=noopener>Create your stake &rarr;</a></div>";
+    }
+  }
+  document.querySelectorAll("[data-stake-link]").forEach(function (btn) {
+    btn.addEventListener("click", function () { startStake(); });
+  });
 })();
