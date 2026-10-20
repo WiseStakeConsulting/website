@@ -7,6 +7,11 @@
 <meta name="description" content="Gana Mientras Vives: tu gente apuesta desde sus propias wallets y gana beneficios completos desde el primer dia. Usted no nos paga honorarios.">
 <link rel="stylesheet" href="../assets/style.css">
 <link rel="icon" href="../assets/logo.png">
+<meta property="og:title" content="Wise Stake - Gana Mientras Vives">
+<meta property="og:description" content="Su gente hace stake desde sus propias wallets y gana beneficios completos desde el primer dia. Usted no nos paga.">
+<meta property="og:image" content="https://wisestake.consulting/assets/img/share-card.png">
+<meta property="og:url" content="https://wisestake.consulting/es/">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 .tip{position:relative;border-bottom:1px dashed #c9a227;cursor:help;outline:none}
 .tip::after{content:attr(data-tip);display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:135%;background:#0d1b2a;color:#f5f1e6;border:1px solid #c9a227;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;width:250px;max-width:80vw;white-space:normal;z-index:9;font-weight:400;box-shadow:0 6px 18px rgba(0,0,0,.35);text-align:left}
@@ -15,6 +20,19 @@
 .tip:hover::before,.tip:focus::before,.tip:active::before{display:block}
 .storyimg{width:100%;border-radius:12px;border:1px solid rgba(201,162,39,.35);display:block;margin:0 0 18px}
 @media(min-width:900px){.storygrid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}.storygrid .storyimg{margin:0}}
+
+/* mobile nav */
+header .wrap.nav{position:relative}
+.navt,.burger{display:none}
+@media(max-width:960px){
+.burger{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(201,162,39,.55);border-radius:9px;padding:7px 15px;background:transparent;color:#0d1b2a;font-weight:600;font-size:14px;cursor:pointer}
+.burger::after{content:"";width:9px;height:9px;border-right:2px solid #c9a227;border-bottom:2px solid #c9a227;transform:rotate(45deg) translateY(-2px)}
+.navt:checked + .burger::after{transform:rotate(-135deg) translateY(-2px)}
+.menu{display:none}
+.navt:checked ~ .menu{display:flex;flex-direction:column;position:absolute;top:calc(100% + 10px);left:12px;right:12px;background:#ffffff;z-index:60;padding:10px 20px;border:1px solid rgba(201,162,39,.4);border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.14)}
+.menu a{padding:12px 2px;border-bottom:1px solid rgba(13,27,42,.07);font-size:15px}
+.menu a:last-child{border-bottom:none}
+}
 </style>
 </head>
 <body>
@@ -25,6 +43,7 @@
       <img src="../assets/logo.png" alt="Logo buho de Wise Stake" onerror="this.style.display='none'">
       <span class="wordmark">Wise Stake<small>Gana Mientras Vives</small></span>
     </a>
+    <input type="checkbox" id="navt" class="navt" aria-label="Open menu"><label for="navt" class="burger">Menu</label>
     <nav class="menu">
       <a href="#free">Gana Mientras Vives</a>
       <a href="#tree">Que es un stake</a>
