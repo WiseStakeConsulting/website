@@ -4,8 +4,136 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wise Stake Consulting, LLC - Stake-Backed Memberships</title>
-<meta name="description" content="Stake through our rail free. Your stakers earn full benefits from day one while your own rail builds. Then, when you're ready: membership architecture, referral design, consulting.">
-<link rel="stylesheet" href="assets/style.css">
+<meta name="description" content="Earn As You Live: your people stake from their own wallets and earn full benefits from day one. Free to start. Membership architecture, referral design, consulting when you are ready.">
+<style>/* ============ Wise Stake Consulting ============ */
+:root {
+  --navy: #14243f;
+  --navy-2: #1d3358;
+  --gold: #c9a227;
+  --ink: #1c2331;
+  --paper: #f7f8fa;
+  --card: #ffffff;
+  --line: #e3e7ee;
+  --muted: #5c6676;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+a { color: inherit; }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+
+/* Header */
+header { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .5px; color: var(--navy); text-decoration: none; }
+.brand img { height: 34px; width: auto; }
+.brand .wordmark { font-size: 15px; }
+.brand .wordmark small { display: block; font-weight: 400; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+nav.menu { display: flex; gap: 26px; font-size: 14px; }
+nav.menu a { text-decoration: none; color: var(--muted); font-weight: 600; }
+nav.menu a:hover { color: var(--navy); }
+
+/* Hero (professional) */
+.hero { background: linear-gradient(160deg, #ffffff 0%, #eef1f7 100%); border-bottom: 1px solid var(--line); padding: 72px 0 64px; text-align: center; }
+.hero h1 { font-size: 40px; color: var(--navy); letter-spacing: -0.5px; line-height: 1.15; }
+.hero p.sub { max-width: 640px; margin: 16px auto 0; color: var(--muted); font-size: 17px; }
+.eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+
+/* Sections */
+section { padding: 58px 0; }
+h2.sec { font-size: 26px; color: var(--navy); margin-bottom: 6px; }
+p.lede { color: var(--muted); max-width: 660px; margin-bottom: 30px; }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px; }
+.card h3 { color: var(--navy); font-size: 18px; margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: 14.5px; }
+.price { margin: 16px 0 6px; font-weight: 700; color: var(--ink); font-size: 20px; }
+.price small { font-weight: 400; color: var(--muted); font-size: 12px; }
+
+/* Buttons */
+.btn { display: inline-block; padding: 11px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer; border: none; font-family: inherit; }
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--navy-2); }
+.btn-gold { background: var(--gold); color: #1a1405; }
+.btn-outline { background: transparent; border: 1.5px solid var(--line); color: var(--muted); }
+.btn-outline:hover { border-color: var(--muted); }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+/* Wallet panel */
+#paypanel { display: none; margin-top: 16px; background: #f0f3f9; border: 1px solid var(--line); border-radius: 10px; padding: 16px; font-size: 14px; }
+#paypanel .addr { font-family: monospace; font-size: 13px; background: #fff; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); display: block; margin: 8px 0; word-break: break-all; }
+#paypanel .amt { font-size: 18px; font-weight: 800; color: var(--navy); }
+
+/* Stakeholders band */
+.band { background: var(--navy); color: #e8edf6; border-radius: 14px; padding: 40px; }
+.band h2 { color: #fff; font-size: 24px; margin-bottom: 10px; }
+.band p { color: #b9c4d8; max-width: 700px; }
+.band .pull { color: var(--gold); font-weight: 700; margin-top: 14px; font-size: 16px; }
+
+/* About */
+.two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+
+/* Contact */
+.contact-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 30px; }
+.contact-card a.mail { display: inline-block; margin: 6px 0 0; color: var(--navy); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); }
+
+footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 12.5px; }
+footer .fine { margin-top: 8px; color: #98a1af; }
+
+/* ============ PROTOCOL SUBPAGE (dark) ============ */
+body.proto { background: #07090f; color: #cfd8e6; }
+body.proto header { background: rgba(7,9,15,.9); border-bottom: 1px solid #1b2334; backdrop-filter: blur(6px); }
+body.proto .brand { color: #e8eefb; }
+body.proto nav.menu a { color: #7f8ba1; }
+body.proto nav.menu a:hover { color: #e8eefb; }
+.protohero { padding: 84px 0 60px; text-align: center; background: radial-gradient(ellipse at 50% -20%, #16233f 0%, #07090f 62%); border-bottom: 1px solid #131a29; }
+.protohero h1 { font-size: 44px; color: #eef3ff; letter-spacing: 1px; }
+.protohero .tag { color: #7f8ba1; margin-top: 12px; font-size: 16px; }
+.statuspill { display: inline-block; margin-top: 22px; padding: 7px 16px; border: 1px solid #2a3a5c; border-radius: 999px; color: var(--gold); font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+body.proto section { border-bottom: 1px solid #10151f; }
+body.proto h2.sec { color: #eef3ff; }
+body.proto p.lede { color: #7f8ba1; }
+.pcard { background: #0c111c; border: 1px solid #1b2334; border-radius: 12px; padding: 26px; }
+.pcard h3 { color: #eef3ff; font-size: 17px; margin-bottom: 8px; }
+.pcard p { color: #8b97ad; font-size: 14.5px; }
+.nn { border-left: 3px solid var(--gold); padding: 10px 16px; margin-bottom: 12px; background: #0c111c; }
+.nn b { color: #eef3ff; }
+.nn span { color: #8b97ad; font-size: 14px; }
+.stream { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.bigquote { text-align: center; padding: 70px 0; }
+.bigquote p { font-size: 26px; color: #eef3ff; max-width: 760px; margin: 0 auto; line-height: 1.4; }
+.bigquote .who { margin-top: 16px; color: var(--gold); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ============ TERMS COMPOSER ============ */
+.composer { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+@media (max-width: 800px) { .composer { grid-template-columns: 1fr; } }
+.cform { background: #0c111c; border: 1px solid #1b2334; border-radius: 12px; padding: 26px; }
+.cform label { display: block; color: #8b97ad; font-size: 13px; margin: 18px 0 6px; font-weight: 600; }
+.cform label:first-child { margin-top: 0; }
+.cform input[type="text"], .cform input[type="number"] {
+  width: 100%; background: #07090f; border: 1px solid #1b2334; border-radius: 8px;
+  color: #eef3ff; padding: 10px 12px; font-size: 15px; font-family: inherit;
+}
+.cform input[type="range"] { width: 100%; accent-color: #c9a227; }
+.cform .rangeval { color: var(--gold); font-weight: 800; font-size: 20px; }
+.cform .hint { color: #5f6b80; font-size: 12px; margin-top: 4px; }
+.termsheet { background: #f7f8fa; color: #1c2331; border-radius: 12px; padding: 30px; font-size: 13.5px; line-height: 1.55; }
+.termsheet h3 { color: #14243f; font-size: 17px; margin-bottom: 4px; }
+.termsheet .tmeta { color: #5c6676; font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.termsheet h4 { color: #14243f; font-size: 13px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: 1px; }
+.termsheet .bigsplit { font-size: 26px; font-weight: 800; color: #14243f; margin: 8px 0; }
+.termsheet .sig { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.termsheet .sig div { border-top: 1.5px solid #1c2331; padding-top: 4px; font-size: 12px; color: #5c6676; margin-top: 26px; }
+.termsheet .warn { margin-top: 14px; background: #fdf3d7; border: 1px solid #e3cf8a; border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: #5a4a10; }
+@media print {
+  body.proto header, body.proto .protohero, body.proto footer, .noprint, .cform { display: none !important; }
+  body.proto { background: #fff; color: #000; }
+  .termsheet { border-radius: 0; padding: 0; background: #fff; color: #000; }
+}
+</style>
 <link rel="icon" href="assets/logo.png">
 </head>
 <body>
@@ -13,14 +141,15 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html">
-      <img src="assets/logo.png" alt="Wise Stake Consulting owl logo" onerror="this.style.display='none'">
-      <span class="wordmark">Wise Stake Consulting<small>LLC - Indianapolis</small></span>
+<img src="assets/logo.png" alt="Wise Stake owl" style="height:34px;width:auto">
+      <span class="wordmark">Wise Stake<small>Earn As You Live</small></span>
     </a>
     <nav class="menu">
-      <a href="#free">Free rail</a>
+      <a href="#free">Earn As You Live</a>
       <a href="#how">How it works</a>
       <a href="#services">Work with us</a>
       <a href="protocol/">PPS-1</a>
+      <a href="es/">Español</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -28,38 +157,38 @@
 
 <div class="hero">
   <div class="wrap">
-    <div class="eyebrow">Free - yes, actually free</div>
-    <h1>Stake through our rail.<br>Pay nothing for the structure.</h1>
-    <p class="sub">Businesses, galleries, charities, creators: route your community's stakes through our referral rail and your people get their full staking benefits from day one - while your own qualification builds in the background. No fee. No invoice. No subscription. When you cross your own threshold, you fly on your own - and we'll help you build that rail too.</p>
+    <div class="eyebrow">Earn As You Live</div>
+    <h1>Earn as you live.<br>Free to start. Here is why.</h1>
+    <p class="sub">Galleries, charities, shops, creators - if your people are going to stake anyway, route them through our program. They get everything they would get anywhere else, from day one. You pay us nothing. Later, when you are ready to run your own program, we show you how. That is the whole pitch.</p>
     <div class="btn-row" style="justify-content:center">
-      <a class="btn btn-gold" style="font-size:16px;padding:14px 28px" href="https://pro.wise.one/r/0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Start staking through our rail &rarr;</a>
+      <a class="btn btn-gold" style="font-size:16px;padding:14px 28px" href="https://pro.wise.one/r/0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Start earning as you live &rarr;</a>
       <a class="btn btn-outline" href="#how">How it works</a>
     </div>
-    <p style="margin-top:14px;font-size:12.5px;color:var(--muted)">Full disclosure, as our own standard requires: stakes placed through our rail credit Wise Stake Consulting's referral attribution. Your stakers always earn their complete staking benefits regardless.</p>
+    <p style="margin-top:14px;font-size:12.5px;color:var(--muted)">Full disclosure: stakes placed through our program build our referral credit. That is how we eat. Your stakers still get every benefit they are owed - that part never changes.</p>
   </div>
 </div>
 
 <section id="how">
   <div class="wrap">
     <div class="eyebrow">The free path</div>
-    <h2 class="sec">How the free rail works</h2>
-    <p class="lede">Three steps. The protocol does the enforcing; you never send us a dollar.</p>
+    <h2 class="sec">How Earn As You Live works</h2>
+    <p class="lede">Three steps. The protocol does the enforcing. You never send us a dollar.</p>
     <div class="cards">
       <div class="card">
         <h3>1. Your people stake from their own wallets</h3>
-        <p>Through our referral link, each member creates their own staking position - their wallet, their custody, their capital. Minimum term: 365 days. We never hold anyone's funds. Ever.</p>
+        They use our link and create their own staking position. Their wallet. Their money. Their keys. The minimum term is a year. We never touch anybody.s funds - not once, not ever.</p>
       </div>
       <div class="card">
         <h3>2. They earn everything, from day one</h3>
-        <p>Full staking benefits, protocol distributions, and the referral share bonus accrue to your stakers immediately. Nothing waits on anyone's threshold.</p>
+        <p>Everything they are supposed to earn, they earn starting day one. Nothing sits in a waiting room and nothing waits on us.</p>
       </div>
       <div class="card">
-        <h3>3. Then graduate to your own rail</h3>
-        <p>Our free rail is the starting line. When the PPS-1 standard goes live, your community's stakes can pin to <i>your own</i> accumulating splitter - your qualification builds from day one, with an agreed-upon split fixed for the life of every stake. Graduate with our help, on terms set in advance.</p>
+        <h3>3. Then leave us. Seriously.</h3>
+        <p>The free program is the on-ramp, not the trap. When our PPS-1 standard goes live, your stakes can point at your own program instead of ours. We help you set it up, the split between us gets agreed on paper before anything goes on-chain, and then it is yours. A membership program where the exit plan comes standard - imagine that.</p>
       </div>
     </div>
     <div class="btn-row" style="justify-content:center;margin-top:26px">
-      <a class="btn btn-primary" href="https://pro.wise.one/r/0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Use the free rail</a>
+      <a class="btn btn-primary" href="https://pro.wise.one/r/0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Start earning</a>
     </div>
   </div>
 </section>
@@ -68,12 +197,12 @@
   <div class="wrap">
     <div class="eyebrow">When you're ready for more</div>
     <h2 class="sec">Work with us</h2>
-    <p class="lede">The free rail is the structure. Everything below is what turns it into a business - memberships for dealerships and charities, gallery programs, your own graduated rail, the whole architecture. Start with a paid consultation; quotes come after.</p>
+    <p class="lede">The free program gets you moving. This is what turns it into a real program - memberships, gallery shows, dealer networks, your own program. It starts with one paid conversation. Quotes come after that, not before.</p>
     <div class="cards">
 
       <div class="card">
         <h3>Initial Consultation</h3>
-        <p>One focused session on turning your stake-backed community into a structured program - or on designing your graduation path off our rail and onto your own.</p>
+        <p>Forty-five minutes, one topic: your people, your program, and whether any of this fits. You will leave knowing more than you came in with, or the session costs you nothing.</p>
         <div class="price">$150 <small>- 45 minutes</small></div>
         <div class="btn-row">
           <button class="btn btn-gold" data-service-usd="150" data-service-name="Initial Consultation">Pay with wallet</button>
@@ -84,16 +213,16 @@
 
       <div class="card">
         <h3>Membership Architecture</h3>
-        <p>Full design of your stake-backed membership program: tiers, terms, disclosure language, and the custody-free structure that keeps your members' funds theirs. The subscription killer, built for your business.</p>
+        <p>Your membership program, designed end to end - who stakes what, for how long, what they get, and what everybody is told up front. We kill the monthly bill and replace it with something your members actually own.</p>
         <div class="price">Quoted <small>- after consultation</small></div>
         <div class="btn-row"><a class="btn btn-outline" href="mailto:hello@wisestake.consulting?subject=Membership%20Architecture%20inquiry">Request quote</a></div>
       </div>
 
       <div class="card">
-        <h3>Rail Graduation &amp; Design</h3>
-        <p>For businesses ready to own their rail: configuration, seeding strategy, onboarding, and referral economics that survive the day you stop borrowing ours.</p>
+        <h3>Graduation - Your Own Program</h3>
+        <p>For the ones ready to run their own program: setup, strategy, onboarding, and the split - agreed in writing, fixed on-chain, yours from then on.</p>
         <div class="price">Quoted <small>- after consultation</small></div>
-        <div class="btn-row"><a class="btn btn-outline" href="mailto:hello@wisestake.consulting?subject=Rail%20Graduation%20inquiry">Request quote</a></div>
+        <div class="btn-row"><a class="btn btn-outline" href="mailto:hello@wisestake.consulting?subject=Graduation%20inquiry">Request quote</a></div>
       </div>
 
     </div>
@@ -104,7 +233,7 @@
   <div class="wrap">
     <div class="band">
       <h2>The Stakeholders movement</h2>
-      <p>Subscriptions ask people to pay forever and own nothing. Stake-backed memberships invert that: members position once, keep custody end to end, and their capital returns at term's end - while the benefit, the access, the art, or the membership rides on a productive position instead of a billing cycle.</p>
+      <p>A subscription is a bill you pay forever for something you never own. We build the other thing: your people position once, keep their own money the whole time, and get it back when the term ends. The access, the art, the membership - that rides on the stake, not on the invoice.</p>
       <p class="pull">Be a stakeholder, not a subscriber.</p>
     </div>
   </div>
@@ -115,8 +244,8 @@
     <div>
       <div class="eyebrow">About</div>
       <h2 class="sec">Built in Indianapolis</h2>
-      <p class="lede" style="margin-bottom:14px">Wise Stake Consulting, LLC is an Indiana limited liability company founded on a simple observation: the businesses people love most - galleries, charities, dealerships, creators - are all still renting their relationships through monthly billing. We design the alternative - and we give the entry-level structure away, because a standard only matters if people can use it.</p>
-      <p style="color:var(--muted);font-size:14.5px">The company's heritage runs through the Wise token community, where stake-backed patronage was first lived rather than theorized. The owl in our mark is a nod to that lineage.</p>
+      <p class="lede" style="margin-bottom:14px">We are a small Indiana LLC with one idea: the shops, galleries, charities and creators people love are all still charging monthly for things people should own a piece of. We build the other version - and the entry-level piece is free, because a standard nobody can use is just a PDF.</p>
+      <p style="color:var(--muted);font-size:14.5px">Fair warning about the owl: yes, it is a nod to the Wise token community, where we learned this stuff by actually doing it. We are not hiding the lineage. We are building on it.</p>
     </div>
     <div class="contact-card">
       <h3 style="color:var(--navy);margin-bottom:10px">Principles</h3>
@@ -143,8 +272,8 @@
 
 <footer>
   <div class="wrap">
-    &copy; 2026 Wise Stake Consulting, LLC - Indianapolis, IN &bull; wisestake.consulting &bull; wisestake.eth
-    <div class="fine">Wise Stake Consulting, LLC provides business consulting services only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Membership structures described involve self-custodied digital assets; participants retain custody of their own funds at all times. Referral attribution on stakes placed through our rail is disclosed and is a standard feature of the underlying protocol. The owl motif is a heritage homage and an independent mark of Wise Stake Consulting, LLC.</div>
+    &copy; 2026 Wise Stake &bull; wisestake.consulting &bull; wisestake.eth
+    <div class="fine">Wise Stake Consulting, LLC provides business consulting services only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Membership structures described involve self-custodied digital assets; participants retain custody of their own funds at all times. Referral attribution on stakes placed through our Earn As You Live program is disclosed and is a standard feature of the underlying protocol. The owl motif is a heritage homage and an independent mark of Wise Stake Consulting, LLC.</div>
   </div>
 </footer>
 
