@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Mobile: Sé dueño de la red. Gana el rendimiento. | Wise Stake Consulting</title>
+<meta name="description" content="World Mobile permite que la gente construya y sea dueña de la red. Cómo los AirNodes generan ingresos, y cómo los depósitos en Wise Vaults convierten esos ingresos en un 20% APY fijo en stablecoins.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1A2F; --navy2:#0E2240; --navy3:#12294B;
+  --gold:#D4A843; --gold2:#E8C675; --cream:#F5EFDF; --cream2:#EFE6CE;
+  --ink:#0A1A2F; --muted:#8FA3BD; --line:rgba(212,168,67,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:'Spline Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Fraunces',serif}
+a{color:var(--gold2)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.eyebrow{letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:600}
+.btn{display:inline-block;padding:15px 30px;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;transition:.25s;border:1.5px solid transparent}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);box-shadow:0 8px 30px rgba(212,168,67,.35)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(212,168,67,.5)}
+.btn-ghost{border-color:var(--gold);color:var(--gold2)}
+.btn-ghost:hover{background:rgba(212,168,67,.12);transform:translateY(-2px)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(10,26,47,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:10px 0;flex-wrap:wrap;gap:10px 18px}
+nav img{height:44px}
+nav .links{display:flex;gap:18px;font-size:.84rem;flex-wrap:wrap;align-items:center}
+nav .links a{color:var(--cream);text-decoration:none;opacity:.85;white-space:nowrap}
+nav .links a:hover{opacity:1;color:var(--gold2)}
+@media(max-width:1150px){nav .links a.sec{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.9}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,26,47,.05) 22%,rgba(10,26,47,.45) 52%,rgba(10,26,47,.9) 74%,rgba(10,26,47,.98) 100%)}
+.hero .wrap{position:relative;z-index:2;margin-left:auto;margin-right:0;text-align:right;max-width:600px;padding:120px 5vw 120px 24px}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.08;font-weight:700;margin:18px 0 22px}
+.hero h1 em{font-style:italic;color:var(--gold2)}
+.hero p.lead{font-size:1.08rem;color:var(--cream);opacity:.9;margin-bottom:34px}
+.cta-row{display:flex;gap:16px;justify-content:flex-end;flex-wrap:wrap}
+@media(max-width:720px){.hero .wrap{text-align:left;margin:0 auto;max-width:100%;padding:90px 24px}.cta-row{justify-content:flex-start}}
+
+/* STAT BAR */
+.stats{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:34px 24px;text-align:center}
+.stats b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;color:var(--gold2)}
+.stats span{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:720px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+
+section{padding:90px 0}
+.sec-head{max-width:760px;margin:0 auto 54px;text-align:center}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:14px 0 16px;line-height:1.15}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+
+/* PLAN CARDS */
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.plan{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:26px 22px;position:relative}
+.plan.best{border-color:var(--gold);box-shadow:0 0 40px rgba(212,168,67,.15)}
+.plan .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:4px 14px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.plan h3{font-size:1.25rem;margin-bottom:4px}
+.plan .price{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--gold2);margin:8px 0 14px}
+.plan .price small{font-size:.85rem;color:var(--muted);font-family:'Spline Sans',sans-serif}
+.plan ul{list-style:none;font-size:.86rem;color:var(--cream2)}
+.plan li{padding:6px 0;border-bottom:1px dashed rgba(143,163,189,.15)}
+.plan li::before{content:"\2713";color:var(--gold);margin-right:9px;font-weight:700}
+.plan .btn{display:block;text-align:center;margin-top:20px;padding:11px 10px;font-size:.88rem}
+@media(max-width:960px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.plans{grid-template-columns:1fr}}
+
+/* COMPARE TABLE */
+.compare{overflow-x:auto;margin-top:54px;border:1px solid var(--line);border-radius:16px}
+table{width:100%;border-collapse:collapse;min-width:640px;font-size:.9rem}
+th,td{padding:13px 16px;text-align:center;border-bottom:1px solid rgba(143,163,189,.12)}
+th{font-family:'Fraunces',serif;font-size:.95rem;color:var(--cream)}
+td:first-child{text-align:left;color:var(--cream2)}
+th.wm{color:var(--gold2);font-size:1.05rem}
+tr:last-child td{border-bottom:none}
+.yes{color:#7BC98B;font-weight:600}
+.no{color:#C96B6B;font-weight:600}
+.meh{color:var(--muted)}
+
+/* OWNERSHIP */
+.own{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 50%,var(--navy) 100%)}
+.own-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+@media(max-width:900px){.own-grid{grid-template-columns:1fr}}
+.own h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.own p{color:var(--cream2);margin-bottom:18px}
+.node-card{background:var(--navy3);border:1px solid var(--line);border-radius:20px;padding:34px 30px;margin-bottom:20px;position:relative;overflow:hidden}
+.node-card::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.22),transparent 70%)}
+.node-card h3{color:var(--gold2);font-size:1.3rem;display:flex;justify-content:space-between;align-items:baseline}
+.node-card h3 small{font-size:.85rem;color:var(--muted);font-family:'Spline Sans',sans-serif;font-weight:400}
+.node-card p{font-size:.92rem;margin:10px 0 0;color:var(--muted)}
+.big-num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--gold2)}
+.own .strip{display:flex;gap:40px;margin-top:26px;flex-wrap:wrap}
+.own .strip div b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold2)}
+
+/* FLOW */
+.flow{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{background:var(--navy3);border:1px solid var(--line);border-radius:18px;padding:32px 26px;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:'Fraunces',serif;font-size:2.6rem;color:var(--gold);opacity:.55;display:block;margin-bottom:10px}
+.step h3{font-size:1.15rem;margin-bottom:10px}
+.step p{font-size:.92rem;color:var(--muted)}
+.apy-pill{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:5px 16px;border-radius:999px;font-size:.9rem;margin-top:14px}
+
+/* DUAL CTA */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin:0 auto}
+@media(max-width:720px){.dual{grid-template-columns:1fr}}
+.cta-card{border-radius:22px;padding:40px 34px;text-align:center;border:1px solid var(--line);background:var(--navy2)}
+.cta-card img{height:74px;margin-bottom:18px}
+.cta-card h3{font-size:1.4rem;margin-bottom:10px}
+.cta-card p{color:var(--muted);font-size:.92rem;margin-bottom:24px}
+
+/* FAQ */
+details{background:var(--navy2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;padding:18px 22px;font-weight:600;color:var(--cream);list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:22px;color:var(--gold);font-size:1.3rem}
+details[open] summary::after{content:"\2212"}
+details .a{padding:0 22px 20px;color:var(--muted);font-size:.93rem}
+
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:.8rem}
+footer .wrap{display:flex;gap:30px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+footer img{height:56px}
+.disc{max-width:760px;font-size:.74rem;line-height:1.55;opacity:.8}
+.reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* BOOK A SESSION */
+.book{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.book-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+.book h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.book .book-copy p{color:var(--muted);font-size:1.02rem}
+.book ul{list-style:none;margin-top:26px;padding:0}
+.book li{padding-left:28px;position:relative;margin-bottom:13px;color:var(--cream);font-size:.98rem}
+.book li::before{content:"\2726";color:var(--gold);position:absolute;left:0;top:1px}
+.book-card{background:var(--cream);border-radius:22px;padding:22px 18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.book-card .ml-form-embedContainer{max-width:100%!important}
+@media(max-width:860px){.book-grid{grid-template-columns:1fr;gap:36px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/es/" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <img src="/assets/img/logo-seal.png" alt="Wise Stake Consulting seal">
+      <span class="serif" style="color:var(--cream);font-size:1.05rem">Wise Stake <span style="color:var(--gold2)">Consulting</span></span>
+    </a>
+    <div class="links">
+      <a href="/es/">Inicio</a><a href="/es/signature-staking/">Staking con Firma</a><a href="/es/vaults/">Vaults</a><a class="sec" href="#plans">Planes</a><a class="sec" href="#own">S&eacute; due&ntilde;o de la red</a><a class="sec" href="#yield">El 20% APY</a><a class="sec" href="#faq">Preguntas</a><a href="/es/pbs-1/">PBS-1</a><a href="/es/book-a-session/" style="color:var(--navy);background:var(--gold2);padding:8px 16px;border-radius:999px;font-weight:700">Reserva una sesi&oacute;n</a><a href="/world-mobile/" style="color:var(--gold2)">English</a>
+      
+      
+      
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img class="bg" src="/assets/img/wm-hero.png" alt="A community-owned AirNode beams golden connectivity over a town, flowing down to a Wise staking vault">
+  <div class="wrap">
+    <div class="eyebrow">World Mobile &times; Wise Stake</div>
+    <h1>Sé dueño de la red.<br>El <em>rendimiento</em> sigue.</h1>
+    <p class="lead">World Mobile es la compañía que pertenece a la gente que la usa &mdash; y los depósitos en Wise Vaults convierten los ingresos de esa misma red en un 20% APY fijo sobre stablecoins.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" rel="noopener">Deposita al 20% APY &rarr;</a>
+      <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Obtén el servicio de World Mobile</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats reveal">
+  <div class="wrap">
+    <div><b>3M+</b><span>Suscriptores en todo el mundo</span></div>
+    <div><b>13,346+</b><span>AirNodes activos</span></div>
+    <div><b>$15/mo</b><span>Planes desde, sin contrato</span></div>
+    <div><b>20%</b><span>APY fijo en depósitos de stablecoins</span></div>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section id="plans">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">El gancho</div>
+      <h2>Un plan de teléfono que no te trata como el producto.</h2>
+      <p>Llamadas y mensajes ilimitados, hotspot incluido, VPN integrada en todos los planes, privacidad por defecto &mdash; y los vicios de las grandes compañías (contratos, chequeos de crédito, venta de tus datos) quedan fuera.</p>
+    </div>
+    <div class="plans reveal">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">$15<small>/mo</small></div>
+        <ul>
+          <li>2GB de datos de alta velocidad</li>
+          <li>Llamadas y mensajes ilimitados</li>
+          <li>Hotspot incluido</li>
+          <li>VPN integrada</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Elige Starter</a>
+      </div>
+      <div class="plan">
+        <h3>Standard</h3>
+        <div class="price">$25<small>/mo</small></div>
+        <ul>
+          <li>8GB de datos de alta velocidad</li>
+          <li>Llamadas y mensajes ilimitados</li>
+          <li>Hotspot incluido</li>
+          <li>VPN integrada</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Elige Standard</a>
+      </div>
+      <div class="plan best">
+        <div class="tag">Mejor valor</div>
+        <h3>Unlimited</h3>
+        <div class="price">$40<small>/mo</small></div>
+        <ul>
+          <li>25GB de datos de alta velocidad</li>
+          <li>Protección de identidad incluida</li>
+          <li>Llamadas gratis a 60 países</li>
+          <li>VPN integrada</li>
+        </ul>
+        <a class="btn btn-gold" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Elige Unlimited</a>
+      </div>
+      <div class="plan">
+        <h3>Unlimited+</h3>
+        <div class="price">$55<small>/mo</small></div>
+        <ul>
+          <li>50GB de datos de alta velocidad</li>
+          <li>15GB de hotspot</li>
+          <li>Protección contra SIM-swap</li>
+          <li>Protección de identidad mejorada</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Elige Unlimited+</a>
+      </div>
+    </div>
+
+    <div class="compare reveal">
+      <table>
+        <thead><tr><th style="text-align:left">Lo que $40 te da</th><th class="wm">World Mobile<br>$40</th><th>Verizon<br>$65</th><th>T-Mobile<br>$75</th><th>Google Fi<br>$60</th></tr></thead>
+        <tbody>
+          <tr><td>Datos ilimitados</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>VPN integrada</td><td class="yes">&#10003;</td><td class="no">&times;</td><td class="no">&times;</td><td class="meh">Complemento</td></tr>
+          <tr><td>Protección contra SIM-swap</td><td class="yes">&#10003;</td><td class="no">&times;</td><td class="no">&times;</td><td class="no">&times;</td></tr>
+          <tr><td>Monitoreo de robo de identidad</td><td class="yes">&#10003;</td><td class="no">&times;</td><td class="no">&times;</td><td class="no">&times;</td></tr>
+          <tr><td>Llamadas internacionales, 60+ países</td><td class="yes">&#10003;</td><td class="no">&times;</td><td class="meh">Limitado</td><td class="meh">Complemento</td></tr>
+          <tr><td>Sin contrato, sin chequeo de crédito</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>Vende tus datos para publicidad dirigida</td><td class="yes">Nunca</td><td class="no">Sí</td><td class="no">Sí</td><td class="no">Sí</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- OWNERSHIP -->
+<section class="own" id="own">
+  <div class="wrap">
+    <div class="own-grid">
+      <div class="reveal">
+        <div class="eyebrow">La diferencia real</div>
+        <h2>Todas las demás redes son de una corporación. Esta es de su gente.</h2>
+        <p>Las torres de Verizon pertenecen a Verizon. Cuando pagas tu factura, el ingreso fluye en una sola dirección: hacia arriba.</p>
+        <p>World Mobile le da la vuelta. La red se construye con <strong style="color:var(--gold2)">AirNodes</strong> &mdash; infraestructura de telecomunicaciones de gente común. Compras uno, el equipo lo instala donde se necesita conectividad, y cuando los suscriptores hacen llamadas, envían mensajes y usan datos a través de él, <strong style="color:var(--gold2)">el dueño gana</strong>. Hardware real, uso real, ganancias reales en USD, visibles en vivo en un panel.</p>
+        <p>El resultado es una red con intereses compartidos: la gente que cubre el planeta con señal es la misma gente que gana con ella. Más de 13,000 AirNodes ya están activos en EE.UU., África y Asia.</p>
+        <div class="strip">
+          <div><b>13,346+</b><span style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase">AirNodes en el mundo</span></div>
+          <div><b>Desde $165</b><span style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase">para tener uno</span></div>
+          <div><b>3 continentes</b><span style="color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase">EE.UU. &middot; África &middot; Asia</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="node-card">
+          <h3>EmberNode <small>desde $165 &middot; Pakistán</small></h3>
+          <p>Propiedad de entrada. Gana desde la capa de distribución de la red &mdash; la forma más barata de tener un pedazo de infraestructura de telecomunicaciones.</p>
+        </div>
+        <div class="node-card">
+          <h3>Frontier <small>desde $585 &middot; Filipinas</small></h3>
+          <p>AirNodes Wi-Fi que conectan negocios. Instalados por el equipo de World Mobile, activados según un calendario publicado, y generando ingresos por el uso de los suscriptores.</p>
+        </div>
+        <div class="node-card" style="border-color:var(--gold)">
+          <h3>Cómo ganan los dueños <small>en USD</small></h3>
+          <p>Compras &rarr; el equipo lo instala y activa &rarr; los suscriptores se conectan a través de tu nodo para llamadas, mensajes y datos &rarr; tú ganas recompensas por la actividad real de la red. Síguelo en vivo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YIELD FLOW -->
+<section class="flow" id="yield">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Dónde entra Wise</div>
+      <h2>La red gana. Los que depositan cobran.</h2>
+      <p>Esta es la parte que casi nadie conecta &mdash; y la razón por la que existe esta página.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <h3>Se financian las antenas</h3>
+        <p>Los depositantes de Wise Vaults ponen stablecoins en la estrategia de World Mobile. Ese capital ayuda a comprar antenas y hardware de red &mdash; la construcción física de la malla.</p>
+      </div>
+      <div class="step">
+        <h3>La red genera ingresos</h3>
+        <p>Cada llamada, mensaje y gigabit que pasa por esos nodos es ingreso real de suscriptores en una red viva y en crecimiento de más de 3 millones de personas.</p>
+      </div>
+      <div class="step">
+        <h3>El rendimiento vuelve a ti</h3>
+        <p>Ese ingreso financia un rendimiento fijo sobre las stablecoins depositadas. Como se compone, se publica de la manera honesta: <strong style="color:var(--cream2)">20% APY, fijo.</strong></p>
+        <span class="apy-pill">20% APY en stablecoins</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUAL CTA -->
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Dos formas de entrar</div>
+      <h2>Gana de la red. O gana de tu factura de teléfono.</h2>
+      <p>La mayoría empieza con una y termina con ambas.</p>
+    </div>
+    <div class="dual reveal">
+      <div class="cta-card">
+        <img src="/assets/img/logo-seal.png" alt="Wise Stake Consulting seal">
+        <h3>Deposit at 20% APY</h3>
+        <p>Pon tus stablecoins a trabajar en la estrategia de rendimiento fijo de World Mobile. USDC en Ethereum, Base, Arbitrum &mdash; nuestra guía de depósito cubre cada paso, de la wallet al rendimiento.</p>
+        <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" rel="noopener">Abre la app de vaults &rarr;</a>
+      </div>
+      <div class="cta-card">
+        <div style="height:74px;display:flex;align-items:center;justify-content:center">
+          <svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="#E8C675" stroke-width="1.4"><circle cx="12" cy="12" r="10" opacity=".4"/><path d="M6.5 9.5c3.5-3 7.5-3 11 0M8.5 12.5c2.2-1.9 4.8-1.9 7 0M10.5 15.5c.9-.8 2.1-.8 3 0"/><circle cx="12" cy="18" r="1" fill="#E8C675" stroke="none"/></svg>
+        </div>
+        <h3>Cambia tu plan de teléfono</h3>
+        <p>Desde $15/mes sin contrato y sin chequeo de crédito. VPN integrada, activación eSIM en minutos y verificación de cobertura por código postal antes de cambiar algo.</p>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Ver planes y cobertura &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding-top:20px">
+  <div class="wrap" style="max-width:820px">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Respuestas directas</div>
+      <h2>Las preguntas que recibimos primero.</h2>
+    </div>
+    <details class="reveal"><summary>¿Está garantizado el 20% APY?</summary><div class="a">Lo publica la plataforma como un rendimiento fijo sobre la estrategia de stablecoins de World Mobile, financiado por los ingresos de la red. Fijo no es lo mismo que garantizado &mdash; las tasas las fija el equipo de la plataforma y nada es definitivo hasta que tu depósito quede hecho. No damos asesoría financiera; haz tu propia investigación.</div></details>
+    <details class="reveal"><summary>¿Qué es exactamente un AirNode?</summary><div class="a">Infraestructura de telecomunicaciones en la red de World Mobile. La compras, el equipo la instala y activa, y cuando los suscriptores usan la red a través de ella, ganas recompensas en USD. Los EmberNodes empiezan en $165 y los Frontier en $585, pagados por completo al comprar.</div></details>
+    <details class="reveal"><summary>¿Necesito experiencia en cripto para depositar?</summary><div class="a">Necesitas una wallet no custodial (MetaMask o Rabby) y USDC. Nuestra <a href="/es/vaults/">guía de depósito</a> te lleva paso a paso por la wallet, el onramp y el depósito. O <a class="sec" href="#book">reserva una sesión gratis</a> y lo hacemos juntos.</div></details>
+    <details class="reveal"><summary>¿Cómo funcionan los retiros?</summary><div class="a">Estos son depósitos, no posiciones bloqueadas: un retiro se procesa como una <strong>orden de venta</strong> &mdash; la plataforma vende la posición subyacente y te paga. Según el equipo de la plataforma, las órdenes de venta se procesan rápido, pero es una fila de órdenes, no un cajero automático. Planifica tus tiempos.</div></details>
+    <details class="reveal"><summary>¿Funcionará World Mobile en mi área?</summary><div class="a">La verificación más rápida es la herramienta de cobertura por código postal en la página de planes. La activación es por eSIM en minutos, sin chequeo de crédito y sin contrato.</div></details>
+    <details class="reveal"><summary>¿Por qué a Wise Stake le importa una compañía de teléfono?</summary><div class="a">Porque la tesis es la misma que está detrás de todo lo que hacemos: la gente que usa un sistema debería tener una parte de él y ganar de él &mdash; sea una posición depositada, un pedazo de hardware de red o tu propio cheque de pago.</div></details>
+  </div>
+</section>
+
+
+<section id="book" class="book">
+  <div class="wrap book-grid">
+    <div class="book-copy reveal">
+      <div class="eyebrow">Reserva una sesión gratis</div>
+      <h2>Véelo en vivo. Trae tus preguntas.</h2>
+      <p>Cuarenta minutos, uno a uno, por Zoom. Recorremos el depósito juntos &mdash; la wallet, el onramp, tu primer depósito &mdash; y sales sabiendo exactamente cómo se paga tu 20% APY. Sin presión, sin compromiso.</p>
+      <ul>
+      <li>Configuración de la wallet y el onramp de USDC, paso a paso</li>
+      <li>Cómo gana un depósito, y cómo te devuelve el dinero un retiro (una orden de venta)</li>
+      <li>Planes de World Mobile y AirNodes, y si la cobertura llega a tu código postal</li>
+      <li>Respuestas directas &mdash; si no es para ti, te lo decimos</li>
+      </ul>
+    </div>
+    <div class="book-card reveal">
+      <div class="ml-embedded" data-form="W06wws"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;gap:18px;align-items:center">
+      <img src="/assets/img/logo-seal.png" alt="Wise Stake Consulting seal">
+      <div>
+        <div class="serif" style="color:var(--cream);font-size:1rem">Wise Stake Consulting LLC</div>
+        <div><a href="https://wisestake.consulting">wisestake.consulting</a></div>
+      </div>
+    </div>
+    <div class="disc">
+      Divulgación: Los enlaces a World Mobile y a la app de depósitos son enlaces de referencia; Wise Stake Consulting puede ganar comisiones de referencia por registros y depósitos sin costo adicional para ti. Podemos tener posiciones propias en las estrategias mencionadas. Nada en esta página es asesoría financiera; los rendimientos son publicados por el equipo de la plataforma y no están garantizados. Los activos digitales implican riesgo, incluida la pérdida del capital. Haz tu propia investigación. Los precios y características de los planes de World Mobile son según lo publicado en worldmobile.io y están sujetos a cambio. &copy; 2026 Wise Stake Consulting LLC.
+    </div>
+  </div>
+<p style="text-align:center;font-size:.85rem;margin-top:10px">Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting" style="color:var(--gold2)">dm@wisestake.consulting</a> (Denise)</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2732159');
+</script>
+<!-- End MailerLite Universal -->
+</body>
+</html>
