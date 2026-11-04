@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wise Stake Consulting - Stakes con Firma y Rendimiento Fijo</title>
+<meta name="description" content="Has vivido del lado que paga interes. Stakes con firma, bovedas de rendimiento fijo, World Mobile y Sovren - cada camino al lado que recibe.">
+<style>
+:root{--navy:#0a1128;--navy2:#101a3a;--panel:#0d1733;--gold:#d4a13a;--gold2:#e8c15a;--cream:#f5efe0;--muted:#9aa5c0;--line:rgba(232,193,90,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:Georgia,'Times New Roman',serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header.site{position:sticky;top:0;z-index:50;background:rgba(10,17,40,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1240px;margin:0 auto;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.brand img{height:44px;width:auto}
+.brand b{font-size:1.02rem;letter-spacing:.04em;white-space:nowrap;line-height:1.15}
+.brand b small{display:block;font-size:.66rem;color:var(--gold2);font-style:italic;font-weight:400;letter-spacing:.09em}
+nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:.86rem;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.03em}
+nav a:hover{color:var(--gold2)}
+nav .nav-cta{color:var(--navy);background:var(--gold);padding:8px 16px;border-radius:999px;font-weight:700}
+nav .soon{font-size:.62rem;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:1px 6px;margin-left:4px;vertical-align:middle;font-family:Arial}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;font-family:'Helvetica Neue',Arial,sans-serif}
+h1{font-size:clamp(2.2rem,4.8vw,3.5rem);line-height:1.12;font-weight:400;margin:18px 0 22px}
+h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;font-weight:400;margin-bottom:18px}
+h3{font-weight:400;font-size:1.15rem}
+p{color:var(--muted)}
+.gold{color:var(--gold2)}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;text-decoration:none;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.02em}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
+.btn-ghost{border:1px solid var(--gold);color:var(--gold2)}
+.hero{padding:84px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero img{width:100%;border-radius:18px;border:1px solid var(--line);box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hero p.lede{font-size:1.12rem;margin-bottom:30px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.strip{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0;text-align:center}
+.strip h2{font-style:italic}
+.strip p{max-width:680px;margin:0 auto 8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;margin-top:34px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--cream);transition:transform .18s,border-color .18s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{color:var(--gold2)}
+.card p{font-size:.94rem}
+.card .go{color:var(--gold2);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;margin-top:auto}
+.card.plain{justify-content:center;min-height:260px}
+.badge{display:inline-block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:3px 10px}
+.usecases{padding:70px 0}
+.uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:36px}
+.uc{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.uc img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.uc .ph{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#1a2a55,var(--navy2));color:var(--gold2);font-size:2.2rem}
+.uc .body{padding:22px 24px 26px}
+.uc h3{color:var(--gold2);margin-bottom:8px}
+.uc p{font-size:.95rem}
+.book-strip{background:linear-gradient(160deg,var(--navy2),var(--navy));border-top:1px solid var(--line);padding:70px 0;text-align:center}
+.book-strip p{max-width:640px;margin:0 auto 26px}
+footer.site{border-top:1px solid var(--line);padding:44px 0 30px;font-family:'Helvetica Neue',Arial,sans-serif}
+footer.site .cols{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:26px}
+footer.site a{color:var(--gold2);text-decoration:none}
+.fnote{color:var(--muted);font-size:.78rem;line-height:1.55}
+.ml-embedded{min-height:320px}
+.book-card{background:var(--cream);border-radius:22px;padding:22px 18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+.svc .card .body{gap:6px}
+.price{color:var(--gold2);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.steps .num{font-size:2rem;color:var(--gold2)}
+@media(max-width:880px){.hero-grid,.uc-grid,.svc,.steps{grid-template-columns:1fr}.hero{padding:56px 0 40px}}
+</style>
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="/es/"><img src="/assets/logo.png" alt="Logotipo de buho de Wise Stake Consulting"><b>Wise Stake Consulting<small>The Receiving Side of Interest</small></b></a>
+<nav aria-label="Main">
+  <a href="/es/">Inicio</a>
+  <a href="/es/signature-staking/">Staking con Firma</a>
+  <a href="/es/vaults/">Vaults</a>
+  <a href="/es/world-mobile/">World Mobile</a>
+  <a href="/es/sovren/">Sovren</a>
+  <a href="/es/pbs-1/">PBS-1 <span class="soon">Pronto</span></a>
+  <a href="/es/book-a-session/" class="nav-cta">Reserva una sesi&oacute;n</a>
+  <a href="/" style="color:var(--gold2)">English</a>
+</nav>
+</div></header>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <div class="eyebrow">Wise Stake Consulting &middot; The Receiving Side of Interest</div>
+    <h1>Has vivido del lado que paga inter&eacute;s.<br>Pasa al lado que lo <em class="gold">recibe</em>.</h1>
+    <p class="lede">Cada mes, el inter&eacute;s sale de tu bolsillo &mdash; tarjetas, pr&eacute;stamos, las facturas que nunca acaban. Te guiamos al otro lado del flujo: <strong class="gold">stakes con firma que son tuyos, b&oacute;vedas de rendimiento fijo y redes reales que te pagan</strong> &mdash; paso a paso, en wallets que solo t&uacute; controlas.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="https://pro.wise.one/r/wisestakes.eth">Crea un Stake con Firma</a>
+      <a class="btn btn-ghost" href="/es/book-a-session/">Reserva una sesi&oacute;n gratis</a>
+    </div>
+  </div>
+  <img src="/assets/img/hero-home.png" alt="Un cheque de nomina alimentando una constelacion de tokens dorados, bajo la mirada del buho de Wise Stake">
+</div></section>
+
+<section class="strip"><div class="wrap">
+  <div class="eyebrow" style="margin-bottom:16px">El replanteamiento</div>
+  <h2>&ldquo;Eres el stake. Tu trabajo es el APY.&rdquo;</h2>
+  <p>Eso dice <strong class="gold">Slave Master Bill</strong> &mdash; el sistema que te pone como apuesta el d&iacute;a que naces, sin preguntar, y cobra para siempre.</p>
+  <p>Todo lo que construimos apunta el flujo al rev&eacute;s: <strong class="gold">un stake que t&uacute; eliges. Un rendimiento que t&uacute; conservas.</strong> S&eacute; accionista, no suscriptor.</p>
+</div></section>
+
+<section class="usecases"><div class="wrap">
+  <div class="eyebrow">Todo lo que construimos</div>
+  <h2>Cada camino al lado que recibe.</h2>
+  <div class="cards">
+    <a class="card" href="/es/signature-staking/"><div class="body">
+      <h3>Staking con Firma</h3>
+      <p>Coloca un stake una sola vez, desde tu propia wallet. Es tuyo todo el tiempo, gana desde el d&iacute;a uno y vuelve al final de su plazo. Un stake, muchas vidas &mdash; n&oacute;mina, familia, viajes diarios.</p>
+      <span class="go">Explora los casos de uso &rarr;</span></div></a>
+    <a class="card" href="/es/vaults/"><div class="body">
+      <h3>B&oacute;vedas de Rendimiento Fijo</h3>
+      <p>B&oacute;vedas de stablecoins respaldadas por infraestructura del mundo real. 20% APY en el pool compuesto; 40% APR en el pool de nodos &mdash; por cerrar.</p>
+      <span class="go">P&oacute;ntete listo para depositar &rarr;</span></div></a>
+    <a class="card" href="/es/world-mobile/"><div class="body">
+      <h3>World Mobile</h3>
+      <p>La compa&ntilde;&iacute;a que es de su gente. Planes desde $15 sin contrato &mdash; y c&oacute;mo los dep&oacute;sitos en Wise Vaults convierten los ingresos de la red en rendimiento fijo.</p>
+      <span class="go">S&eacute; due&ntilde;o de la red &rarr;</span></div></a>
+    <a class="card" href="/es/sovren/"><div class="body">
+      <h3>Nodos Sovren</h3>
+      <p>40% APR en USDC, garantizado cinco meses, de una red DePIN donde tu dep&oacute;sito compra las m&aacute;quinas que hacen el trabajo.</p>
+      <span class="go">Mira las matem&aacute;ticas &rarr;</span></div></a>
+    <a class="card" href="/es/pbs-1/"><div class="body">
+      <h3>PBS-1 <span class="badge" style="margin-left:8px">Pronto</span></h3>
+      <p>El est&aacute;ndar que permite a cualquier negocio manejar su propio programa de stakes &mdash; membres&iacute;as que tu gente posee, no facturas que pagan para siempre. En pruebas ahora.</p>
+      <span class="go">Por qu&eacute; importa &rarr;</span></div></a>
+    <a class="card" href="/es/book-a-session/"><div class="body">
+      <h3>Reserva una Sesi&oacute;n</h3>
+      <p>Cuarenta minutos, uno a uno, gratis. Wallets, dep&oacute;sitos, stakes &mdash; trae tus preguntas, sal con un plan. O empieza con una consulta pagada para tu negocio.</p>
+      <span class="go">Aparta tu lugar &rarr;</span></div></a>
+  </div>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div><div class="eyebrow" style="margin-bottom:8px">Contacto</div>
+      <p style="font-size:.9rem">Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting">dm@wisestake.consulting</a> (Denise)<br>
+      General: <a href="mailto:hello@wisestake.consulting">hello@wisestake.consulting</a><br>
+      Legal: <a href="mailto:legal@wisestake.consulting">legal@wisestake.consulting</a></p></div>
+    <div><div class="eyebrow" style="margin-bottom:8px">Sitio</div>
+      <p style="font-size:.9rem"><a href="/es/signature-staking/">Staking con Firma</a> &middot; <a href="/es/vaults/">Vaults</a> &middot; <a href="/es/world-mobile/">World Mobile</a> &middot; <a href="/es/sovren/">Sovren</a> &middot; <a href="/es/pbs-1/">PBS-1</a> &middot; <a href="/es/book-a-session/">Reserva una sesi&oacute;n</a></p></div>
+  </div>
+  <p class="fnote">Wise Stake Consulting, LLC ofrece consultor&iacute;a y educaci&oacute;n de negocios &uacute;nicamente. Nada en este sitio es asesor&iacute;a financiera, de inversi&oacute;n, legal ni fiscal, y no se promete ni implica ning&uacute;n rendimiento. Las tasas mostradas son publicadas por las plataformas correspondientes al momento de escribirse, no est&aacute;n garantizadas y cambian con el tiempo. Los activos digitales implican riesgo, incluida la p&eacute;rdida del capital. Los enlaces marcados como enlaces de referencia generan cr&eacute;dito de referencia para Wise Stake Consulting sin costo para ti. El motivo del b&uacute;ho es un homenaje a la comunidad del token Wise y una marca independiente de Wise Stake Consulting, LLC. &copy; 2026 Wise Stake Consulting LLC &middot; wisestake.consulting &middot; wisestake.eth</p>
+</div></footer>
+</body>
+</html>
