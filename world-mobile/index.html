@@ -133,6 +133,18 @@ footer img{height:56px}
 .disc{max-width:760px;font-size:.74rem;line-height:1.55;opacity:.8}
 .reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.3,1)}
 .reveal.in{opacity:1;transform:none}
+
+/* BOOK A SESSION */
+.book{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.book-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+.book h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.book .book-copy p{color:var(--muted);font-size:1.02rem}
+.book ul{list-style:none;margin-top:26px;padding:0}
+.book li{padding-left:28px;position:relative;margin-bottom:13px;color:var(--cream);font-size:.98rem}
+.book li::before{content:"\2726";color:var(--gold);position:absolute;left:0;top:1px}
+.book-card{background:var(--cream);border-radius:22px;padding:22px 18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.book-card .ml-form-embedContainer{max-width:100%!important}
+@media(max-width:860px){.book-grid{grid-template-columns:1fr;gap:36px}}
 </style>
 </head>
 <body>
@@ -147,7 +159,7 @@ footer img{height:56px}
       <a href="#plans">Phone Plans</a>
       <a href="#own">Own the Network</a>
       <a href="#yield">The 20% APY</a>
-      <a href="#faq">FAQ</a>
+      <a href="#faq">FAQ</a><a href="es/" style="color:var(--gold2)">Español</a>
     </div>
   </div>
 </nav>
@@ -343,10 +355,30 @@ footer img{height:56px}
     </div>
     <details class="reveal"><summary>Is the 20% APY guaranteed?</summary><div class="a">It's published by the platform as a fixed yield on the World Mobile stablecoin strategy, funded by network revenue. Fixed is not the same as guaranteed &mdash; rates are set by the platform team and nothing is final until your deposit lands. We don't give financial advice; do your own research.</div></details>
     <details class="reveal"><summary>What exactly is an AirNode?</summary><div class="a">Telecom hardware on the World Mobile network. You buy it, the team deploys and activates it, and when subscribers use the network through it, you earn rewards in USD. EmberNodes start at $165 and Frontiers at $585, paid in full at checkout.</div></details>
-    <details class="reveal"><summary>Do I need crypto experience to deposit?</summary><div class="a">You need a non-custodial wallet (MetaMask or Rabby) and USDC. Our <a href="https://wisestake.consulting/vaults/">deposit-ready guide</a> walks through the wallet, the onramp, and the deposit step by step. Or book a consultation and we'll do it together.</div></details>
+    <details class="reveal"><summary>Do I need crypto experience to deposit?</summary><div class="a">You need a non-custodial wallet (MetaMask or Rabby) and USDC. Our <a href="https://wisestake.consulting/vaults/">deposit-ready guide</a> walks through the wallet, the onramp, and the deposit step by step. Or <a href="#book">book a free session</a> and we'll do it together.</div></details>
     <details class="reveal"><summary>How do withdrawals work?</summary><div class="a">These are deposits, not locked stakes: a withdrawal is processed as a <strong>sell order</strong> &mdash; the platform sells the underlying position and pays you out. Per the platform team, sell orders are processed quickly, but it's an order queue, not an instant ATM. Plan your timeline accordingly.</div></details>
     <details class="reveal"><summary>Will World Mobile work in my area?</summary><div class="a">The fastest check is the ZIP-code coverage tool on the plans page. Activation is by eSIM in minutes, with no credit check and no contract.</div></details>
     <details class="reveal"><summary>Why does Wise Stake care about a phone company?</summary><div class="a">Because the thesis is the same one behind everything we do: the people using a system should own a piece of it and earn from it &mdash; whether that's a staked position, a piece of network hardware, or your own paycheck.</div></details>
+  </div>
+</section>
+
+
+<section id="book" class="book">
+  <div class="wrap book-grid">
+    <div class="book-copy reveal">
+      <div class="eyebrow">Book a free session</div>
+      <h2>See it live. Bring your questions.</h2>
+      <p>Thirty minutes, one on one, over Zoom. We'll walk through the deposit together &mdash; the wallet, the onramp, your first deposit &mdash; and you leave knowing exactly how your 20% APY gets paid. No pressure, no obligation.</p>
+      <ul>
+      <li>Wallet setup and the USDC onramp, step by step</li>
+      <li>How a deposit earns, and how a withdrawal (a sell order) comes back to you</li>
+      <li>World Mobile plans and AirNodes, and whether the coverage reaches your ZIP</li>
+      <li>Straight answers &mdash; if this isn't a fit, we'll tell you</li>
+      </ul>
+    </div>
+    <div class="book-card reveal">
+      <div class="ml-embedded" data-form="W06wws"></div>
+    </div>
   </div>
 </section>
 
@@ -369,5 +401,14 @@ footer img{height:56px}
 const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2732159');
+</script>
+<!-- End MailerLite Universal -->
 </body>
 </html>
