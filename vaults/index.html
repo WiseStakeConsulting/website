@@ -52,6 +52,15 @@ h2{font-size:30px;margin-bottom:16px}
 .disclaimer{font-size:12.5px;color:#6b7590;padding:34px 0 10px;max-width:860px}
 footer{padding:10px 0 50px;color:#6b7590;font-size:13px}
 .center{text-align:center}
+
+.topnav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
+.topnav a{color:var(--muted);text-decoration:none;font-size:13.5px;letter-spacing:.4px}
+.topnav a:hover{color:var(--gold)}
+.topnav a.active{color:var(--gold);font-weight:bold}
+.topnav .soon{font-size:9px;border:1px solid var(--gold);color:var(--gold);border-radius:20px;padding:1px 7px;margin-left:4px;vertical-align:middle}
+.topnav .nav-cta{background:var(--gold);color:var(--navy);font-weight:bold;padding:8px 18px;border-radius:8px}
+.topnav .lang{color:var(--gold)}
+@media(max-width:760px){.topnav{gap:12px}.topnav a{font-size:12px}}
 </style>
 <!-- MailerLite Universal -->
 <script>
@@ -62,6 +71,16 @@ ml('account', '2732159');
 <body>
 <header><div class="wrap">
   <a class="brand" href="https://wisestake.consulting"><img src="../assets/logo.png" alt="Wise Stake Consulting logo"><span class="bname">Wise Stake Consulting<small>The Receiving Side of Interest</small></span></a>
+  <nav class="topnav" aria-label="Main">
+    <a href="/">Home</a>
+    <a href="/signature-staking/">Signature Staking</a>
+    <a href="/vaults/" class="active">Vaults</a>
+    <a href="/world-mobile/">World Mobile</a>
+    <a href="/sovren/">Sovren</a>
+    <a href="/pbs-1/">PBS-1 <span class="soon">Soon</span></a>
+    <a href="/book-a-session/" class="nav-cta">Book a Session</a>
+    <a href="/vaults/es/" class="lang">Espa&ntilde;ol</a>
+  </nav>
 </div></header>
 
 <section><div class="wrap">
@@ -131,7 +150,6 @@ ml('account', '2732159');
   <h2>Straight answers.</h2>
   <div><h3>Is my deposit guaranteed?</h3><p>Honest split: your deposit is USDC, a dollar stablecoin - your principal does not swing with token prices. That is the strongpoint: the 40% pays on stable money. It is not risk-free: USDC is built to hold $1 but is issued by a company and has wobbled before; the yield depends on the platform reward buffer and real asset revenue; exits can have a queue; and the contracts, while exact, are still software. Stable describes your deposit, not the future. Do your own research, and never deposit money you need back on a schedule.</p></div>
   <div><h3>Do you hold my money?</h3><p>No. Wise Stake Consulting never touches your funds. You deposit from your own wallet into the protocol. We earn referral commission from the platform on deposits made through our link - that's our disclosure, up front.</p></div>
-<p>No - and more than that: nobody holds it but you. There is no admin key anywhere that can freeze, move, or touch your position - not the platform, not us. Funding the position is a transaction only your wallet can sign. Exiting - even when it means a buyer takes over your position - is a transaction only your wallet can start. We earn referral commission from the platform on deposits made through our link, and that is the full extent of our involvement. Our disclosure, up front.</p>
   <div><h3>What happens after the pool caps?</h3><p>Existing positions keep earning their locked rate for the rest of the window. New entries close. The platform team has stated the next pool will open at a different rate with higher node prices - their projection is ~60% APR, potentially three digits as the network grows. Nothing is set in stone until the capital lands.</p></div>
   <div><h3>Where do I ask a human?</h3><p>Join a free 40-minute session or book a consultation at <a href="https://wisestake.consulting">wisestake.consulting</a>. We walk through wallets, chains and deposits with you - that's the job.</p></div>
 </div></section>
@@ -148,6 +166,16 @@ ml('account', '2732159');
   </div>
 </div></section>
 
+
+<section><div class="wrap">
+  <div class="eyebrow">More doors on this site</div>
+  <h2>The same vaults, two other windows.</h2>
+  <div class="ramps">
+    <div class="ramp"><span class="tag">20% APY</span><h3>World Mobile</h3><p>The carrier owned by its people. The World Mobile stablecoin strategy pays 20% APY, compounded - and the deposit button on that page carries our referral link, same as here.</p><a class="btn" href="/world-mobile/">See World Mobile &rarr;</a></div>
+    <div class="ramp"><span class="tag hot">40% APR</span><h3>Sovren Nodes</h3><p>The node-backed pool - the 40% window described above. The math behind the rate, the Tier 01 countdown, and the deposit-ready walkthrough.</p><a class="btn" href="/sovren/">See Sovren &rarr;</a></div>
+  </div>
+</div></section>
+
 <section class="center"><div class="wrap">
   <h2 style="margin-bottom:10px">The window is open. It will not stay open.</h2>
   <p class="lead" style="margin:0 auto 26px">Get deposit-ready, then move - or wait for the next pool at worse prices. Either way, now you know.</p>
@@ -157,6 +185,6 @@ ml('account', '2732159');
 <div class="wrap disclaimer">
 Not financial advice. Nothing on this page is a recommendation to buy, sell, or hold any asset. Wise Stake Consulting is an education and consulting business, not a broker, dealer, investment adviser, or bank. Rates (20% APY on compoundable stablecoin vaults; 40% APR on the non-compounding node-backed pool; projected ~60% APR on a future pool) are shown by the platform at the time of writing (November 1, 2026), are not guaranteed, and change over time. The December deposit, pool cap and timing are the platform team's public statements, not commitments. USDC aims to hold $1 but is not guaranteed (depeg risk); yield depends on the platform reward buffer and underlying asset revenue; exit may be subject to queue; smart-contract and platform risks apply. Wise Stake Consulting earns referral commission on deposits made through links on this page and may hold its own positions. Do your own research.
 </div>
-<footer><div class="wrap">Wise Stake Consulting, LLC &middot; wisestake.consulting &middot; <a href="https://wisestake.consulting" style="color:#6b7590">Home</a></div></footer>
+<footer><div class="wrap">Wise Stake Consulting, LLC &middot; wisestake.consulting &middot; <a href="https://wisestake.consulting" style="color:#6b7590">Home</a><br>Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting" style="color:#6b7590">dm@wisestake.consulting</a> (Denise)</div></footer>
 </body>
 </html>
