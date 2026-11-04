@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wise Stake Consulting - Las B&oacute;vedas Est&aacute;n Abiertas</title>
+<meta name="description" content="B&oacute;vedas de stablecoins de rendimiento fijo respaldadas por activos del mundo real. 20% APY compuesto. Pool respaldado por nodos al 40% APR con ventana de cierre. Listo para depositar en cuatro pasos.">
+<link rel="icon" type="image/png" href="/assets/logo.png">
+<style>
+:root{--navy:#0b1020;--navy2:#111a33;--gold:#d4af37;--white:#f5f6fa;--muted:#9aa3b5;--ok:#2ecc71;--warn:#e67e22}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--navy);color:var(--white);font-family:Helvetica,Arial,sans-serif;line-height:1.55}
+a{color:var(--gold)}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;background:rgba(11,16,32,.97);border-bottom:1px solid #1e2a4a;padding:12px 0;z-index:9}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{border-radius:50%;border:2px solid var(--gold);background:#fff;width:40px;height:40px}
+.bname{font-family:Georgia,serif;color:var(--gold);font-size:19px;display:flex;flex-direction:column}
+.bname small{font-family:Helvetica,Arial,sans-serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:normal}
+.cta{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;font-size:19px;padding:16px 34px;border-radius:8px;text-decoration:none;letter-spacing:.3px}
+.cta:hover{filter:brightness(1.1)}
+.cta.ghost{background:transparent;color:var(--gold);border:1.5px solid var(--gold);font-size:15px;padding:12px 24px}
+section{padding:56px 0;border-bottom:1px solid #1a2440}
+.eyebrow{color:var(--gold);letter-spacing:3px;font-size:12px;text-transform:uppercase;font-weight:bold;margin-bottom:14px}
+h1{font-size:44px;line-height:1.1;margin-bottom:18px}
+h2{font-size:30px;margin-bottom:16px}
+.lead{color:var(--muted);font-size:19px;max-width:680px}
+.nums{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
+.num{flex:1;min-width:240px;background:var(--navy2);border:1px solid #223055;border-radius:12px;padding:24px}
+.num .big{font-size:40px;font-weight:bold;color:var(--gold);line-height:1.1}
+.num .lbl{color:var(--muted);margin-top:8px;font-size:15px}
+.clock{background:linear-gradient(135deg,#1a2440,#0b1020);border:1px solid var(--gold);border-radius:14px;padding:30px;margin-top:8px}
+.clock h2{color:var(--gold)}
+.clock ul{margin:16px 0 0 20px;color:var(--muted)}
+.clock li{margin-bottom:10px}
+.steps{counter-reset:st}
+.step{display:flex;gap:18px;margin-top:26px;align-items:flex-start}
+.step:before{counter-increment:st;content:counter(st);flex:none;width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:bold;font-size:18px;display:flex;align-items:center;justify-content:center}
+.ramps{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px}
+.ramp{flex:1;min-width:250px;background:var(--navy2);border:1px solid #223055;border-radius:12px;padding:24px}
+.ramp h3{color:var(--gold);margin-bottom:8px;font-size:19px}
+.ramp p{color:var(--muted);font-size:15px;margin-bottom:16px}
+.ramp a.btn{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;padding:10px 20px;border-radius:7px;text-decoration:none;font-size:15px}
+.tag{display:inline-block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;background:#223055;color:var(--muted);border-radius:20px;padding:3px 12px;margin-bottom:10px}
+.tag.hot{background:#3a2a10;color:var(--gold)}
+.warnbox{background:#2a1c08;border:1px solid var(--warn);border-radius:10px;padding:18px 22px;margin-top:22px;font-size:15px;color:#f0d9b5}
+.chains{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.chain{background:var(--navy2);border:1px solid #223055;border-radius:8px;padding:8px 16px;font-size:14px;color:var(--muted)}
+.faq div{margin-bottom:18px}
+.faq h3{color:var(--gold);font-size:17px;margin-bottom:4px}
+.faq p{color:var(--muted);font-size:15px}
+.disclaimer{font-size:12.5px;color:#6b7590;padding:34px 0 10px;max-width:860px}
+footer{padding:10px 0 50px;color:#6b7590;font-size:13px}
+.center{text-align:center}
+
+.topnav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
+.topnav a{color:var(--muted);text-decoration:none;font-size:13.5px;letter-spacing:.4px}
+.topnav a:hover{color:var(--gold)}
+.topnav a.active{color:var(--gold);font-weight:bold}
+.topnav .soon{font-size:9px;border:1px solid var(--gold);color:var(--gold);border-radius:20px;padding:1px 7px;margin-left:4px;vertical-align:middle}
+.topnav .nav-cta{background:var(--gold);color:var(--navy);font-weight:bold;padding:8px 18px;border-radius:8px}
+.topnav .lang{color:var(--gold)}
+@media(max-width:760px){.topnav{gap:12px}.topnav a{font-size:12px}}
+</style>
+<!-- MailerLite Universal -->
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f]||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2732159');
+</script>
+<!-- End MailerLite Universal --></head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/es/"><img src="/assets/logo.png" alt="Wise Stake Consulting logo"><span class="bname">Wise Stake Consulting<small>The Receiving Side of Interest</small></span></a>
+  <nav class="topnav" aria-label="Main">
+    <a href="/es/">Inicio</a>
+    <a href="/es/signature-staking/">Staking con Firma</a>
+    <a href="/es/vaults/" class="active">Vaults</a>
+    <a href="/world-mobile/es/">World Mobile</a>
+    <a href="/sovren/es/">Sovren</a>
+    <a href="/es/pbs-1/">PBS-1 <span class="soon">Pronto</span></a>
+    <a href="/es/book-a-session/" class="nav-cta">Reserva una sesi&oacute;n</a>
+    <a href="/vaults/" class="lang">English</a>
+  </nav>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">B&oacute;vedas de rendimiento fijo en activos del mundo real</div>
+  <h1>Las b&oacute;vedas est&aacute;n abiertas.<br>El reloj corre.</h1>
+  <p class="lead">B&oacute;vedas de stablecoins respaldadas por infraestructura del mundo real - redes de telecomunicaciones y econom&iacute;as de nodos - que pagan rendimiento fijo que ves llegar en tiempo real - deja el panel abierto y ver&aacute;s tu balance subir cada pocos segundos. Un pool cierra pronto a dinero nuevo. Los que ya est&aacute;n dentro llevan la ventaja. Esta p&aacute;gina te deja listo para depositar en cuatro pasos.</p>
+  <div class="nums">
+    <div class="num"><div class="big">20% APY</div><div class="lbl">B&oacute;vedas de stablecoins de rendimiento fijo, respaldadas por activos del mundo real. Compuesto - las recompensas llegan y crecen. Visible en vivo en el panel de la plataforma.</div></div>
+    <div class="num"><div class="big">40% APR</div><div class="lbl">El pool respaldado por nodos - pagado sobre dinero ESTABLE. Tu dep&oacute;sito se queda en d&oacute;lares; sin monta&ntilde;as rusas de precio de token sobre tu capital. No compone. Cierra pronto.</div></div>
+    <div class="num"><div class="big">~5 meses</div><div class="lbl">Restantes de la ventana del 40% del pool de nodos al 1 de noviembre de 2026. Despu&eacute;s del cierre, la &uacute;nica vuelta atr&aacute;s es comprar &oacute;rdenes de venta secundarias.</div></div>
+  </div>
+  <p class="center" style="margin-top:40px"><a class="cta" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" target="_blank" rel="noopener">DEPOSITA YA &rarr;</a></p>
+  <p class="center" style="margin-top:12px;color:var(--muted);font-size:14px">&iquest;Ya sabes lo que haces? El bot&oacute;n te lleva directo a la plataforma por nuestro enlace de referencia. &iquest;A&uacute;n no? Los cuatro pasos de abajo te dejan listo.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Por qu&eacute; ganan los primeros</div>
+  <h2>La ventana, en n&uacute;meros claros.</h2>
+  <div class="clock">
+    <h2>Lo que est&aacute; pasando</h2>
+    <ul>
+      <li>Un dep&oacute;sito muy grande tiene fecha de llegar en diciembre. Cuando llegue, <strong style="color:var(--white)">el pool de nodos al 40% APR se cierra</strong> - cerrado a dep&oacute;sitos nuevos.</li>
+      <li>Despu&eacute;s del cierre, quien salga solo puede volver a entrar comprando &oacute;rdenes de venta secundarias - al precio que el mercado pida.</li>
+      <li>El equipo de la plataforma proyecta el pr&oacute;ximo pool en <strong style="color:var(--white)">~60% APR, potencialmente tres d&iacute;gitos</strong> a medida que crece la red Sovren - pero los precios de los nodos suben, as&iacute; que quien entre despu&eacute;s compra a peores precios para un rendimiento similar.</li>
+      <li><strong style="color:var(--white)">Los primeros se llevan la mayor ventaja.</strong> Tasa asegurada, ventana completa, precio m&aacute;s bajo.</li>
+    </ul>
+  </div>
+  <p class="lead" style="margin-top:20px;font-size:15px">Fuentes: anuncios del equipo de la plataforma (25 y 31 de octubre de 2026) y el panel en vivo. Las proyecciones son del equipo, no nuestras - nada aqu&iacute; est&aacute; garantizado, y las tasas cambian.</p>
+</div></section>
+
+<section><div class="wrap steps">
+  <div class="eyebrow">De d&oacute;lares al dep&oacute;sito</div>
+  <h2>Cuatro pasos. Una sola sesi&oacute;n.</h2>
+  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Consigue una wallet no custodial</h3>
+    <p class="lead" style="font-size:16px;margin-top:6px">Instala <strong style="color:var(--white)">MetaMask</strong> o <strong style="color:var(--white)">Rabby</strong> (extensi&oacute;n de navegador + app del tel&eacute;fono). Escribe tu frase semilla en papel - nunca la escribas en un sitio web, nunca le tomes captura, nunca la compartas. Ni siquiera con nosotros. No custodial significa que T&Uacute; tienes las llaves - sin banco, sin empresa, sin Wise Stake Consulting en medio. Ese es el punto.</p></div></div>
+  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Convierte d&oacute;lares en USDC</h3>
+    <p class="lead" style="font-size:16px;margin-top:6px">Tres formas abajo - elige la que te quede. Las tres terminan en el mismo lugar: USDC (una stablecoin d&oacute;lar) en tu wallet, listo para depositar.</p></div></div>
+  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Conoce tu red</h3>
+    <p class="lead" style="font-size:16px;margin-top:6px">Las b&oacute;vedas corren en cuatro redes. Tu USDC necesita estar en la misma red en la que depositas:</p>
+    <div class="chains"><span class="chain">Ethereum</span><span class="chain">Base</span><span class="chain">Arbitrum One</span><span class="chain">Robinhood Chain</span></div>
+    <p class="lead" style="font-size:16px;margin-top:12px">&iquest;Primer dep&oacute;sito? Ethereum es lo m&aacute;s simple - y las herramientas integradas de la app te permiten transferir o intercambiar entre redes despu&eacute;s de entrar.</p></div></div>
+  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Deposita</h3>
+    <p class="lead" style="font-size:16px;margin-top:6px">Abre la plataforma por nuestro enlace de referencia, conecta tu wallet, elige tu b&oacute;veda y coloca tu dep&oacute;sito. El panel muestra tasas, buffers de recompensas y tu posici&oacute;n en vivo.</p>
+    <p style="margin-top:18px"><a class="cta" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" target="_blank" rel="noopener">DEPOSITA YA &rarr;</a></p></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Qui&eacute;n controla el dinero</div>
+  <h2>Tu dinero. Tus llaves. Tu decisi&oacute;n.</h2>
+  <p class="lead">Aqu&iacute; no hay una "cuenta de dep&oacute;sito" ni nadie a quien pedirle un retiro. Tus fondos nunca est&aacute;n en una empresa - viven en una posici&oacute;n que es tuya, controlada por la llave de tu wallet, en contratos p&uacute;blicos que cualquiera puede auditar.</p>
+  <p class="lead" style="margin-top:14px">Ning&uacute;n administrador de la plataforma puede congelar, mover ni tocar tu posici&oacute;n. Ni Wise Soft, ni Wise Stake Consulting, ni nadie. No podemos ver tu frase semilla, no podemos firmar por ti, no podemos entrar. Colocar fondos es una transacci&oacute;n que solo tu wallet puede hacer. Salir - incluso cuando significa que un comprador toma tu posici&oacute;n - es una transacci&oacute;n que solo tu wallet puede iniciar. La &uacute;nica forma de perder el control de estos fondos es perder o compartir tu propia llave - por eso las reglas de la frase semilla del paso 1 importan m&aacute;s que cualquier contrase&ntilde;a que te hayan dicho proteger.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Paso 2 - elige tu puerta de entrada</div>
+  <h2>D&oacute;lares dentro. Tres puertas.</h2>
+  <div class="ramps">
+    <div class="ramp"><span class="tag">La m&aacute;s f&aacute;cil</span><h3>Coinbase</h3><p>Crea una cuenta, verifica tu identidad, compra USDC con tu tarjeta de d&eacute;bito o cuenta bancaria, y luego ret&iacute;ralo a la direcci&oacute;n de tu wallet en Ethereum. Diez minutos para un principiante.</p><a class="btn" href="https://coinbase.com/join/BZVEJBM?src=ios-link" target="_blank" rel="noopener">Abre Coinbase &rarr;</a></div>
+    <div class="ramp"><span class="tag">Si ya tienes la app</span><h3>Robinhood</h3><p>Compra USDC directamente en la app de Robinhood, y luego ret&iacute;ralo a tu wallet en Robinhood Chain - la misma red donde corre una de las b&oacute;vedas. El paso clave es el retiro a tu propia wallet; no te quedes en "ya lo compr&eacute;".</p><a class="btn" href="https://join.robinhood.com/ramond143" target="_blank" rel="noopener">Abre Robinhood &rarr;</a></div>
+    <div class="ramp"><span class="tag hot">Avanzada</span><h3>Cash App</h3><p>La ruta Bitcoin: compra BTC en Cash App, ret&iacute;ralo a tu propia wallet de Bitcoin, convi&eacute;rtelo en USDC, y luego env&iacute;a el USDC a tu wallet. M&aacute;s pasos - elige esta ruta solo si te sientes c&oacute;modo, o tr&aacute;ela a una sesi&oacute;n gratis y la recorremos contigo.</p><a class="btn" href="https://cash.app/refer/HQPWCNW" target="_blank" rel="noopener">Abre Cash App &rarr;</a></div>
+  </div>
+  <div class="warnbox"><strong>Lee esto antes de la ruta de Cash App:</strong> Bitcoin es una red distinta. Nunca env&iacute;es BTC a una direcci&oacute;n de Ethereum (como tu direcci&oacute;n de MetaMask) - se perder&aacute; para siempre. El BTC primero debe convertirse en USDC en un servicio de intercambio, y solo entonces enviarse a tu wallet. Si alg&uacute;n paso de esa oraci&oacute;n fue nuevo para ti, usa Coinbase. En cripto no hay deshacer.</div>
+</div></section>
+
+<section><div class="wrap faq">
+  <div class="eyebrow">Preguntas que todos hacen</div>
+  <h2>Respuestas directas.</h2>
+  <div><h3>&iquest;Est&aacute; garantizado mi dep&oacute;sito?</h3><p>Con honestidad: tu dep&oacute;sito es USDC, una stablecoin d&oacute;lar - tu capital no se mueve con los precios de los tokens. Ese es el punto fuerte: el 40% paga sobre dinero estable. No es libre de riesgo: USDC est&aacute; dise&ntilde;ado para mantener $1 pero lo emite una empresa y ha temblado antes; el rendimiento depende del buffer de recompensas de la plataforma y de los ingresos reales de los activos; las salidas pueden tener fila; y los contratos, aunque exactos, siguen siendo software. Estable describe tu dep&oacute;sito, no el futuro. Haz tu propia investigaci&oacute;n, y nunca depongas dinero que necesites recuperar en una fecha fija.</p></div>
+  <div><h3>&iquest;Ustedes guardan mi dinero?</h3><p>No. Wise Stake Consulting nunca toca tus fondos. Depositas desde tu propia wallet al protocolo. Ganamos comisi&oacute;n de referencia de la plataforma por los dep&oacute;sitos hechos por nuestro enlace - esa es nuestra divulgaci&oacute;n, de entrada.</p></div>
+  <div><h3>&iquest;Qu&eacute; pasa cuando el pool se cierra?</h3><p>Las posiciones existentes siguen ganando su tasa asegurada por lo que queda de la ventana. Las entradas nuevas se cierran. El equipo de la plataforma ha declarado que el pr&oacute;ximo pool abrir&aacute; con una tasa distinta y precios de nodos m&aacute;s altos - su proyecci&oacute;n es ~60% APR, potencialmente tres d&iacute;gitos a medida que crece la red. Nada est&aacute; escrito hasta que el capital llegue.</p></div>
+  <div><h3>&iquest;D&oacute;nde hablo con una persona?</h3><p>&Uacute;nete a una sesi&oacute;n gratis de 40 minutos o reserva una consulta en <a href="/es/">wisestake.consulting</a>. Recorremos wallets, redes y dep&oacute;sitos contigo - ese es el trabajo.</p></div>
+</div></section>
+
+<section id="stay"><div class="wrap">
+  <div class="eyebrow">&iquest;A&uacute;n no est&aacute;s listo para depositar? Mantente cerca.</div>
+  <h2>Dos formas de entrar - las dos sin presi&oacute;n.</h2>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:26px">
+    <div class="ramp"><span class="tag">El ciclo</span><h3>S&eacute; parte de la pr&oacute;xima sesi&oacute;n</h3><p>Un webinar gratis en vivo que explica el cuadro completo - stakes, b&oacute;vedas, el cierre, las matem&aacute;ticas - con preguntas abiertas al final. &Uacute;nete a la lista y la invitaci&oacute;n llega a tu correo. Pregunta lo que quieras; sin gui&oacute;n de venta.</p>
+      <div class="notify" style="max-width:100%;margin:18px 0 0"><div class="ml-embedded" data-form="W06wws"></div></div></div>
+    <div class="ramp"><span class="tag hot">Directo</span><h3>Reserva una sesi&oacute;n</h3><p>&iquest;Quieres uno a uno? Escr&iacute;benos con lo que intentas hacer y lo organizamos - recorrido gratis de 40 minutos para empezar, o una consulta completa para stakes, paquetes y programas.</p>
+      <p style="margin-top:18px"><a class="btn" href="mailto:dm@wisestake.consulting?subject=Sesi%C3%B3n%20con%20Wise%20Stake">Escr&iacute;benos para reservar &rarr;</a></p>
+      <p style="margin-top:12px;color:var(--muted);font-size:13px">&iquest;Prefieres paso a paso con una persona? Cada correo de la lista tiene bot&oacute;n de respuesta que tambi&eacute;n nos llega.</p></div>
+  </div>
+</div></section>
+
+
+<section><div class="wrap">
+  <div class="eyebrow">M&aacute;s puertas en este sitio</div>
+  <h2>Las mismas b&oacute;vedas, otras dos ventanas.</h2>
+  <div class="ramps">
+    <div class="ramp"><span class="tag">20% APY</span><h3>World Mobile</h3><p>La compa&ntilde;&iacute;a de su gente. La estrategia de stablecoins de World Mobile paga 20% APY, compuesto - y el bot&oacute;n de dep&oacute;sito en esa p&aacute;gina lleva nuestro enlace de referencia, igual que aqu&iacute;.</p><a class="btn" href="/world-mobile/es/">Ver World Mobile &rarr;</a></div>
+    <div class="ramp"><span class="tag hot">40% APR</span><h3>Sovren Nodes</h3><p>El pool respaldado por nodos - la ventana del 40% descrita arriba. Las matem&aacute;ticas detr&aacute;s de la tasa, la cuenta regresiva del Tier 01, y la gu&iacute;a para quedar listo para depositar.</p><a class="btn" href="/sovren/es/">Ver Sovren &rarr;</a></div>
+  </div>
+</div></section>
+
+<section class="center"><div class="wrap">
+  <h2 style="margin-bottom:10px">La ventana est&aacute; abierta. No seguir&aacute; abierta.</h2>
+  <p class="lead" style="margin:0 auto 26px">Prep&aacute;rate para depositar y mu&eacute;vete - o espera el pr&oacute;ximo pool a peores precios. De cualquier forma, ahora ya lo sabes.</p>
+  <a class="cta" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" target="_blank" rel="noopener">DEPOSITA YA &rarr;</a>
+</div></section>
+
+<div class="wrap disclaimer">
+No es asesor&iacute;a financiera. Nada en esta p&aacute;gina es una recomendaci&oacute;n de comprar, vender o mantener ning&uacute;n activo. Wise Stake Consulting es un negocio de educaci&oacute;n y consultor&iacute;a, no un corredor, distribuidor, asesor de inversi&oacute;n ni banco. Las tasas (20% APY en b&oacute;vedas de stablecoins compuestas; 40% APR en el pool de nodos que no compone; ~60% APR proyectados en un pool futuro) son mostradas por la plataforma al momento de escribir esto (1 de noviembre de 2026), no est&aacute;n garantizadas y cambian con el tiempo. El dep&oacute;sito de diciembre, el cierre del pool y los tiempos son declaraciones p&uacute;blicas del equipo de la plataforma, no compromisos. USDC busca mantener $1 pero no est&aacute; garantizado (riesgo de despegue); el rendimiento depende del buffer de recompensas de la plataforma y de los ingresos reales de los activos; la salida puede estar sujeta a fila; aplican riesgos de contratos inteligentes y de plataforma. Wise Stake Consulting gana comisi&oacute;n de referencia por los dep&oacute;sitos hechos por los enlaces de esta p&aacute;gina y puede tener posiciones propias. Haz tu propia investigaci&oacute;n.
+</div>
+<footer><div class="wrap">Wise Stake Consulting, LLC &middot; wisestake.consulting &middot; <a href="/es/" style="color:#6b7590">Inicio</a><br>Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting" style="color:#6b7590">dm@wisestake.consulting</a> (Denise)</div></footer>
+</body>
+</html>
