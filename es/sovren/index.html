@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nodos Sovren: 40% APR en USDC. Tier 01 en cierre. | Wise Stake Consulting</title>
+<meta name="description" content="Cómo los Nodos Sovren pagan 40% APR en depósitos de USDC - una cuenta de ahorros respaldada por infraestructura DePIN real; los ingresos de la red financian el pool, y el precio de Tier 01 está por cerrar. De dónde viene el rendimiento, explicado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1A2F; --navy2:#0E2240; --navy3:#12294B;
+  --gold:#D4A843; --gold2:#E8C675; --cream:#F5EFDF; --cream2:#EFE6CE;
+  --ink:#0A1A2F; --muted:#8FA3BD; --line:rgba(212,168,67,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:'Spline Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Fraunces',serif}
+a{color:var(--gold2)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.eyebrow{letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:600}
+.btn{display:inline-block;padding:15px 30px;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;transition:.25s;border:1.5px solid transparent}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);box-shadow:0 8px 30px rgba(212,168,67,.35)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(212,168,67,.5)}
+.btn-ghost{border-color:var(--gold);color:var(--gold2)}
+.btn-ghost:hover{background:rgba(212,168,67,.12);transform:translateY(-2px)}
+nav{position:sticky;top:0;z-index:50;background:rgba(10,26,47,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:10px 0;flex-wrap:wrap;gap:10px 18px}
+nav img{height:44px}
+nav .links{display:flex;gap:18px;font-size:.84rem;flex-wrap:wrap;align-items:center}
+nav .links a{color:var(--cream);text-decoration:none;opacity:.85;white-space:nowrap}
+nav .links a:hover{opacity:1;color:var(--gold2)}
+@media(max-width:1150px){nav .links a.sec{display:none}}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.9}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,26,47,.05) 22%,rgba(10,26,47,.45) 52%,rgba(10,26,47,.9) 74%,rgba(10,26,47,.98) 100%)}
+.hero .wrap{position:relative;z-index:2;margin-left:auto;margin-right:0;text-align:right;max-width:600px;padding:120px 5vw 120px 24px}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.08;font-weight:700;margin:18px 0 22px}
+.hero h1 em{font-style:italic;color:var(--gold2)}
+.hero p.lead{font-size:1.08rem;color:var(--cream);opacity:.9;margin-bottom:34px}
+.cta-row{display:flex;gap:16px;justify-content:flex-end;flex-wrap:wrap}
+@media(max-width:720px){.hero .wrap{text-align:left;margin:0 auto;max-width:100%;padding:90px 24px}.cta-row{justify-content:flex-start}}
+.stats{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:34px 24px;text-align:center}
+.stats b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;color:var(--gold2)}
+.stats span{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:720px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+section{padding:90px 0}
+.sec-head{max-width:760px;margin:0 auto 54px;text-align:center}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:14px 0 16px;line-height:1.15}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:900px;margin:0 auto}
+@media(max-width:720px){.plans{grid-template-columns:1fr}}
+.plan{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:30px 26px;position:relative}
+.plan.hot{border-color:var(--gold);box-shadow:0 0 40px rgba(212,168,67,.18)}
+.plan .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:4px 14px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.plan h3{font-size:1.3rem;margin-bottom:6px}
+.plan .rate{font-family:'Fraunces',serif;font-size:2.4rem;color:var(--gold2);margin:10px 0 8px}
+.plan p{font-size:.9rem;color:var(--muted)}
+.split{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.split .card{background:var(--navy3);border:1px solid var(--line);border-radius:18px;padding:30px 26px;text-align:center}
+.split .card b{display:block;font-family:'Fraunces',serif;font-size:2.4rem;color:var(--gold2)}
+.split .card span{font-size:.85rem;color:var(--muted)}
+.split .card p{font-size:.85rem;color:var(--cream2);margin-top:12px}
+.own{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 50%,var(--navy) 100%)}
+.own-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+@media(max-width:900px){.own-grid{grid-template-columns:1fr}}
+.own h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.own p{color:var(--cream2);margin-bottom:18px}
+.node-card{background:var(--navy3);border:1px solid var(--line);border-radius:20px;padding:30px 28px;margin-bottom:20px;position:relative;overflow:hidden}
+.node-card::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.22),transparent 70%)}
+.node-card h3{color:var(--gold2);font-size:1.25rem;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.node-card h3 small{font-size:.8rem;color:var(--muted);font-family:'Spline Sans',sans-serif;font-weight:400;text-align:right}
+.node-card p{font-size:.9rem;margin:10px 0 0;color:var(--muted)}
+.own .strip{display:flex;gap:40px;margin-top:26px;flex-wrap:wrap}
+.own .strip div b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold2)}
+.own .strip div span{color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.flow{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{background:var(--navy3);border:1px solid var(--line);border-radius:18px;padding:32px 26px;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:'Fraunces',serif;font-size:2.6rem;color:var(--gold);opacity:.55;display:block;margin-bottom:10px}
+.step h3{font-size:1.15rem;margin-bottom:10px}
+.step p{font-size:.92rem;color:var(--muted)}
+.apy-pill{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:5px 16px;border-radius:999px;font-size:.9rem;margin-top:14px}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin:0 auto}
+@media(max-width:720px){.dual{grid-template-columns:1fr}}
+.cta-card{border-radius:22px;padding:40px 34px;text-align:center;border:1px solid var(--line);background:var(--navy2)}
+.cta-card img{height:74px;margin-bottom:18px}
+.cta-card h3{font-size:1.4rem;margin-bottom:10px}
+.cta-card p{color:var(--muted);font-size:.92rem;margin-bottom:24px}
+details{background:var(--navy2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;padding:18px 22px;font-weight:600;color:var(--cream);list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:22px;color:var(--gold);font-size:1.3rem}
+details[open] summary::after{content:"\2212"}
+details .a{padding:0 22px 20px;color:var(--muted);font-size:.93rem}
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:.8rem}
+footer .wrap{display:flex;gap:30px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+footer img{height:56px}
+.disc{max-width:760px;font-size:.74rem;line-height:1.55;opacity:.8}
+.reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* BOOK A SESSION */
+.book{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.book-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+.book h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.book .book-copy p{color:var(--muted);font-size:1.02rem}
+.book ul{list-style:none;margin-top:26px;padding:0}
+.book li{padding-left:28px;position:relative;margin-bottom:13px;color:var(--cream);font-size:.98rem}
+.book li::before{content:"\2726";color:var(--gold);position:absolute;left:0;top:1px}
+.book-card{background:var(--cream);border-radius:22px;padding:22px 18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.book-card .ml-form-embedContainer{max-width:100%!important}
+@media(max-width:860px){.book-grid{grid-template-columns:1fr;gap:36px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/es/" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <img src="/assets/img/seal-f5f18769.png" alt="Wise Stake Consulting seal">
+      <span class="serif" style="color:var(--cream);font-size:1.05rem">Wise Stake <span style="color:var(--gold2)">Consulting</span></span>
+    </a>
+    <div class="links">
+      <a href="/es/">Inicio</a><a href="/es/signature-staking/">Staking con Firma</a><a href="/es/vaults/">Vaults</a><a class="sec" href="#depin">Qu&eacute; es DePIN</a><a class="sec" href="#source">De d&oacute;nde viene el rendimiento</a><a class="sec" href="#tier">Tier 01</a><a class="sec" href="#faq">Preguntas</a><a href="/es/pbs-1/">PBS-1</a><a href="/es/book-a-session/" style="color:var(--navy);background:var(--gold2);padding:8px 16px;border-radius:999px;font-weight:700">Reserva una sesi&oacute;n</a><a href="/sovren/" style="color:var(--gold2)">English</a>
+      
+      
+      
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img class="bg" src="/assets/img/sv-hero-d38a13e5.png" alt="A web of operator-owned nodes spans the horizon, gold coins flowing along the lines into a Wise staking vault">
+  <div class="wrap">
+    <div class="eyebrow">Sovren Nodes &times; Wise Stake</div>
+    <h1>La infraestructura paga.<br>Las <em>matemáticas</em> se componen.</h1>
+    <p class="lead">Sovren es infraestructura del mundo real que paga a sus operadores en trabajo verificable. Depositas USDC, se compra la infraestructura de nodos, y los ingresos de la red financian un pool al 40% APR &mdash; mientras dure el precio de Tier 01. Piénsalo como una cuenta de ahorros respaldada por máquinas, no un stake: <strong style="color:var(--gold2)">depositas en Wise Vaults, no bloqueas una posición.</strong></p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" rel="noopener">Deposita USDC al 40% APR &rarr;</a>
+      <a class="btn btn-ghost" href="https://wisestake.consulting/vaults/" rel="noopener">Lee la guía de depósito</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats reveal">
+  <div class="wrap">
+    <div><b>40%</b><span>APR en USDC, Tier 01</span></div>
+    <div><b>$3,000</b><span>Licencia de nodo Tier 01</span></div>
+    <div><b>10,000</b><span>Licencias. En total.</span></div>
+    <div><b>1B</b><span>límite máximo de SOVR</span></div>
+  </div>
+</div>
+
+<!-- DEPIN -->
+<section id="depin">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Primero, el concepto</div>
+      <h2>La mayoría de las cripto mueven dinero. DePIN mueve el mundo físico.</h2>
+      <p>DePIN &mdash; redes de infraestructura física descentralizada &mdash; usa una blockchain para coordinar hardware real: discos de almacenamiento, GPUs, hotspots inalámbricos, ancho de banda. Operadores independientes son dueños de las máquinas. Los clientes pagan por usarlas. La cadena verifica que el trabajo realmente ocurrió, y luego paga.</p>
+    </div>
+    <div class="split reveal">
+      <div class="card"><b>01</b><span>LOS OPERADORES APORTAN EL HARDWARE</span><p>Máquinas reales, de gente real, conectadas a la red &mdash; no la granja de servidores de una sola corporación.</p></div>
+      <div class="card"><b>02</b><span>LOS CLIENTES PAGAN POR EL SERVICIO</span><p>Almacenamiento, entrega de contenido, ancho de banda, cómputo. Demanda real de usuarios reales &mdash; el ecosistema de Sovren (Parler, Play, Shop, Pay) es el lado de la demanda.</p></div>
+      <div class="card"><b>03</b><span>PRUEBA, LUEGO PAGO</span><p>Cada solicitud produce un recibo criptográfico firmado. La cadena califica a los operadores en una ventana móvil de 30 días y liquida en SOVR.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE YIELD COMES FROM -->
+<section class="own" id="source">
+  <div class="wrap">
+    <div class="own-grid">
+      <div class="reveal">
+        <div class="eyebrow">Sigue el dinero</div>
+        <h2>De dónde viene realmente el 40%.</h2>
+        <p>Cada SOVR liquidado en la red se divide por regla fija: <strong style="color:var(--gold2)">el 50% se quema y se recicla</strong> (presión estructural sobre el precio del token), <strong style="color:var(--gold2)">el 25% va al pool de operadores</strong>, y el 25% financia a la empresa. Ese pool de operadores son ingresos reales de uso real &mdash; creadores monetizando en Parler y Play, archivos almacenados, contenido entregado, ancho de banda servido.</p>
+        <p>Cuando depositas USDC en el pool de stablecoins, <strong style="color:var(--gold2)">tu depósito se destina a comprar la infraestructura</strong> &mdash; las licencias de nodo y el hardware que hacen funcionar la red. El trabajo verificado de la red genera SOVR. Los ingresos del pool son lo que paga tu tasa.</p>
+        <p>Esta es la diferencia entre un rendimiento respaldado por facturas de suscriptores y tarifas de servidores &mdash; y un rendimiento respaldado por depósitos nuevos. DePIN paga del primer tipo.</p>
+        <div class="strip">
+          <div><b>50 / 25 / 25</b><span>División de liquidación, por regla</span></div>
+          <div><b>30-day</b><span>Ventana de calificación por atestación</span></div>
+          <div><b>Signed</b><span>Recibo por cada solicitud</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="node-card">
+          <h3>Tu depósito <small>USDC, stablecoin</small></h3>
+          <p>Compra infraestructura de nodos: licencias y despliegue de hardware. Esto es lo que separa depositar aquí de los círculos de préstamo &mdash; el dinero se convierte en máquinas.</p>
+        </div>
+        <div class="node-card">
+          <h3>Las máquinas ganan <small>verified work</small></h3>
+          <p>Los nodos sirven a los servicios reales de Sovren y cobran en SOVR bajo reglas publicadas. El mal trabajo no gana nada y puede impugnarse on-chain.</p>
+        </div>
+        <div class="node-card" style="border-color:var(--gold)">
+          <h3>El pool te paga <small>40% APR &middot; garantizado 5 meses</small></h3>
+          <p>Los ingresos de la red financian la tasa del pool de stablecoins. Publicado como APR, no APY &mdash; la etiqueta honesta, porque el pool en sí no compone. Compóntelo tú y el retorno efectivo es mayor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 01 -->
+<section class="flow" id="tier">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">La ventana</div>
+      <h2>Por qué Tier 01 es el momento de entrar temprano.</h2>
+      <p>Según el equipo de la plataforma &mdash; y dicho con claridad, nada es definitivo hasta que tu depósito quede hecho.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <h3>Tier 01: el precio temprano</h3>
+        <p>Solo existirán 10,000 licencias de nodo en total. El precio de Tier 01 es $3,000, está activo ahora, y se espera que un depósito grande en diciembre cierre la entrada del pool actual. Este será el precio más bajo que la infraestructura tendrá jamás. Y la tasa no es un gancho: <strong style="color:var(--cream2)">la plataforma garantiza el 40% APR por los próximos cinco meses.</strong></p>
+        <span class="apy-pill">Tier 01 &mdash; ventana de cierre</span>
+      </div>
+      <div class="step">
+        <h3>El próximo pool: tasa más baja, por matemáticas</h3>
+        <p>A medida que sube el precio de SOVR, el depósito de cada tier posterior compra menos infraestructura, así que los mismos ingresos de la red pagan una tasa más baja. Se proyecta que los pools futuros queden bastante por debajo del 40% &mdash; el tier temprano es donde la tasa es más alta.</p>
+      </div>
+      <div class="step">
+        <h3>Este pool: la tasa proyecta al alza</h3>
+        <p>A medida que crece la demanda de la infraestructura de Sovren y la presión de quemar-y-reciclar empuja el precio, el equipo de la plataforma proyecta que el retorno de este pool suba hacia 60% APY y más. Los depósitos tempranos montan esa curva.</p>
+        <span class="apy-pill">60%+ APY proyectado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Una puerta, dos pasos</div>
+      <h2>Entra la stablecoin. Es tuya la infraestructura. Salen los ingresos.</h2>
+      <p>La guía de depósito te lleva de la wallet al pool en cuatro pasos, o ve directo a la app.</p>
+    </div>
+    <div class="dual reveal">
+      <div class="cta-card">
+        <img src="/assets/img/seal-f5f18769.png" alt="Wise Stake Consulting seal">
+        <h3>Abre la app y deposita</h3>
+        <p>USDC en Ethereum, Base o Arbitrum. La vía de referencia está activa &mdash; los depósitos por este enlace van directo al pool mientras Tier 01 esté abierto.</p>
+        <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" rel="noopener">Deposita USDC al 40% APR &rarr;</a>
+      </div>
+      <div class="cta-card">
+        <div style="height:74px;display:flex;align-items:center;justify-content:center">
+          <svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="#E8C675" stroke-width="1.4"><path d="M4 19.5V5.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+        </div>
+        <h3>¿Aún no estás listo para depositar?</h3>
+        <p>Configuración de la wallet, onramps de USDC (Coinbase, Robinhood, Cash App &mdash; con la trampa del BTC señalada), elección de cadena, y luego el depósito. Paso a paso, sin dar nada por sabido.</p>
+        <a class="btn btn-ghost" href="https://wisestake.consulting/vaults/" rel="noopener">Lee la guía de depósito &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding-top:20px">
+  <div class="wrap" style="max-width:820px">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Straight answers</div>
+      <h2>Questions we get first.</h2>
+    </div>
+    <details class="reveal"><summary>¿Está garantizado el 40%?</summary><div class="a">For the current window, yes: <strong>la plataforma garantiza el 40% APR por los próximos cinco meses.</strong> Después de esa ventana, la tasa depende de la demanda de la red y del precio de SOVR &mdash; las proyecciones más arriba en esta página son del equipo de la plataforma, no promesas. El whitepaper de Sovren es explícito en que las recompensas de nodos nunca están garantizadas a largo plazo, y por eso te decimos de dónde viene la tasa en vez de solo imprimir el número. Haz tu propia investigación; nada aquí es asesoría financiera.</div></details>
+    <details class="reveal"><summary>¿Por qué este es APR y el de World Mobile es APY?</summary><div class="a">Precisión. El pool de Sovren paga una tasa plana que no compone, así que se publica como APR. La estrategia de stablecoins de World Mobile compone, así que se publica como APY. Usamos la etiqueta honesta para cada uno &mdash; compara tasas solo cuando sepas cuál es cuál.</div></details>
+    <details class="reveal"><summary>¿A dónde va exactamente mi depósito?</summary><div class="a">A comprar la infraestructura del pool: licencias de nodo de Sovren (respaldadas por NFT, limitadas a 10,000) y el hardware donde corren. Los ingresos de red que esas máquinas generan son lo que financia la tasa del pool.</div></details>
+    <details class="reveal"><summary>¿Qué pasa cuando Tier 01 cierre?</summary><div class="a">Los tiers posteriores entran a precios más altos con más tasa ya consumida detrás. Según el equipo de la plataforma, se proyecta que los pools futuros tengan APRs más bajos, mientras que los depósitos ya en Tier 01 tienen proyectado ver el retorno del pool subir hacia 60% APY y más a medida que crece la demanda de la red. Proyecciones, no promesas.</div></details>
+    <details class="reveal"><summary>¿Puedo comprar una licencia de nodo yo mismo?</summary><div class="a">Sí &mdash; $3,000 en Tier 01, con un bloqueo de transferencia de 12 meses y consolidación de recompensas a 180 días. La vía del pool existe para la gente que quiere la exposición a la infraestructura en stablecoins sin operar un nodo. <a class="sec" href="#book">Una sesión gratis</a> puede ayudarte a sopesar ambas.</div></details>
+    <details class="reveal"><summary>¿Cómo funcionan los retiros?</summary><div class="a">Esto es un depósito, no una posición bloqueada &mdash; más cerca de una cuenta de ahorros que de un certificado de depósito. Un retiro se procesa como una <strong>orden de venta</strong>: la plataforma vende la posición correspondiente en la parte trasera (ella mantiene las licencias de nodo, así que las órdenes se cubren desde el lado de los nodos) y te paga. Según el equipo de la plataforma, las órdenes de venta se procesan rápido, pero es una fila de órdenes, no un cajero automático &mdash; trata el plazo en días, no en segundos, y planifica en consecuencia.</div></details>
+  </div>
+</section>
+
+
+<section id="book" class="book">
+  <div class="wrap book-grid">
+    <div class="book-copy reveal">
+      <div class="eyebrow">Reserva una sesión gratis</div>
+      <h2>Véelo en vivo. Trae tus preguntas.</h2>
+      <p>Cuarenta minutos, uno a uno, por Zoom. Recorremos el depósito juntos &mdash; la wallet, el USDC, tu primer depósito &mdash; y sales sabiendo exactamente cómo funciona la ventana del 40% APR y cómo te devuelve el dinero. Sin presión, sin compromiso.</p>
+      <ul>
+      <li>Configuración de la wallet y el onramp de USDC, paso a paso</li>
+      <li>Cómo gana un depósito, y cómo te devuelve el dinero un retiro (una orden de venta)</li>
+      <li>Qué pasa cuando Tier 01 cierre, y qué significan los tiers posteriores para entrar</li>
+      <li>Respuestas directas &mdash; si no es para ti, te lo decimos</li>
+      </ul>
+    </div>
+    <div class="book-card reveal">
+      <div class="ml-embedded" data-form="W06wws"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;gap:18px;align-items:center">
+      <img src="/assets/img/seal-f5f18769.png" alt="Wise Stake Consulting seal">
+      <div>
+        <div class="serif" style="color:var(--cream);font-size:1rem">Wise Stake Consulting LLC</div>
+        <div><a href="https://wisestake.consulting">wisestake.consulting</a></div>
+      </div>
+    </div>
+    <div class="disc">
+      Divulgación: El enlace a la app de depósitos es un enlace de referencia; Wise Stake Consulting puede ganar comisiones de referencia por depósitos sin costo adicional para ti. Podemos tener posiciones propias en las estrategias mencionadas. El 40% APR y todas las proyecciones a futuro (incluyendo el precio de Tier 02, el momento de cierre del pool y el 60%+ APY) son declaraciones del equipo de la plataforma, no garantías, y están sujetas a cambio; el whitepaper de Sovren declara que las recompensas de nodos no están garantizadas y que las licencias de nodo no son una inversión. Nada en esta página es asesoría financiera, de inversión, legal ni fiscal. Los activos digitales implican riesgo, incluida la pérdida del capital. Haz tu propia investigación. &copy; 2026 Wise Stake Consulting LLC.
+    </div>
+  </div>
+<p style="text-align:center;font-size:.85rem;margin-top:10px">Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting" style="color:var(--gold2)">dm@wisestake.consulting</a> (Denise)</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2732159');
+</script>
+<!-- End MailerLite Universal -->
+</body>
+</html>
