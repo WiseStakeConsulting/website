@@ -143,7 +143,11 @@ function wscConfig(){return{to:"0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f",ens:
 async function wscPay(ev,token){
   ev.preventDefault();
   var cfg=wscConfig(),st=document.getElementById("wsc-pay-status"),eth=window.ethereum;
-  if(!eth){st.innerHTML="No wallet detected. Open this page in your wallet browser, or send $150 in "+(token==="usdc"?"USDC":"USDT")+" to <b>"+cfg.ens+"</b> ("+cfg.to+") and email us the tx link: "+cfg.contact;return}
+  var isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if(!eth){
+    if(isMobile){st.innerHTML="<strong>Open this page inside your wallet app</strong> - phone browsers do not expose wallets to websites.<br><a class=\"btn btn-gold\" style=\"padding:10px 20px;font-size:.85rem;margin-top:10px;display:inline-block\" href=\"https://metamask.app.link/dapp/wisestake.consulting/book-a-session/\">Open in MetaMask</a><br><span style=\"display:block;margin-top:8px\">Or send $150 in "+(token==="usdc"?"USDC":"USDT")+" to <b>"+cfg.ens+"</b> ("+cfg.to+") and email the tx link to "+cfg.contact+".</span>"}
+    else{st.innerHTML="No wallet detected. Install <a href='https://metamask.io' target='_blank' rel='noopener' style='color:var(--gold2)'>MetaMask</a>, or send $150 in "+(token==="usdc"?"USDC":"USDT")+" to <b>"+cfg.ens+"</b> ("+cfg.to+") and email us the tx link: "+cfg.contact}
+    return}
   try{
     await eth.request({method:"eth_requestAccounts"});
     var cid=await eth.request({method:"eth_chainId"});
