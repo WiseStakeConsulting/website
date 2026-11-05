@@ -129,7 +129,36 @@ footer.site a{color:var(--gold2);text-decoration:none}
       <h3 class="gold">Consulta Inicial</h3>
       <p>Cuarenta y cinco minutos, un tema: tu gente, tu programa, y si algo de esto le queda a tu caso. Sales sabiendo m&aacute;s de lo que llegaste, o no te cuesta nada.</p>
       <div class="price">$150 &middot; 45 minutos</div>
-      <span class="go"><a class="btn btn-ghost" style="padding:10px 20px;font-size:.85rem" href="mailto:dm@wisestake.consulting?subject=Consulta%20Inicial%20-%20pago%20con%20tarjeta">Tarjeta / factura</a> &nbsp; <a class="btn btn-gold" style="padding:10px 20px;font-size:.85rem" href="mailto:dm@wisestake.consulting?subject=Consulta%20Inicial%20-%20pago%20con%20wallet">Paga con wallet</a></span>
+      <span class="go"><a class="btn btn-ghost" style="padding:10px 20px;font-size:.85rem" href="mailto:dm@wisestake.consulting?subject=Consulta%20Inicial%20-%20pago%20con%20tarjeta">Tarjeta / factura</a> &nbsp; 
+<div class="wsc-pay" style="margin-top:12px;padding:14px;border:1px solid #c6a14e;border-radius:8px;background:rgba(198,161,78,.06)">
+  <div style="font-size:.85rem;margin-bottom:10px;color:inherit"><strong>$150</strong> in USDC or USDT &middot; Ethereum mainnet &middot; direct to <strong>wisestakes.eth</strong> &mdash; sent straight from your wallet, we never hold your funds.</div>
+  <span>
+    <a class="btn btn-gold" style="padding:10px 20px;font-size:.85rem;cursor:pointer" onclick="wscPay(event,'usdc')">Pay $150 in USDC</a>
+    &nbsp; <a class="btn btn-ghost" style="padding:10px 20px;font-size:.85rem;cursor:pointer" onclick="wscPay(event,'usdt')">Pay $150 in USDT</a>
+  </span>
+  <div id="wsc-pay-status" style="font-size:.82rem;margin-top:10px;line-height:1.5"></div>
+</div>
+<script>
+function wscConfig(){return{to:"0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f",ens:"wisestakes.eth",usdc:"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",usdt:"0xdAC17F958D2ee523a2206206994597C13D831ec7",amount:150000000,contact:"dm@wisestake.consulting"}}
+async function wscPay(ev,token){
+  ev.preventDefault();
+  var cfg=wscConfig(),st=document.getElementById("wsc-pay-status"),eth=window.ethereum;
+  if(!eth){st.innerHTML="No wallet detected. Open this page in your wallet browser, or send $150 in "+(token==="usdc"?"USDC":"USDT")+" to <b>"+cfg.ens+"</b> ("+cfg.to+") and email us the tx link: "+cfg.contact;return}
+  try{
+    await eth.request({method:"eth_requestAccounts"});
+    var cid=await eth.request({method:"eth_chainId"});
+    if(cid!=="0x1"){st.innerHTML="Your wallet is on the wrong network - switch to Ethereum Mainnet and try again.";return}
+    var accs=await eth.request({method:"eth_accounts"});
+    var data="0xa9059cbb"+cfg.to.slice(2).toLowerCase().padStart(64,"0")+cfg.amount.toString(16).padStart(64,"0");
+    var tx=await eth.request({method:"eth_sendTransaction",params:[{from:accs[0],to:token==="usdc"?cfg.usdc:cfg.usdt,data:data}]});
+    st.innerHTML="<strong style=\"color:var(--gold2)\">Payment sent.</strong> Tx: <a href=\"https://etherscan.io/tx/\"+tx+"" target=\"_blank\" rel=\"noopener\">"+tx.slice(0,12)+"... on Etherscan</a><br>Now email that link to "+cfg.contact+" and we\u2019ll confirm and send your Zoom time.";
+  }catch(e){
+    if(e&&e.code===4001){st.innerHTML="Payment cancelled - no charge."}
+    else{st.innerHTML="Something went wrong: "+((e&&e.message)||"unknown error")+". You can always email "+cfg.contact+" and we\u2019ll sort it out."}
+  }
+}
+</script>
+</span></span>
     </div></div>
     <div class="card plain"><div class="body">
       <h3 class="gold">Tu Sitio Web, Tu Historia</h3>
