@@ -150,7 +150,7 @@ async function wscPay(ev,token){
     var accs=await eth.request({method:"eth_accounts"});
     var data="0xa9059cbb"+cfg.to.slice(2).toLowerCase().padStart(64,"0")+cfg.amount.toString(16).padStart(64,"0");
     var tx=await eth.request({method:"eth_sendTransaction",params:[{from:accs[0],to:token==="usdc"?cfg.usdc:cfg.usdt,data:data}]});
-    st.innerHTML="<strong style=\"color:var(--gold2)\">Payment sent.</strong> Tx: <a href=\"https://etherscan.io/tx/\"+tx+"" target=\"_blank\" rel=\"noopener\">"+tx.slice(0,12)+"... on Etherscan</a><br>Now email that link to "+cfg.contact+" and we\u2019ll confirm and send your Zoom time.";
+    st.innerHTML="<strong style='color:var(--gold2)'>Payment sent.</strong> Tx: <a href='https://etherscan.io/tx/"+tx+"' target='_blank' rel='noopener'>"+tx.slice(0,12)+"...</a> on Etherscan<br>Now email that link to "+cfg.contact+" and we will confirm and send your Zoom time.";
   }catch(e){
     if(e&&e.code===4001){st.innerHTML="Payment cancelled - no charge."}
     else{st.innerHTML="Something went wrong: "+((e&&e.message)||"unknown error")+". You can always email "+cfg.contact+" and we\u2019ll sort it out."}
