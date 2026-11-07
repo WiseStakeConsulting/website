@@ -140,6 +140,26 @@ let provider,signer,wrap,acct=null,wrapOwner=null,allowed=false;
 function st(el,txt,cls){const e=document.getElementById(el);e.textContent=txt;e.className='status '+(cls||'');}
 function short(a){return a?a.slice(0,6)+'...'+a.slice(-4):''}
 
+async function stillAllowed(){
+  const now=(await (new ethers.providers.Web3Provider(window.ethereum).getSigner()).getAddress()).toLowerCase();
+  if(now!==acct){
+    st('createStatus','MetaMask account changed since connect - reloaded. Connect as '+short(acct)+' (the wrapper owner or patron) and try again.','err');
+    connect();
+    return false;
+  }
+  if(!GATE.includes(now)){
+    st('createStatus','Wrong account for actions: connected '+short(now)+'. Switch MetaMask to '+short(acct)+' (owner or patron), then retry.','err');
+    return false;
+  }
+  return true;
+}
+
+if(window.ethereum){
+  window.ethereum.on&&window.ethereum.on('accountsChanged',function(accounts){
+    if(acct){connect();}
+  });
+}
+
 async function connect(){
   if(!window.ethereum){alert('Install MetaMask to use the console.');return;}
   provider=new ethers.providers.Web3Provider(window.ethereum);
@@ -186,6 +206,7 @@ async function loadBundles(){
 
 async function scrape(i){
   try{
+    if(!await stillAllowed())return;
     const days=document.getElementById('days'+i).value||'30';
     st('stat'+i,'Sending scrape for '+days+' days...','wait');
     const w=wrap.connect(signer);
@@ -198,6 +219,7 @@ async function scrape(i){
 
 async function closeB(i){
   try{
+    if(!await stillAllowed())return;
     st('stat'+i,'Closing bundle - both NFTs return to you...','wait');
     const w=wrap.connect(signer);
     const tx=await w.closeBundle(i,acct);
