@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bundle Console - PBS-1 | Wise Stake Consulting</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--navy:#0a1128;--navy2:#101a3a;--panel:#0d1733;--gold:#d4a13a;--gold2:#e8c15a;--cream:#f5efe0;--muted:#9aa5c0;--line:rgba(232,193,90,.18);--green:#4caf7d;--red:#b3543f}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--navy);color:var(--cream);font-family:Georgia,'Times New Roman',serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header.site{position:sticky;top:0;z-index:50;background:rgba(10,17,40,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1240px;margin:0 auto;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.brand img{height:44px;width:auto}
+.brand b{font-size:1.02rem;letter-spacing:.04em;white-space:nowrap;line-height:1.15}
+.brand b small{display:block;font-size:.66rem;color:var(--gold2);font-style:italic;font-weight:400;letter-spacing:.09em}
+.btn{cursor:pointer;border:none;border-radius:999px;padding:10px 20px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;letter-spacing:.03em;background:var(--gold);color:var(--navy);font-weight:700}
+.btn:hover{background:var(--gold2)}
+.btn.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold2);font-weight:400}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;font-family:'Helvetica Neue',Arial,sans-serif}
+main{padding:36px 0 70px}
+h1{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:400;margin:10px 0 6px}
+h1 .gold{color:var(--gold2)}
+h2{font-weight:400;font-size:1.4rem;color:var(--gold2);margin:44px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+.sub{color:var(--muted);max-width:52em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:16px 0}
+.panel h3{font-weight:400;color:var(--cream);font-size:1.15rem;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.kv{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.93rem;font-family:'Helvetica Neue',Arial,sans-serif}
+.kv span{color:var(--muted)}.kv b{color:var(--cream);font-weight:600;text-align:right;word-break:break-all}
+.kv b.gold{color:var(--gold2)}
+.badge{display:inline-block;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:2px 12px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-family:'Helvetica Neue',Arial,sans-serif;margin-left:8px;vertical-align:middle}
+.badge.live{border-color:var(--green);color:var(--green)}
+.badge.off{border-color:var(--red);color:var(--red)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:14px}
+input,select{background:var(--navy2);border:1px solid var(--line);border-radius:10px;color:var(--cream);padding:10px 14px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;min-width:0}
+input:focus,select:focus{outline:1px solid var(--gold)}
+label{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.08em}
+.note{font-size:.8rem;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;margin-top:10px}
+.status{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;margin-top:12px;min-height:1.3em}
+.status.ok{color:var(--green)}.status.err{color:#d98d75}.status.wait{color:var(--gold2)}
+.gate{background:var(--panel);border:1px solid var(--gold);border-radius:16px;padding:18px 22px;margin:18px 0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;color:var(--muted)}
+.gate b{color:var(--gold2)}
+footer.site{border-top:1px solid var(--line);padding:30px 0;font-family:'Helvetica Neue',Arial,sans-serif}
+.fnote{color:var(--muted);font-size:.78rem}
+.fnote a{color:var(--gold2);text-decoration:none}
+.empty{color:var(--muted);font-style:italic;padding:18px 0}
+</style>
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="/"><img src="/assets/logo.png" alt="Wise Stake Consulting owl logo"><b>Wise Stake Consulting<small>The Receiving Side of Interest</small></b></a>
+  <button class="btn" id="connectBtn" onclick="connect()">Connect Wallet</button>
+</div></header>
+
+<main><div class="wrap">
+  <div class="eyebrow">PBS-1 &middot; Bundle Console &middot; Private Beta</div>
+  <h1>The <span class="gold">Patronage Bundle</span> Console</h1>
+  <p class="sub">Create bundles, scrape yield, and watch both NFTs work. Wrapper v0 on Ethereum mainnet.</p>
+
+  <div class="gate" id="gateBox" style="display:none">
+    <b>Read-only view.</b> Bundle actions are limited to the owner and patrons while the console is in private beta. You can inspect every bundle below - the chain is public, even in beta.
+  </div>
+
+  <section>
+    <h2>Your Bundles</h2>
+    <div id="bundles" class="empty">Connect a wallet to load bundles.</div>
+  </section>
+
+  <section id="createSection" style="display:none">
+    <h2>Create a Bundle</h2>
+    <p class="sub">Three guided transactions: approve the stake collection, approve the kitty, create the bundle. Everything is checked before you sign.</p>
+    <div class="panel">
+      <div class="grid">
+        <div><label>Signature Stake (yield engine)</label>
+          <select id="pickStake" style="width:100%"><option>Connect wallet first</option></select></div>
+        <div><label>CryptoKitty (the rider)</label>
+          <select id="pickKitty" style="width:100%"><option>Connect wallet first</option></select></div>
+        <div><label>Patron address (gets the patron share)</label>
+          <input id="patronAddr" style="width:100%" placeholder="0x... or an ENS name"></div>
+        <div><label>Patron share (basis points)</label>
+          <select id="bps" style="width:100%">
+            <option value="5000">50% (5000 bps)</option>
+            <option value="10000">100% (10000 bps)</option>
+            <option value="7000">70% (7000 bps)</option>
+            <option value="3000">30% (3000 bps)</option>
+          </select></div>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="step1Btn" onclick="approveStakes()">1 &middot; Approve Stakes</button>
+        <button class="btn ghost" id="step2Btn" onclick="approveKitty()">2 &middot; Approve Kitty</button>
+        <button class="btn" id="step3Btn" onclick="createBundle()">3 &middot; Create Bundle</button>
+      </div>
+      <div class="note" id="approvalsNote">Approvals are one-time per collection: if you already approved, step 1 detects it and skips. Kitty approval is per-cat.</div>
+      <div class="status" id="createStatus"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Protocol</h2>
+    <div class="panel"><div class="kv"><span>Wrapper (v0, fork-validated)</span><b class="gold">0xD4007f3C899fDb8A98A891173766dB8929Ae82ef</b></div>
+    <div class="kv"><span>Signature Stakes collection</span><b>0x48791DbD...c1e1</b></div>
+    <div class="kv"><span>WISE engine</span><b>0x66a0f676...5bd6</b></div>
+    <div class="kv"><span>CryptoKitties (2017)</span><b>0x06012c8c...266d</b></div>
+    <p class="note">Found a bug? The Warchest pays: <a href="mailto:security@wisestake.consulting" style="color:var(--gold2)">security@wisestake.consulting</a> - safe harbor applies to good-faith reports.</p></div>
+  </section>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <p class="fnote">Wise Stake Consulting, LLC - business consulting and education only. Nothing here is financial advice and no returns are promised. Wrapper is fork-tested, not audited; exposure is capped to small designated stakes. <a href="/pbs-1/docs/">Read the PBS-1 documentation</a>.</p>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script>
+const WRAPPER='0xD4007f3C899fDb8A98A891173766dB8929Ae82ef';
+const SIG='0x48791DbDFB38bAA58e48329148C321bF33B3c1e1';
+const WISE='0x66a0f676479Cee1d7373f3DC2e2952778BfF5bd6';
+const CK='0x06012c8cf97BEaD5deAe237070F9587f8E7A266d';
+// PRIVATE BETA GATE: wallets with full console access. To go public, add the zero address.
+const GATE=['0xF2aCF5bA7ac4af87e1B15770Da5002a6894397BF'.toLowerCase(),'0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f'.toLowerCase()];
+const ERC721=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"ownerOf","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"name":"","type":"bool"}],"type":"function","stateMutability":"view"},
+ {"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"approved","type":"bool"}],"name":"setApprovalForAll","type":"function"},
+ {"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"approve","type":"function"},
+ {"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"transferFrom","type":"function"},
+ {"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"walletOfOwner","outputs":[{"name":"","type":"uint256[]"}],"type":"function","stateMutability":"view"}];
+const WRAP_ABI=[{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[],"name":"nextBundleId","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"entitlements","outputs":[{"name":"chainId","type":"uint256"},{"name":"stakeCollection","type":"address"},{"name":"stakeId","type":"uint256"},{"name":"yieldToken","type":"address"},{"name":"membershipCollection","type":"address"},{"name":"membershipTokenId","type":"uint256"},{"name":"patron","type":"address"},{"name":"patronAllocationBps","type":"uint16"},{"name":"active","type":"bool"}],"type":"function","stateMutability":"view"},
+ {"constant":false,"inputs":[{"name":"bundleId","type":"uint256"},{"name":"scrapeDays","type":"uint64"}],"name":"scrape","type":"function"},
+ {"constant":false,"inputs":[{"name":"bundleId","type":"uint256"},{"name":"to","type":"address"}],"name":"closeBundle","type":"function"},
+ {"constant":false,"inputs":[{"name":"stakeCollection","type":"address"},{"name":"stakeId","type":"uint256"},{"name":"yieldToken","type":"address"},{"name":"membershipCollection","type":"address"},{"name":"membershipTokenId","type":"uint256"},{"name":"patron","type":"address"},{"name":"patronAllocationBps","type":"uint16"}],"name":"createBundle","type":"function"}];
+let provider,signer,wrap,acct=null,wrapOwner=null,allowed=false;
+
+function st(el,txt,cls){const e=document.getElementById(el);e.textContent=txt;e.className='status '+(cls||'');}
+function short(a){return a?a.slice(0,6)+'...'+a.slice(-4):''}
+
+async function connect(){
+  if(!window.ethereum){alert('Install MetaMask to use the console.');return;}
+  provider=new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send('eth_requestAccounts',[]);
+  signer=provider.getSigner();
+  acct=(await signer.getAddress()).toLowerCase();
+  wrap=new ethers.Contract(WRAPPER,WRAP_ABI,provider);
+  wrapOwner=(await wrap.owner()).toLowerCase();
+  allowed=GATE.includes(acct);
+  document.getElementById('connectBtn').textContent=short(acct);
+  document.getElementById('gateBox').style.display=allowed?'none':'block';
+  document.getElementById('createSection').style.display=allowed?'block':'none';
+  await loadBundles();
+  if(allowed)await loadPickers();
+}
+
+async function loadBundles(){
+  const box=document.getElementById('bundles');
+  try{
+    const n=(await wrap.nextBundleId()).toNumber();
+    if(n<2){box.textContent='No bundles yet.';box.className='empty';return;}
+    let html='';
+    for(let i=1;i<n;i++){
+      const e=await wrap.entitlements(i);
+      const mine=acct&&(e.patron.toLowerCase()===acct||wrapOwner===acct);
+      const patronLabel=e.patron.toLowerCase()==='0x84ebf885b2655e8be3d3492ca81dfacad04b5e7f'?'Denise (wisestakes.eth)':short(e.patron);
+      html+=`<div class="panel"><h3>Bundle #${i} <span class="badge ${e.active?'live':'off'}">${e.active?'Active':'Closed'}</span></h3>
+      <div class="kv"><span>Chain</span><b>Ethereum (${e.chainId.toString()})</b></div>
+      <div class="kv"><span>Signature Stake</span><b class="gold">Token #${e.stakeId.toString()}</b></div>
+      <div class="kv"><span>Membership NFT</span><b class="gold">Token #${e.membershipTokenId.toString()}</b></div>
+      <div class="kv"><span>Yield token</span><b>WISE</b></div>
+      <div class="kv"><span>Patron</span><b>${patronLabel}</b></div>
+      <div class="kv"><span>Patron share</span><b class="gold">${(e.patronAllocationBps/100)}%</b></div>
+      ${allowed&&mine&&e.active?`<div class="row">
+        <label style="margin:0">Days</label><input id="days${i}" value="30" style="width:70px">
+        <button class="btn" onclick="scrape(${i})">Scrape Yield</button>
+        ${wrapOwner===acct?`<button class="btn ghost" onclick="closeB(${i})">Close Bundle</button>`:''}
+      </div>`:''}
+      <div class="status" id="stat${i}"></div></div>`;
+    }
+    box.innerHTML=html;box.className='';
+  }catch(err){box.textContent='Could not load bundles: '+short(err.message);box.className='empty';}
+}
+
+async function scrape(i){
+  try{
+    const days=document.getElementById('days'+i).value||'30';
+    st('stat'+i,'Sending scrape for '+days+' days...','wait');
+    const w=wrap.connect(signer);
+    const tx=await w.scrape(i,days);
+    st('stat'+i,'Scrape sent - waiting for confirmation...','wait');
+    await tx.wait();
+    st('stat'+i,'Scraped. Patron and owner shares paid.','ok');
+  }catch(e){st('stat'+i,'Scrape failed: '+(e.data?e.data.message:e.message),'err');}
+}
+
+async function closeB(i){
+  try{
+    st('stat'+i,'Closing bundle - both NFTs return to you...','wait');
+    const w=wrap.connect(signer);
+    const tx=await w.closeBundle(i,acct);
+    await tx.wait();
+    st('stat'+i,'Bundle closed. NFTs returned.','ok');
+    await loadBundles();
+  }catch(e){st('stat'+i,'Close failed: '+(e.data?e.data.message:e.message),'err');}
+}
+
+async function loadPickers(){
+  const sigC=new ethers.Contract(SIG,ERC721,provider);
+  const ckC=new ethers.Contract(CK,ERC721,provider);
+  const ss=document.getElementById('pickStake'),kk=document.getElementById('pickKitty');
+  ss.innerHTML='';kk.innerHTML='';
+  try{
+    const stakes=await sigC.walletOfOwner(acct);
+    stakes.forEach(t=>{const o=document.createElement('option');o.value=t.toString();o.textContent='Signature Stake #'+t.toString();ss.appendChild(o);});
+    if(!stakes.length){const o=document.createElement('option');o.textContent='No stakes in this wallet';ss.appendChild(o);}
+  }catch(e){ss.innerHTML='<option>Could not read stakes</option>';}
+  try{
+    const bal=(await ckC.balanceOf(acct)).toNumber();
+    for(let i=0;i<Math.min(bal,50);i++){
+      try{
+        const id=await ckC.tokenOfOwnerByIndex(acct,i);
+        const o=document.createElement('option');o.value=id.toString();o.textContent='CryptoKitty #'+id.toString();kk.appendChild(o);
+      }catch(e){break;}
+    }
+    if(!kk.children.length){const o=document.createElement('option');o.textContent='No kitties in this wallet';kk.appendChild(o);}
+  }catch(e){kk.innerHTML='<option>Could not read kitties</option>';}
+}
+
+async function approveStakes(){
+  try{
+    st('createStatus','Checking stake approval...','wait');
+    const sigC=new ethers.Contract(SIG,ERC721,provider).connect(signer);
+    const ok=await sigC.isApprovedForAll(acct,WRAPPER);
+    if(ok){st('createStatus','Stakes already approved - skipping to step 2.','ok');return;}
+    st('createStatus','Sending collection approval (one-time)...','wait');
+    const tx=await sigC.setApprovalForAll(WRAPPER,true);
+    await tx.wait();
+    st('createStatus','Stakes approved. Next: approve the kitty.','ok');
+  }catch(e){st('createStatus','Approval failed: '+(e.data?e.data.message:e.message),'err');}
+}
+
+async function approveKitty(){
+  try{
+    const kid=document.getElementById('pickKitty').value;
+    if(!/^\d+$/.test(kid)){st('createStatus','Pick a kitty first.','err');return;}
+    st('createStatus','Approving kitty #'+kid+'...','wait');
+    const ckC=new ethers.Contract(CK,ERC721,provider).connect(signer);
+    const tx=await ckC.approve(WRAPPER,kid);
+    await tx.wait();
+    st('createStatus','Kitty #'+kid+' approved. Ready to create the bundle.','ok');
+  }catch(e){st('createStatus','Kitty approval failed: '+(e.data?e.data.message:e.message),'err');}
+}
+
+async function createBundle(){
+  try{
+    const sid=document.getElementById('pickStake').value;
+    const kid=document.getElementById('pickKitty').value;
+    let patron=document.getElementById('patronAddr').value.trim();
+    const bps=document.getElementById('bps').value;
+    if(!/^\d+$/.test(sid)||!/^\d+$/.test(kid)){st('createStatus','Pick a stake and a kitty first.','err');return;}
+    if(patron.endsWith('.eth')){try{patron=await provider.resolveName(patron);}catch(e){st('createStatus','Could not resolve that ENS name.','err');return;}}
+    if(!/^0x[a-fA-F0-9]{40}$/.test(patron)){st('createStatus','Enter a valid patron address (0x...).','err');return;}
+    st('createStatus','Creating bundle: stake #'+sid+' + kitty #'+kid+', patron '+short(patron)+' at '+(bps/100)+'%...','wait');
+    const w=wrap.connect(signer);
+    const tx=await w.createBundle(SIG,sid,WISE,CK,kid,patron,bps);
+    st('createStatus','Bundle sent - waiting for confirmation...','wait');
+    await tx.wait();
+    st('createStatus','Bundle created on-chain. Welcome to the receiving side.','ok');
+    await loadBundles();
+  }catch(e){st('createStatus','Create failed: '+(e.data?e.data.message:e.message),'err');}
+}
+</script>
+</body>
+</html>
