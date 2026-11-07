@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PBS-1 Documentation — The Patronage Bundle Standard | Wise Stake</title>
+<meta name="description" content="PBS-1 (Patronage Bundle Standard) documentation: one WISE Signature Stake + one membership or art NFT, bound on-chain, with yield flowing to a designated patron. Live on Ethereum mainnet.">
+<meta property="og:title" content="PBS-1 Documentation — The Patronage Bundle Standard">
+<meta property="og:description" content="One stake. One NFT. One entitlement record. Patronage on the receiving side of interest.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b2e; --navy-2:#12233a; --card:#16283f; --card-edge:#1f3550;
+  --gold:#c9a24b; --gold-bright:#e3c36b; --cream:#f2ead8; --muted:#9db0c7;
+  --line:#2a405c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--navy);color:var(--cream);font-family:'Source Sans 3',sans-serif;font-weight:300;line-height:1.7}
+a{color:var(--gold-bright);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+header.site{border-bottom:1px solid var(--line);background:var(--navy-2)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.18em;color:var(--gold);font-weight:600}
+.brand small{display:block;font-family:'Source Sans 3',sans-serif;font-size:.68rem;letter-spacing:.3em;color:var(--muted);font-weight:300;text-transform:uppercase;margin-top:2px}
+.owl{font-size:1.6rem}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;color:var(--cream);font-weight:600}
+h1{font-size:2.6rem;line-height:1.15;margin:56px 0 8px}
+h1 em{color:var(--gold-bright);font-style:italic}
+.kicker{color:var(--gold);letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;font-weight:600;margin-top:48px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:46em;margin-bottom:12px}
+h2{font-size:1.7rem;margin:56px 0 16px;padding-top:8px;border-top:1px solid var(--gold);display:inline-block;padding-right:32px}
+h3{font-size:1.25rem;margin:32px 0 10px;color:var(--gold-bright)}
+p{margin:14px 0;max-width:44em}
+ul,ol{margin:14px 0 14px 1.3em;max-width:42em}
+li{margin:7px 0}
+li::marker{color:var(--gold)}
+strong{font-weight:600;color:#fff}
+code{background:var(--card);border:1px solid var(--card-edge);border-radius:4px;padding:1px 7px;font-size:.86em;color:var(--gold-bright);word-break:break-all}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.95rem}
+th{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--gold);text-align:left;border-bottom:1px solid var(--gold);padding:10px 14px 8px;font-weight:600;letter-spacing:.04em}
+td{border-bottom:1px solid var(--line);padding:11px 14px;vertical-align:top}
+td:first-child{color:var(--muted);white-space:nowrap}
+.card{background:var(--card);border:1px solid var(--card-edge);border-left:3px solid var(--gold);border-radius:8px;padding:22px 26px;margin:24px 0}
+.card p{margin:8px 0}
+.callout{background:linear-gradient(135deg,var(--card),var(--navy-2));border:1px solid var(--gold);border-radius:8px;padding:26px 30px;margin:32px 0}
+.callout .t{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-bright);font-weight:600;margin-bottom:8px}
+.warn{border-left-color:#b3543f}
+.warn .t{color:#d98d75}
+.pill{display:inline-block;background:transparent;border:1px solid var(--gold);color:var(--gold-bright);border-radius:999px;padding:2px 14px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;margin:0 6px 6px 0}
+.stat{display:flex;gap:40px;flex-wrap:wrap;margin:26px 0}
+.stat div b{display:block;font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold-bright);font-weight:600;line-height:1.1}
+.stat div span{color:var(--muted);font-size:.85rem;letter-spacing:.06em}
+footer.site{border-top:1px solid var(--line);margin-top:80px;background:var(--navy-2)}
+footer.site .wrap{padding:34px 24px;color:var(--muted);font-size:.88rem;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.tagline{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.05rem}
+@media(max-width:640px){h1{font-size:2rem}.wrap{padding:0 18px}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">WISE&nbsp;STAKE<small>The Receiving Side of Interest</small></div>
+    <div class="owl">&#129417;</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="kicker">PBS-1 &middot; Documentation &middot; v0</div>
+<h1>The Patronage Bundle <em>Standard</em></h1>
+<p class="lede">One WISE Signature Stake. One membership or art NFT. One on-chain entitlement record binding them — with yield flowing to a patron, on the receiving side of interest.</p>
+<div style="margin:18px 0 0">
+  <span class="pill">Live on Ethereum Mainnet</span>
+  <span class="pill">Fork-Validated</span>
+  <span class="pill">Self-Funded Security</span>
+  <span class="pill">Standing Bug Bounty</span>
+</div>
+
+<h2>Abstract</h2>
+<p>PBS-1 is a standard for <strong>patronage bundles</strong>: a smart-contract wrapper that holds one WISE Signature Stake NFT together with one membership or art NFT (a CryptoKitty, a piece from an artist, a pass), and records — permanently, on-chain — who the <strong>patron</strong> is and what share of the stake's yield they receive.</p>
+<p>The stake keeps earning WISE interest exactly as it always would. The wrapper adds an entitlement record and a fair split. Nothing more, nothing less. The principal is never touched, never pledged, and never put at risk by the protocol.</p>
+
+<div class="callout">
+  <div class="t">The idea in one sentence</div>
+  <p>A 2017 CryptoKitty can ride a 2026 yield engine — and the artist, the patron, or the partner you name gets paid every time the interest is scraped.</p>
+</div>
+
+<h2>Roles</h2>
+<table>
+  <tr><th>Role</th><th>Who</th><th>Powers</th></tr>
+  <tr><td>Owner</td><td>Creator of the bundle (deployer of the wrapper)</td><td>Creates bundles, scrapes, closes a bundle and recovers both NFTs</td></tr>
+  <tr><td>Patron</td><td>Any address named at bundle creation — an artist, a partner, a family fund</td><td>Receives their share on every scrape, and may trigger the scrape themselves</td></tr>
+  <tr><td>Wrapper</td><td>The PBS-1 contract</td><td>Custodies both NFTs, routes scraped yield, keeps nothing — its balance is always zero after a payout</td></tr>
+</table>
+
+<h2>The Entitlement Record</h2>
+<p>Every bundle writes one on-chain record at creation. This is the bundle's birth certificate — it survives as long as Ethereum does.</p>
+<table>
+  <tr><th>Field</th><th>Meaning</th></tr>
+  <tr><td>chainId</td><td>The chain the bundle lives on — records are chain-scoped, per the PBS-1 checklist</td></tr>
+  <tr><td>stakeCollection</td><td>The Signature Stakes contract holding the yield-bearing NFT</td></tr>
+  <tr><td>stakeId</td><td>The token ID of the Signature Stake itself</td></tr>
+  <tr><td>yieldToken</td><td>The token scraped interest is paid in (WISE)</td></tr>
+  <tr><td>membershipCollection</td><td>The art or membership NFT contract</td></tr>
+  <tr><td>membershipTokenId</td><td>The token ID of the bundled NFT</td></tr>
+  <tr><td>patron</td><td>The address receiving the patron share</td></tr>
+  <tr><td>patronAllocationBps</td><td>Patron's share in basis points (5000 = 50%)</td></tr>
+  <tr><td>active</td><td>Whether the bundle is currently bound</td></tr>
+</table>
+
+<h2>Lifecycle</h2>
+<h3>1 &middot; Create</h3>
+<p>The owner approves the wrapper for their stake NFT and their membership NFT, then calls <code>createBundle</code>, naming the patron and the split. Both NFTs move into the wrapper's custody and the entitlement record is written in the same transaction.</p>
+<h3>2 &middot; Scrape</h3>
+<p>Owner <em>or</em> patron calls <code>scrape(bundleId, scrapeDays)</code> at any time — mid-term, day one, day 300. The wrapper commands the WISE engine's <code>scrapeInterest</code>, measures exactly what arrived, and pays the patron share and owner share instantly. The wrapper retains nothing. The principal never moves.</p>
+<h3>3 &middot; Close</h3>
+<p>The owner may close a bundle: both NFTs return to the chosen address, the record deactivates. The same stake-and-NFT pair may be bundled together again — but an NFT can never be re-bound to a <em>different</em> stake. The pair is permanent by design.</p>
+
+<h2>Guarantees</h2>
+<ul>
+  <li><strong>Principal is sacred.</strong> The protocol only ever routes interest. The staked WISE stays staked for its full term.</li>
+  <li><strong>Claims are early, not gated.</strong> Scraping works from day one of the term. Nobody waits for maturity to collect.</li>
+  <li><strong>Either party can collect.</strong> A patron is never dependent on the owner to trigger payment.</li>
+  <li><strong>The wrapper keeps nothing.</strong> Verified in testing: balance returns to zero after every scrape.</li>
+  <li><strong>Binding is permanent.</strong> A bundled NFT can never attach to a different stake — provenance is untainted.</li>
+  <li><strong>On-chain, not metadata.</strong> The entitlement record is the proof. Descriptions describe; the chain decides.</li>
+</ul>
+
+<h2>Bundle #0001 — The First One</h2>
+<div class="stat">
+  <div><b>#59</b><span>SIGNATURE STAKE &middot; 50 WISE &middot; 366-DAY TERM</span></div>
+  <div><b>#295857</b><span>CRYPTOKITTY &middot; MINTED 2017</span></div>
+  <div><b>50%</b><span>PATRON SHARE &middot; 5,000 BPS</span></div>
+</div>
+<p>The first Patronage Bundle ever created binds a 50 WISE, 366-day Signature Stake (CMR-eligible) to CryptoKitty #295857, held since 2017 in the <code>getyousome.eth</code> wallet. The patron of record is <strong>Denise (wisestakes.eth)</strong> at an equal 50/50 split — a heritage NFT from the first NFT era, put to work on the receiving side of interest.</p>
+
+<h2>Live Addresses (Ethereum Mainnet)</h2>
+<table>
+  <tr><th>Contract</th><th>Address</th></tr>
+  <tr><td>PBS-1 Wrapper v0</td><td><code>0xD4007f3C899fDb8A98A891173766dB8929Ae82ef</code></td></tr>
+  <tr><td>Signature Stakes collection</td><td><code>0x48791DbDFB38bAA58e48329148C321bF33B3c1e1</code></td></tr>
+  <tr><td>WISE token engine</td><td><code>0x66a0f676479Cee1d7373f3DC2e2952778BfF5bd6</code></td></tr>
+  <tr><td>CryptoKitties (2017)</td><td><code>0x06012c8cf97BEaD5deAe237070F9587f8E7A266d</code></td></tr>
+</table>
+
+<h2>Security: The Warchest</h2>
+<p>PBS-1 secures itself the same way it pays its patrons — from interest, not from fees. The <strong>Warchest</strong> is a designated Patronage Bundle whose entire yield is paid out to anyone who finds a vulnerability in the protocol. If you can break it, the protocol thanks you in WISE.</p>
+<table>
+  <tr><th>Term</th><th>Definition</th></tr>
+  <tr><td>The Warchest</td><td>Bundle #0002 — one WISE Signature Stake dedicated to security, with no patron but the protocol's own defense. Its principal is never spent; only its yield pays bounties.</td></tr>
+  <tr><td>Funding</td><td>The founding stake, plus a dedicated share of all future protocol revenue, so the pot grows as the protocol grows.</td></tr>
+  <tr><td>Payouts</td><td>Scaled to the Warchest balance so they grow automatically: Critical — 50% of the Warchest &middot; High — 25% &middot; Medium — 10% &middot; Low — 5%. Paid in WISE, on-chain, no forms.</td></tr>
+  <tr><td>Scope</td><td>The PBS-1 wrapper contract and all official PBS-1 documentation and sites.</td></tr>
+  <tr><td>Safe harbor</td><td>Anyone who reports a vulnerability responsibly and in good faith will be paid promptly and will never face legal action from Wise Stake for the report. state-exploiting, stealing user funds, or extorting users is not white-hat work and forfeits the bounty.</td></tr>
+  <tr><td>How to report</td><td>Email <code>security@wisestake.consulting</code> with details and, if possible, a proof-of-concept. First valid report of a given bug takes the payout.</td></tr>
+</table>
+<div class="callout">
+  <div class="t">Why a bounty instead of (only) an audit</div>
+  <p>An audit is two to four professionals for a fixed window; a standing bounty is every security researcher on earth, all the time, paid only for results. The Warchest starts small and grows with the protocol — and until it matures, exposure is capped by design: real stakes are limited to small, designated amounts. Independent third-party audit reviews may still be commissioned as the Warchest grows.</p>
+</div>
+<ul>
+  <li><strong>Yield is variable.</strong> Scraped amounts depend on the WISE engine's live global state. Nothing here is a promise of returns.</li>
+  <li><strong>Bundles never pledge collateral.</strong> PBS-1 uses no lending path; the "no scraping while pledged" rule of Signature Stake LOCs does not apply.</li>
+  <li><strong>Legacy quirks are handled.</strong> CryptoKitties predates modern NFT standards — the wrapper compensates for its approval behavior, and non-sequential stake IDs are read, never assumed.</li>
+</ul>
+
+
+<h2>Any ERC-721 Can Ride the Stake</h2>
+<p>The protocol does not care what an NFT <em>means</em> — it holds the token and routes the yield. Any ERC-721 NFT can be bundled with a WISE Signature Stake:</p>
+<ul>
+  <li><strong>Art NFTs came first.</strong> Bundle #0001 pairs a 2017 CryptoKitty with a live stake — heritage art put to work.</li>
+  <li><strong>ENS names</strong> are themselves ERC-721 tokens; an identity can hold its own yield.</li>
+  <li><strong>Music NFTs</strong> let an artist ride the stake as patron — patronage with no label in the middle.</li>
+  <li><strong>Memberships and passes</strong> turn the pattern into a service: the stake funds the benefit behind the token.</li>
+  <li><strong>Tokenized real-world assets</strong> — property rights via legal wrappers, for example — follow the same shape: a unique claim, backed by what stands behind it.</li>
+</ul>
+<p>The standard is the same for all of them: one unique token, one stake, one entitlement record. What changes is the story the token carries. Each new collection is fork-tested against the wrapper before it ships — the same validation Bundle #0001 went through.</p>
+
+<div class="callout">
+  <div class="t">The principle</div>
+  <p>An NFT is a unique claim. The value is what stands behind the claim. PBS-1 puts a yield engine behind it.</p>
+</div>
+
+<h2>Roadmap</h2>
+<ul>
+  <li><strong>Now:</strong> v0 wrapper live; Bundle #0001 active; scraping available on-chain.</li>
+  <li><strong>Next:</strong> a friendly interface — connect a wallet, see your stakes and NFTs, create a bundle in one signature; a patron view for self-service scrapes.</li>
+  <li><strong>In progress:</strong> expansion beyond art — ENS identities, music, memberships, and tokenized real-world assets. The roadmap to the next bundle types is underway; each new collection is fork-tested before it goes live.</li>
+  <li><strong>Later:</strong> a mature Warchest — a bounty pot that makes the protocol self-defending at any size; art patronage at scale.</li>
+</ul>
+
+<h2>Questions</h2>
+<h3>Do we have to wait for the stake term to end to claim?</h3>
+<p>No. Interest accrues from day one and can be scraped any day of the term. The permanent binding restricts which stake an NFT rides — never when you collect.</p>
+<h3>Can the patron take the stake or the NFT?</h3>
+<p>No. The patron's power is exactly one thing: trigger a scrape and receive their recorded share. Custody stays with the wrapper until the owner closes the bundle.</p>
+<h3>What happens at the end of the stake's term?</h3>
+<p>The owner closes the bundle (both NFTs come home) and the stake NFT can be burned for its principal plus final interest — exactly as if it had never been bundled.</p>
+<h3>What happens if someone finds a bug?</h3>
+<p>They get paid. The Warchest pays bounties from its own yield at published, automatic rates — Critical 50% of the pot down to Low 5% — with a written safe harbor for responsible reports. Security here is funded the same way everything else is: from interest.</p>
+<h3>Can a bundle have a different split than 50/50?</h3>
+<p>Yes. The split is chosen per bundle at creation, in basis points. Bundle #0001 is 50/50 as a statement of equal partnership, not a protocol limit.</p>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div><span class="tagline">The Receiving Side of Interest</span><br>&#129417; Wise Stake &middot; PBS-1 v0 &middot; Nov 2026</div>
+    <div>Contact<br>English: hello@wisestake.consulting<br>Espa&ntilde;ol: dm@wisestake.consulting (Denise)</div>
+  </div>
+</footer>
+
+</body>
+</html>
