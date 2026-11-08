@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mint Your Art - Wise Stake Consulting</title>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<style>
+  :root { --navy:#0d1b3e; --navy2:#13265a; --gold:#c9a227; --cream:#faf6ec; --ink:#1a1a2e; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Georgia,'Times New Roman',serif; background:var(--cream); color:var(--ink); line-height:1.6; }
+  header { background:var(--navy); color:var(--cream); padding:18px 24px; display:flex; align-items:center; gap:14px; }
+  .owl { width:44px; height:44px; border-radius:50%; background:var(--gold); color:var(--navy); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; }
+  header h1 { font-size:1.3rem; font-weight:normal; letter-spacing:1px; }
+  header small { display:block; color:var(--gold); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; }
+  main { max-width:760px; margin:0 auto; padding:32px 20px 80px; }
+  h2 { color:var(--navy); font-size:1.25rem; margin:34px 0 8px; padding-bottom:6px; border-bottom:2px solid var(--gold); }
+  h2:first-of-type { margin-top:8px; }
+  .intro { background:#fff; border:1px solid #e5ddc8; border-radius:10px; padding:18px 22px; margin-top:20px; font-size:1.02rem; }
+  .check { display:flex; gap:12px; padding:14px 0; border-bottom:1px dashed #d8ceb2; align-items:flex-start; }
+  .check:last-child { border-bottom:none; }
+  .check input[type=checkbox] { width:22px; height:22px; margin-top:4px; accent-color:var(--gold); flex-shrink:0; }
+  .check b { color:var(--navy); }
+  .check small { display:block; color:#555; font-size:.9rem; }
+  .box { background:#fff; border:1px solid #e5ddc8; border-radius:10px; padding:20px 22px; margin-top:14px; }
+  label { display:block; font-weight:bold; color:var(--navy); margin:12px 0 4px; font-size:.95rem; }
+  input[type=text], textarea { width:100%; padding:10px; border:1px solid #cfc5a8; border-radius:6px; font-family:inherit; font-size:1rem; background:var(--cream); }
+  textarea { min-height:70px; }
+  input[type=file] { margin-top:6px; }
+  .fileline { padding:8px 0; border-bottom:1px dotted #d8ceb2; font-size:.92rem; display:flex; justify-content:space-between; gap:10px; }
+  .fileline .status { color:#777; }
+  .fileline .status.ok { color:#1c7a2e; font-weight:bold; }
+  button { background:var(--navy); color:var(--cream); border:none; border-radius:8px; padding:13px 26px; font-family:inherit; font-size:1.05rem; cursor:pointer; margin-top:14px; }
+  button:hover { background:var(--navy2); }
+  button:disabled { background:#999; cursor:not-allowed; }
+  button.gold { background:var(--gold); color:var(--navy); font-weight:bold; }
+  button.gold:hover { background:#b08e1f; }
+  .status-line { margin-top:12px; padding:10px 14px; border-radius:6px; display:none; font-size:.95rem; }
+  .status-line.show { display:block; }
+  .status-line.ok { background:#e2f2e4; color:#1c5a2a; }
+  .status-line.err { background:#f8e2e2; color:#8a1c1c; }
+  .status-line.wait { background:#f5eeda; color:#6b5510; }
+  .note { font-size:.88rem; color:#666; margin-top:8px; }
+  .feebox { background:var(--navy); color:var(--cream); border-radius:10px; padding:18px 22px; margin-top:14px; }
+  .feebox .big { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+  .feebox small { color:#b9c2dd; display:block; }
+  .adv { margin-top:10px; }
+  .adv details { font-size:.88rem; color:#666; }
+  .adv summary { cursor:pointer; }
+  .adv input { margin-top:6px; }
+  footer { text-align:center; padding:26px; color:#8a8370; font-size:.85rem; }
+  a { color:var(--navy2); }
+  #walletBtn { position:fixed; top:14px; right:20px; margin:0; padding:9px 18px; font-size:.9rem; }
+</style>
+</head>
+<body>
+<header>
+  <div class="owl">W</div>
+  <div><small>Wise Stake Consulting LLC</small><h1>Mint Your Art</h1></div>
+  <button id="walletBtn" onclick="connectWallet()">Connect Wallet</button>
+</header>
+<main>
+  <div class="intro">
+    <p><b>You own your art. You always will.</b> This page gives your artwork a permanent, timestamped
+    record that <i>you</i> created it - stored so nobody can ever alter or remove it, not even us.
+    The art is minted from <b>your own wallet</b>, so the creator record is yours from the very first block.</p>
+    <p class="note">One honest note: this record proves <b>who created it and when</b>. It can't see the
+    physical piece itself - that's exactly what the checklist below is for.</p>
+  </div>
+
+  <h2>Step 1 - Capture your piece (do this on the call with us)</h2>
+  <div class="box" id="checklist">
+    <div class="check"><input type="checkbox" id="c1"><div><b>The full piece, straight-on</b>
+      <small>Daylight from a window (not direct sun), no flash, fill the whole frame. Phone camera is perfect.</small></div></div>
+    <div class="check"><input type="checkbox" id="c2"><div><b>Detail shot of your signature</b>
+      <small>Get close. Signatures and dates are what make a piece traceably yours.</small></div></div>
+    <div class="check"><input type="checkbox" id="c3"><div><b>Detail shot of the texture</b>
+      <small>Angle the light so brushstrokes or texture show. Forgers fake a photo - they don't fake your brushwork.</small></div></div>
+    <div class="check"><input type="checkbox" id="c4"><div><b>A short video (10-20 seconds)</b>
+      <small>Pan across the piece slowly, then show the back. Video is very hard to fake and stores permanently.</small></div></div>
+    <div class="check"><input type="checkbox" id="c5"><div><b>You, holding the piece</b>
+      <small>Simple, human, and the single best proof that the piece was in your hands at minting time.</small></div></div>
+  </div>
+
+  <h2>Step 2 - Tell the world what it is</h2>
+  <div class="box">
+    <label>Title of the piece</label>
+    <input type="text" id="artTitle" placeholder="e.g. Sunset Over the Hudson">
+    <label>Statement (what it is, what it means, materials, year)</label>
+    <textarea id="artDesc" placeholder="e.g. Acrylic on canvas, 2026. Painted the week I finally..."></textarea>
+    <label>Certificate statement (we pre-fill it - you can edit)</label>
+    <textarea id="certText">I, the creator of this wallet, declare that this artwork is my original work, and that this record was created by me on the date of this mint.</textarea>
+  </div>
+
+  <h2>Step 3 - Upload the files (from YOUR device)</h2>
+  <div class="box">
+    <p class="note" style="margin-top:0">Your files go straight from your device into permanent decentralized
+    storage. They never pass through our hands. Uploads use IPFS - a storage network where files live across
+    many computers, so no single company (including ours) can take them down.</p>
+    <label>Main image (the full piece)</label>
+    <input type="file" id="fImage" accept="image/*">
+    <div class="fileline" id="sImage"><span class="status">waiting</span></div>
+    <label>Signature closeup</label>
+    <input type="file" id="fSign" accept="image/*">
+    <div class="fileline" id="sSign"><span class="status">waiting</span></div>
+    <label>Texture detail</label>
+    <input type="file" id="fTex" accept="image/*">
+    <div class="fileline" id="sTex"><span class="status">waiting</span></div>
+    <label>Video (optional but powerful)</label>
+    <input type="file" id="fVid" accept="video/*">
+    <div class="fileline" id="sVid"><span class="status">waiting</span></div>
+    <label>Artist holding the piece</label>
+    <input type="file" id="fHold" accept="image/*">
+    <div class="fileline" id="sHold"><span class="status">waiting</span></div>
+    <div class="adv"><details>
+      <summary>Advanced: upload gateway (Pinata key) or manual metadata URI</summary>
+      <label>Pinata JWT (WSC setup - stored only in this browser)</label>
+      <input type="text" id="pinataKey" placeholder="Paste Pinata JWT here">
+      <label>OR paste a ready metadata URI (Arweave / manual mode)</label>
+      <input type="text" id="manualURI" placeholder="ipfs://... or https://arweave.net/...">
+    </details></div>
+    <button onclick="prepareMetadata()">Upload &amp; Prepare Record</button>
+    <div class="status-line" id="prepStatus"></div>
+  </div>
+
+  <h2>Step 4 - Mint (the one button YOU click)</h2>
+  <div class="feebox">
+    <small>Service fee - permanently stores your art, records you as creator</small>
+    <span class="big" id="feeDisplay">- ETH</span>
+    <small id="feeDetail">Connect your wallet to see the current fee. Network gas fee (paid to Ethereum, not to us) is shown by your wallet before you sign.</small>
+  </div>
+  <div class="box">
+    <button class="gold" id="mintBtn" onclick="doMint()" disabled>Mint My Art</button>
+    <div class="status-line" id="mintStatus"></div>
+    <p class="note" id="etherscan" style="display:none"></p>
+  </div>
+</main>
+<footer>Wise Stake Consulting LLC &middot; The Receiving Side of Interest &middot; security@wisestake.consulting</footer>
+
+<script>
+const MAINNET = '0x1'; // Ethereum Mainnet - the WSC mint contract lives here
+const CONTRACT_ADDRESS = '0xEda93378F2d17747657d16B7EEB4bAf2E4a46a94'; // WiseStakeMint (Wise Stake Artist)
+let provider=null, signer=null, contract=null, account=null, preparedURI=null;
+const ABI = ["function mint(string) payable returns (uint256)","function mintFee() view returns (uint256)","function ownerOf(uint256) view returns (address)"];
+
+function st(id,msg,cls){const el=document.getElementById(id);el.className='status-line show '+cls;el.innerHTML=msg;}
+function short(a){return a.slice(0,6)+'...'+a.slice(-4);}
+function getPinata(){return document.getElementById('pinataKey').value.trim()||localStorage.getItem('wsc_pinata')||'';}
+
+async function connectWallet(){
+  try{
+    if(!window.ethereum){st('mintStatus','Install MetaMask first - we will walk you through it.','err');return;}
+    provider=new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts',[]);
+    signer=provider.getSigner(); account=await signer.getAddress();
+    const net=await provider.getNetwork();
+    document.getElementById('walletBtn').textContent=short(account);
+    if(net.chainId!==1){ // not Ethereum Mainnet
+      try{await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:MAINNET}]});}
+      catch(e){st('mintStatus','Switch MetaMask to the Ethereum Mainnet network, then reconnect.','err');return;}
+    }
+    contract=new ethers.Contract(CONTRACT_ADDRESS,ABI,signer);
+    const fee=await contract.mintFee();
+    document.getElementById('feeDisplay').textContent=ethers.utils.formatEther(fee)+' ETH';
+    st('mintStatus','Wallet connected on Ethereum mainnet. Ready when your files are.','ok');
+    document.getElementById('mintBtn').disabled=false;
+  }catch(e){st('mintStatus','Wallet: '+(e.message||e),'err');}
+}
+
+async function pinFile(file,label,statId){
+  const key=getPinata();
+  if(!key){st('prepStatus','A Pinata key is needed for uploads - paste it under Advanced, or use manual metadata mode.','err');return null;}
+  const fd=new FormData();
+  fd.append('file',file);
+  const r=await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS',{method:'POST',headers:{Authorization:'Bearer '+key},body:fd});
+  if(!r.ok){document.querySelector('#'+statId+' .status').textContent='failed';throw new Error(label+' upload failed');}
+  const j=await r.json();
+  document.querySelector('#'+statId+' .status').textContent='ipfs://'+j.IpfsHash;
+  document.querySelector('#'+statId+' .status').className='status ok';
+  return 'ipfs://'+j.IpfsHash;
+}
+
+async function pinJSON(obj){
+  const key=getPinata();
+  const r=await fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({pinataContent:obj})});
+  if(!r.ok)throw new Error('metadata upload failed');
+  const j=await r.json();
+  return 'ipfs://'+j.IpfsHash;
+}
+
+async function prepareMetadata(){
+  try{
+    const manual=document.getElementById('manualURI').value.trim();
+    if(manual){preparedURI=manual;st('prepStatus','Manual metadata URI set: '+manual,'ok');return;}
+    const title=document.getElementById('artTitle').value.trim();
+    if(!title){st('prepStatus','Give the piece a title first.','err');return;}
+    const files={image:['fImage','sImage'],signature:['fSign','sSign'],texture:['fTex','sTex'],video:['fVid','sVid'],holding:['fHold','sHold']};
+    const meta={name:title,description:document.getElementById('artDesc').value.trim(),certificate:document.getElementById('certText').value.trim(),properties:{}};
+    let haveMain=false;
+    for(const k in files){
+      const el=document.getElementById(files[k][0]);
+      if(el.files[0]){
+        document.querySelector('#'+files[k][1]+' .status').textContent='uploading...';
+        const uri=await pinFile(el.files[0],k,files[k][1]);
+        if(k==='image'){meta.image=uri;haveMain=true;}else{meta.properties[k]=uri;}
+      }
+    }
+    if(!haveMain){st('prepStatus','The main image is required.','err');return;}
+    preparedURI=await pinJSON(meta);
+    st('prepStatus','Record prepared and permanently stored: <br><code>'+preparedURI+'</code>','ok');
+  }catch(e){st('prepStatus','Upload: '+(e.message||e),'err');}
+}
+
+async function doMint(){
+  try{
+    if(!contract){st('mintStatus','Connect your wallet first.','err');return;}
+    if(!preparedURI){st('mintStatus','Upload and prepare the record first (Step 3).','err');return;}
+    const fee=await contract.mintFee();
+    st('mintStatus','Confirm in MetaMask - you are signing the mint of YOUR art with your OWN wallet...','wait');
+    const tx=await contract.mint(preparedURI,{value:fee});
+    st('mintStatus','Recording on Ethereum... this takes under a minute.','wait');
+    await tx.wait();
+    st('mintStatus','<b>Done. The record is yours, forever.</b> Your wallet is the creator of record.','ok');
+    const link=document.getElementById('etherscan');
+    link.style.display='block';
+    link.innerHTML='See it on Etherscan: <a href="https://sepolia.etherscan.io/tx/'+tx.hash+'" target="_blank">'+tx.hash.slice(0,10)+'...</a>';
+  }catch(e){st('mintStatus','Mint: '+(e.data?e.data.message:e.message),'err');}
+}
+</script>
+</body>
+</html>
