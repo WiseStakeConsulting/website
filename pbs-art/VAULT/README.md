@@ -1,0 +1,3 @@
+# PBS-ART / VAULT metadata
+
+Vault-backed bundles (any bundle holding a Wise vault position, via wrapVault, createVaultBundle, or attachVault) resolve their tokenURI here: baseURI + VAULT/{bundleId}.json, and all point at the single vault emblem image img/vault.png (one-emblem decision, Nov 10 2026). Category and label stay on-chain and surface as marketplace traits. Extend past id 50 the same way as the category folders: copy the highest file, bump the number.
