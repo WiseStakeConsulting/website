@@ -3,139 +3,300 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mint Your Art - Wise Stake Consulting</title>
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<title>Minting - Your Work. Your Wallet. From Block One. | Wise Stake Consulting</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wise Stake Consulting">
+<meta property="og:title" content="Minting - Your Work. Your Wallet. From Block One. | Wise Stake Consulting">
+<meta property="og:description" content="Mint your song, your signature, your art - from YOUR wallet, with white-glove guidance. One flat fee, daily-interest bundles for stakes.">
+<meta property="og:url" content="https://wisestake.consulting/mint/">
+<meta property="og:image" content="https://wisestake.consulting/assets/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Minting - Your Work. Your Wallet. From Block One. | Wise Stake Consulting">
+<meta name="twitter:description" content="Mint your song, your signature, your art - from YOUR wallet, with white-glove guidance. One flat fee, daily-interest bundles for stakes.">
+<meta name="twitter:image" content="https://wisestake.consulting/assets/img/share-card.png">
+<meta name="description" content="Mint your song, your signature, your art - from YOUR wallet, with white-glove guidance. One flat fee, daily-interest bundles for stakes.">
+<script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
 <style>
-  :root { --navy:#0d1b3e; --navy2:#13265a; --gold:#c9a227; --cream:#faf6ec; --ink:#1a1a2e; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:Georgia,'Times New Roman',serif; background:var(--cream); color:var(--ink); line-height:1.6; }
-  header { background:var(--navy); color:var(--cream); padding:18px 24px; display:flex; align-items:center; gap:14px; }
-  .owl { width:44px; height:44px; border-radius:50%; background:var(--gold); color:var(--navy); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; }
-  header h1 { font-size:1.3rem; font-weight:normal; letter-spacing:1px; }
-  header small { display:block; color:var(--gold); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; }
-  main { max-width:760px; margin:0 auto; padding:32px 20px 80px; }
-  h2 { color:var(--navy); font-size:1.25rem; margin:34px 0 8px; padding-bottom:6px; border-bottom:2px solid var(--gold); }
-  h2:first-of-type { margin-top:8px; }
-  .intro { background:#fff; border:1px solid #e5ddc8; border-radius:10px; padding:18px 22px; margin-top:20px; font-size:1.02rem; }
-  .check { display:flex; gap:12px; padding:14px 0; border-bottom:1px dashed #d8ceb2; align-items:flex-start; }
-  .check:last-child { border-bottom:none; }
-  .check input[type=checkbox] { width:22px; height:22px; margin-top:4px; accent-color:var(--gold); flex-shrink:0; }
-  .check b { color:var(--navy); }
-  .check small { display:block; color:#555; font-size:.9rem; }
-  .box { background:#fff; border:1px solid #e5ddc8; border-radius:10px; padding:20px 22px; margin-top:14px; }
-  label { display:block; font-weight:bold; color:var(--navy); margin:12px 0 4px; font-size:.95rem; }
-  input[type=text], textarea { width:100%; padding:10px; border:1px solid #cfc5a8; border-radius:6px; font-family:inherit; font-size:1rem; background:var(--cream); }
-  textarea { min-height:70px; }
-  input[type=file] { margin-top:6px; }
-  .fileline { padding:8px 0; border-bottom:1px dotted #d8ceb2; font-size:.92rem; display:flex; justify-content:space-between; gap:10px; }
-  .fileline .status { color:#777; }
-  .fileline .status.ok { color:#1c7a2e; font-weight:bold; }
-  button { background:var(--navy); color:var(--cream); border:none; border-radius:8px; padding:13px 26px; font-family:inherit; font-size:1.05rem; cursor:pointer; margin-top:14px; }
-  button:hover { background:var(--navy2); }
-  button:disabled { background:#999; cursor:not-allowed; }
-  button.gold { background:var(--gold); color:var(--navy); font-weight:bold; }
-  button.gold:hover { background:#b08e1f; }
-  .status-line { margin-top:12px; padding:10px 14px; border-radius:6px; display:none; font-size:.95rem; }
-  .status-line.show { display:block; }
-  .status-line.ok { background:#e2f2e4; color:#1c5a2a; }
-  .status-line.err { background:#f8e2e2; color:#8a1c1c; }
-  .status-line.wait { background:#f5eeda; color:#6b5510; }
-  .note { font-size:.88rem; color:#666; margin-top:8px; }
-  .feebox { background:var(--navy); color:var(--cream); border-radius:10px; padding:18px 22px; margin-top:14px; }
-  .feebox .big { font-size:1.5rem; color:var(--gold); font-weight:bold; }
-  .feebox small { color:#b9c2dd; display:block; }
-  .adv { margin-top:10px; }
-  .adv details { font-size:.88rem; color:#666; }
-  .adv summary { cursor:pointer; }
-  .adv input { margin-top:6px; }
-  footer { text-align:center; padding:26px; color:#8a8370; font-size:.85rem; }
-  a { color:var(--navy2); }
-  #walletBtn { position:fixed; top:14px; right:20px; margin:0; padding:9px 18px; font-size:.9rem; }
+:root{--navy:#0a1128;--navy2:#101a3a;--panel:#0d1733;--gold:#d4a13a;--gold2:#e8c15a;--cream:#f5efe0;--muted:#9aa5c0;--line:rgba(232,193,90,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:Georgia,'Times New Roman',serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header.site{position:sticky;top:0;z-index:50;background:rgba(10,17,40,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1240px;margin:0 auto;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.brand img{height:44px;width:auto}
+.brand b{font-size:1.02rem;letter-spacing:.04em;white-space:nowrap;line-height:1.15}
+.brand b small{display:block;font-size:.66rem;color:var(--gold2);font-style:italic;font-weight:400;letter-spacing:.09em}
+nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:.86rem;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.03em}
+nav a:hover{color:var(--gold2)}
+nav a.active{color:var(--gold2)}
+nav .nav-cta{color:var(--navy);background:var(--gold);padding:8px 16px;border-radius:999px;font-weight:700}
+nav .soon{font-size:.62rem;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:1px 6px;margin-left:4px;vertical-align:middle;font-family:Arial}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;font-family:'Helvetica Neue',Arial,sans-serif}
+h1{font-size:clamp(2.2rem,4.8vw,3.5rem);line-height:1.12;font-weight:400;margin:18px 0 22px}
+h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;font-weight:400;margin-bottom:18px}
+h3{font-weight:400;font-size:1.15rem}
+p{color:var(--muted)}
+.gold{color:var(--gold2)}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;text-decoration:none;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.02em}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
+.btn-ghost{border:1px solid var(--gold);color:var(--gold2)}
+.hero{padding:84px 0 50px}
+.hero p.lede{font-size:1.12rem;max-width:760px;margin-bottom:12px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+section{padding:70px 0}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:36px}
+.door{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--cream);transition:transform .18s,border-color .18s}
+.door:hover{transform:translateY(-4px);border-color:var(--gold)}
+.door img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.door .ph{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#1a2a55,var(--navy2));color:var(--gold2);font-size:2rem}
+.door .body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:9px;flex:1}
+.door h3{color:var(--gold2)}
+.door p{font-size:.93rem}
+.door .go{color:var(--gold2);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.84rem;margin-top:auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+.step .num{font-size:2rem;color:var(--gold2)}
+.step h3{margin:6px 0 8px}
+.step p{font-size:.93rem}
+.cards-give{background:linear-gradient(160deg,var(--navy2),var(--navy));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cg-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:10px}
+.cg-grid ul{list-style:none}
+.cg-grid li{padding-left:26px;position:relative;margin-bottom:12px;color:var(--cream);font-size:.97rem}
+.cg-grid li::before{content:"\2726";color:var(--gold);position:absolute;left:0}
+@media(max-width:880px){.cg-grid{grid-template-columns:1fr}}
+.sellnote{max-width:820px;margin:0 auto;text-align:center}
+/* mint studio */
+.studio{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.studio-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:20px}
+.studio-box h3{color:var(--gold2);margin-bottom:10px}
+.studio-box label{display:block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:14px 0 5px}
+.studio-box input[type=text],.studio-box textarea{width:100%;background:var(--navy);border:1px solid var(--line);border-radius:8px;color:var(--cream);padding:10px 12px;font-family:Georgia,serif;font-size:.95rem}
+.studio-box input[type=file]{width:100%;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;margin-top:6px}
+.check{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;color:var(--cream);margin:4px 0;padding-left:22px;position:relative}
+.check::before{content:"\2713";color:var(--gold);position:absolute;left:2px}
+.upload-row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;border-top:1px dashed var(--line);padding:12px 0 2px;margin-top:12px;flex-wrap:wrap}
+.upload-row .lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:var(--cream)}
+.status{font-family:monospace;font-size:.72rem;color:var(--muted);word-break:break-all}
+.status.ok{color:#7fd48a}
+.feebox{background:var(--navy);border:1px solid var(--gold);border-radius:12px;padding:16px 20px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.feebox .big{font-size:1.6rem;color:var(--gold2)}
+.feebox small{display:block;color:var(--muted)}
+.status-line{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;margin-top:12px;display:none}
+.status-line.show{display:block}
+.status-line.ok{color:#7fd48a}.status-line.err{color:#e08080}.status-line.wait{color:var(--gold2)}
+button.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border:none;border-radius:999px;padding:14px 30px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.95rem;cursor:pointer}
+button.gold:disabled{opacity:.45;cursor:not-allowed}
+button.gold:not(:disabled):hover{transform:translateY(-2px)}
+details.adv{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:var(--navy)}
+details.adv summary{cursor:pointer;padding:12px 16px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;color:var(--gold2)}
+details.adv .inner{padding:0 16px 16px}
+footer.site{border-top:1px solid var(--line);padding:44px 0 30px;font-family:'Helvetica Neue',Arial,sans-serif}
+footer.site .cols{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:26px}
+footer.site a{color:var(--gold2);text-decoration:none}
+.fnote{color:var(--muted);font-size:.78rem;line-height:1.55}
+@media(max-width:880px){.steps{grid-template-columns:1fr}.hero{padding:56px 0 40px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="owl">W</div>
-  <div><small>Wise Stake Consulting LLC</small><h1>Mint Your Art</h1></div>
-  <button id="walletBtn" onclick="connectWallet()">Connect Wallet</button>
-</header>
-<main>
-  <div class="intro">
-    <p><b>You own your art. You always will.</b> This page gives your artwork a permanent, timestamped
-    record that <i>you</i> created it - stored so nobody can ever alter or remove it, not even us.
-    The art is minted from <b>your own wallet</b>, so the creator record is yours from the very first block.</p>
-    <p class="note">One honest note: this record proves <b>who created it and when</b>. It can't see the
-    physical piece itself - that's exactly what the checklist below is for.</p>
+<header class="site"><div class="bar">
+  <a class="brand" href="/"><img src="/assets/logo.png" alt="Wise Stake Consulting owl logo"><b>Wise Stake Consulting<small>The Receiving Side of Interest</small></b></a>
+  <nav aria-label="Main">
+  <a href="/">Home</a>
+  <a href="/signature-staking/">Signature Staking</a>
+  <a href="/vaults/">The Vault</a>
+  <a href="/mint/" class="active">Minting</a>
+  <a href="/pbs-1/">PBS-1 <span class="soon">Soon</span></a>
+  <a href="/book-a-session/" class="nav-cta">Book a Session</a>
+</nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">Minting at Wise Stake Consulting</div>
+  <h1>Your work. Your wallet.<br>From <em class="gold">block one</em>.</h1>
+  <p class="lede">Here's the rule that never changes: <strong class="gold">the artist mints from their own wallet.</strong> We drive the whole process on a guided call &mdash; but the record is created by YOU, owned by YOU, and held by YOU from the first block. We never take custody, and there's nothing to hand over later.</p>
+  <p class="lede">One flat fee: <strong class="gold">0.0112 ETH, about $25</strong>, paid on-chain when you mint. It permanently stores your work and records you as the creator. The network gas fee is shown by your wallet before you sign anything.</p>
+  <div class="cta-row">
+    <a class="btn btn-gold" href="#studio">Start minting now</a>
+    <a class="btn btn-ghost" href="/book-a-session/">Prefer the guided call? Book free</a>
+  </div>
+</div></section>
+
+<section style="padding-top:30px"><div class="wrap">
+  <div class="eyebrow">Four doors</div>
+  <h2>What are we putting on-chain today?</h2>
+  <div class="doors">
+    <div class="door">
+      <img src="/assets/img/door-songs.png" alt="A golden owl sings at a vintage studio microphone, gold music notes rising" onerror="this.style.display='none'">
+      <div class="body">
+        <h3>Songs That Pay</h3>
+        <p>Your song as a permanent record, minted from your wallet. The master's certificate lives on-chain with you as creator of record &mdash; and your Wise Stake position behind it earns daily interest.</p>
+        <span class="go">For musicians &rarr;</span>
+      </div>
+    </div>
+    <div class="door">
+      <img src="/assets/img/door-signatures.png" alt="A golden owl signs a glowing signature with a quill" onerror="this.style.display='none'">
+      <div class="body">
+        <h3>Signatures That Last</h3>
+        <p>Your signature, sealed on-chain forever. For performers, athletes, authors &mdash; anyone whose name is the asset. One signing moment, a mark that outlives paper.</p>
+        <span class="go">For names that matter &rarr;</span>
+      </div>
+    </div>
+    <div class="door">
+      <img src="/assets/img/door-easel.png" alt="A golden owl paints at a glowing easel in a navy studio" onerror="this.style.display='none'">
+      <div class="body">
+        <h3>Art, From the Easel</h3>
+        <p>The white-glove original: five captures of your physical piece, done before our call, then minted together on the guided Zoom. You click the one button that signs.</p>
+        <span class="go">For visual artists &rarr;</span>
+      </div>
+    </div>
+    <div class="door">
+      <img src="/assets/img/door-bundle.png" alt="A golden owl guards a bundle of glowing cards bound with a gold ribbon" onerror="this.style.display='none'">
+      <div class="body">
+        <h3>Bundle It</h3>
+        <p>Already have a stake or vault position? Wrap your work and your stake together as a bundle &mdash; the work on-chain, the yield paying daily interest to the holder.</p>
+        <span class="go">For stakes + bundles &rarr;</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="studio" id="how"><div class="wrap">
+  <div class="eyebrow">How it works</div>
+  <h2>One call. You click one button.</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3>Capture (before the call)</h3><p>We send you a five-shot phone checklist &mdash; the work, your signature, texture, and you holding it. Done before we meet, so the call is all minting, no fumbling with cameras.</p></div>
+    <div class="step"><div class="num">2</div><h3>The guided call</h3><p>On Zoom, we prepare the record together: title, story, certificate text. Files are uploaded and stored permanently. You see every field before anything is signed.</p></div>
+    <div class="step"><div class="num">3</div><h3>You sign, it's yours</h3><p>One button, clicked by you, from your wallet. The record is minted on Ethereum &mdash; creator of record: you. Optional bundle step for stakes, right after.</p></div>
+  </div>
+</div></section>
+
+<section class="cards-give" id="giving"><div class="wrap">
+  <div class="eyebrow">Cards That Give</div>
+  <h2>One sale. Two gifts.</h2>
+  <div class="cg-grid">
+    <div>
+      <p style="margin-bottom:18px">A cause you love, built the Wise Stake way: not a fundraiser that ends, a card that keeps giving.</p>
+      <ul>
+        <li><strong>One-time proceeds:</strong> the card sells once &mdash; the sale proceeds go to the cause, in full, on-chain and visible to anyone.</li>
+        <li><strong>Optional yield share:</strong> if the card is bundled with a stake, a share of the daily interest it earns can flow to the same cause for the life of the bundle.</li>
+        <li><strong>Your name on it, or not:</strong> give publicly or anonymously &mdash; the record shows what you choose.</li>
+      </ul>
+      <p style="margin-top:18px">If you have a cause &mdash; a church, a school, a family, a foundation &mdash; <a class="gold" href="/book-a-session/">talk to us</a> and we'll design the card with you.</p>
+    </div>
+    <div class="door" style="cursor:default">
+      <img src="/assets/img/door-signatures.png" alt="" style="aspect-ratio:16/9" onerror="this.style.display='none'"><div class="ph" style="display:none"></div>
+      <div class="body">
+        <h3>How a giving card works</h3>
+        <p>Minted from the giver's wallet. Sold once, proceeds sent to the cause's wallet. If bundled, the yield share flows daily. The giver chooses the cause, the split, and the story on the card.</p>
+        <p style="font-size:.82rem">We're careful with promises here: structures like this can have tax and legal implications, and we'll point you to qualified counsel before anything is final.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap sellnote">
+  <div class="eyebrow">Selling your work</div>
+  <h2>We don't run auctions &mdash; yet.</h2>
+  <p>When you're ready to sell or auction your minted piece, it lists on the established marketplaces that already connect to your wallet. You set the price, you keep the sale. We take no cut of what you sell &mdash; our fee is the flat mint fee, and that's the whole bill. When a Wise Stake auction option goes live, it will be announced here, never before it's real.</p>
+</div></section>
+
+<section class="studio" id="studio"><div class="wrap">
+  <div class="eyebrow">The mint studio</div>
+  <h2>Mint now, from your own wallet.</h2>
+  <p style="max-width:760px">Prefer to do it yourself, right now? Everything below is the real minting studio on Ethereum mainnet &mdash; the same flow we drive on the guided call. If any step feels unfamiliar, book the free call and we'll drive it with you.</p>
+
+  <div class="studio-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+      <h3 style="margin:0">Step 0 &mdash; Connect your wallet</h3>
+      <button class="gold" id="walletBtn" onclick="connectWallet()" style="padding:10px 22px;font-size:.85rem">Connect Wallet</button>
+    </div>
+    <p style="font-size:.85rem;margin-top:8px">MetaMask, Rabby, or any Ethereum wallet. The mint happens on Ethereum Mainnet only.</p>
   </div>
 
-  <h2>Step 1 - Capture your piece (do this on the call with us)</h2>
-  <div class="box" id="checklist">
-    <div class="check"><input type="checkbox" id="c1"><div><b>The full piece, straight-on</b>
-      <small>Daylight from a window (not direct sun), no flash, fill the whole frame. Phone camera is perfect.</small></div></div>
-    <div class="check"><input type="checkbox" id="c2"><div><b>Detail shot of your signature</b>
-      <small>Get close. Signatures and dates are what make a piece traceably yours.</small></div></div>
-    <div class="check"><input type="checkbox" id="c3"><div><b>Detail shot of the texture</b>
-      <small>Angle the light so brushstrokes or texture show. Forgers fake a photo - they don't fake your brushwork.</small></div></div>
-    <div class="check"><input type="checkbox" id="c4"><div><b>A short video (10-20 seconds)</b>
-      <small>Pan across the piece slowly, then show the back. Video is very hard to fake and stores permanently.</small></div></div>
-    <div class="check"><input type="checkbox" id="c5"><div><b>You, holding the piece</b>
-      <small>Simple, human, and the single best proof that the piece was in your hands at minting time.</small></div></div>
+  <div class="studio-box">
+    <h3>Step 1 &mdash; Describe the piece</h3>
+    <label for="artTitle">Title of the work</label>
+    <input type="text" id="artTitle" placeholder="e.g. Autumn in Ossining">
+    <label for="artDesc">The story (this is stored permanently, on-chain)</label>
+    <textarea id="artDesc" rows="3" placeholder="What is this piece? What does it mean? Who made it?"></textarea>
+    <label for="certText">Certificate line (creator, date, edition)</label>
+    <input type="text" id="certText" placeholder="e.g. Original work by the wallet holder, November 2026, 1 of 1">
   </div>
 
-  <h2>Step 2 - Tell the world what it is</h2>
-  <div class="box">
-    <label>Title of the piece</label>
-    <input type="text" id="artTitle" placeholder="e.g. Sunset Over the Hudson">
-    <label>Statement (what it is, what it means, materials, year)</label>
-    <textarea id="artDesc" placeholder="e.g. Acrylic on canvas, 2026. Painted the week I finally..."></textarea>
-    <label>Certificate statement (we pre-fill it - you can edit)</label>
-    <textarea id="certText">I, the creator of this wallet, declare that this artwork is my original work, and that this record was created by me on the date of this mint.</textarea>
+  <div class="studio-box">
+    <h3>Step 2 &mdash; The captures (done before the call)</h3>
+    <p style="font-size:.9rem">Five phone shots, good light, no flash:</p>
+    <p class="check">The whole piece, straight on</p>
+    <p class="check">Your signature or mark, close up</p>
+    <p class="check">The texture &mdash; brushwork, grain, canvas</p>
+    <p class="check">A short video, ten slow seconds</p>
+    <p class="check">You, holding the piece</p>
+    <div class="upload-row"><span class="lbl">Main image <span class="gold">*</span></span><input type="file" id="fImage" accept="image/*"></div>
+    <div class="upload-row" id="sImage"><span class="lbl">stored to</span><span class="status">not yet</span></div>
+    <div class="upload-row"><span class="lbl">Signature close-up</span><input type="file" id="fSign" accept="image/*"></div>
+    <div class="upload-row" id="sSign"><span class="lbl">stored to</span><span class="status">not yet</span></div>
+    <div class="upload-row"><span class="lbl">Texture shot</span><input type="file" id="fTex" accept="image/*"></div>
+    <div class="upload-row" id="sTex"><span class="lbl">stored to</span><span class="status">not yet</span></div>
+    <div class="upload-row"><span class="lbl">Video (10 sec)</span><input type="file" id="fVid" accept="video/*"></div>
+    <div class="upload-row" id="sVid"><span class="lbl">stored to</span><span class="status">not yet</span></div>
+    <div class="upload-row"><span class="lbl">Holding shot</span><input type="file" id="fHold" accept="image/*"></div>
+    <div class="upload-row" id="sHold"><span class="lbl">stored to</span><span class="status">not yet</span></div>
   </div>
 
-  <h2>Step 3 - Upload the files (from YOUR device)</h2>
-  <div class="box">
-    <p class="note" style="margin-top:0">Your files go straight from your device into permanent decentralized
-    storage. They never pass through our hands. Uploads use IPFS - a storage network where files live across
-    many computers, so no single company (including ours) can take them down.</p>
-    <label>Main image (the full piece)</label>
-    <input type="file" id="fImage" accept="image/*">
-    <div class="fileline" id="sImage"><span class="status">waiting</span></div>
-    <label>Signature closeup</label>
-    <input type="file" id="fSign" accept="image/*">
-    <div class="fileline" id="sSign"><span class="status">waiting</span></div>
-    <label>Texture detail</label>
-    <input type="file" id="fTex" accept="image/*">
-    <div class="fileline" id="sTex"><span class="status">waiting</span></div>
-    <label>Video (optional but powerful)</label>
-    <input type="file" id="fVid" accept="video/*">
-    <div class="fileline" id="sVid"><span class="status">waiting</span></div>
-    <label>Artist holding the piece</label>
-    <input type="file" id="fHold" accept="image/*">
-    <div class="fileline" id="sHold"><span class="status">waiting</span></div>
-    <div class="adv"><details>
-      <summary>Advanced: upload gateway (Pinata key) or manual metadata URI</summary>
-      <label>Pinata JWT (WSC setup - stored only in this browser)</label>
-      <input type="text" id="pinataKey" placeholder="Paste Pinata JWT here">
-      <label>OR paste a ready metadata URI (Arweave / manual mode)</label>
-      <input type="text" id="manualURI" placeholder="ipfs://... or https://arweave.net/...">
-    </details></div>
-    <button onclick="prepareMetadata()">Upload &amp; Prepare Record</button>
+  <div class="studio-box">
+    <h3>Step 3 &mdash; Prepare the record</h3>
+    <button class="gold" onclick="prepareMetadata()" style="padding:12px 26px;font-size:.9rem">Upload &amp; Prepare Record</button>
     <div class="status-line" id="prepStatus"></div>
+    <details class="adv">
+      <summary>Advanced &mdash; IPFS (Pinata) key or manual metadata URI</summary>
+      <div class="inner">
+        <label for="pinataKey">Pinata JWT (stored only in this browser)</label>
+        <input type="text" id="pinataKey" placeholder="Paste your Pinata API key - or get one free at pinata.cloud">
+        <label for="manualURI">Manual metadata URI (skip uploads entirely)</label>
+        <input type="text" id="manualURI" placeholder="ipfs://... a prepared metadata file">
+      </div>
+    </details>
   </div>
 
-  <h2>Step 4 - Mint (the one button YOU click)</h2>
-  <div class="feebox">
-    <small>Service fee - permanently stores your art, records you as creator</small>
-    <span class="big" id="feeDisplay">- ETH</span>
-    <small id="feeDetail">Connect your wallet to see the current fee. Network gas fee (paid to Ethereum, not to us) is shown by your wallet before you sign.</small>
+  <div class="studio-box">
+    <h3>Step 4 &mdash; Mint (the one button YOU click)</h3>
+    <div class="feebox">
+      <small>Service fee &mdash; permanently stores your art, records you as creator. Flat, the whole bill.</small>
+      <span class="big" id="feeDisplay">- ETH</span>
+      <small id="feeDetail">Connect your wallet to see the current fee. Network gas (paid to Ethereum, not to us) is shown by your wallet before you sign.</small>
+    </div>
+    <div style="margin-top:16px">
+      <button class="gold" id="mintBtn" onclick="doMint()" disabled>Mint My Art</button>
+      <div class="status-line" id="mintStatus"></div>
+      <p class="status-line" id="etherscan" style="display:none"></p>
+    </div>
   </div>
-  <div class="box">
-    <button class="gold" id="mintBtn" onclick="doMint()" disabled>Mint My Art</button>
-    <div class="status-line" id="mintStatus"></div>
-    <p class="note" id="etherscan" style="display:none"></p>
+</div></section>
+
+<section><div class="wrap sellnote">
+  <div class="eyebrow">Rather we drive?</div>
+  <h2>Book the free call.</h2>
+  <p>Thirty minutes on Zoom, we do the driving, you do the signing. Captures before the call, mint on the call, questions answered the whole way.</p>
+  <a class="btn btn-gold" href="/book-a-session/">Book a free session</a>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div><div class="eyebrow" style="margin-bottom:8px">Contact</div>
+      <p style="font-size:.9rem">General: <a href="mailto:hello@wisestake.consulting">hello@wisestake.consulting</a><br>
+      Legal: <a href="mailto:legal@wisestake.consulting">legal@wisestake.consulting</a><br>
+      Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting">dm@wisestake.consulting</a> (Denise)</p></div>
+    <div><div class="eyebrow" style="margin-bottom:8px">Site</div>
+      <p style="font-size:.9rem"><a href="/signature-staking/">Signature Staking</a> &middot; <a href="/vaults/">The Vault</a> &middot; <a href="/mint/">Minting</a> &middot; <a href="/pbs-1/">PBS-1</a> &middot; <a href="/book-a-session/">Book a Session</a></p></div>
   </div>
-</main>
-<footer>Wise Stake Consulting LLC &middot; The Receiving Side of Interest &middot; security@wisestake.consulting</footer>
+  <p class="fnote">Wise Stake Consulting, LLC provides business consulting and education only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Rates shown are published by the underlying platforms at the time of writing, are not guaranteed, and change over time. Digital assets involve risk, including loss of principal. The mint fee is set by the smart contract and shown in your wallet before you sign. Links marked as referral links build Wise Stake Consulting's referral credit at no cost to you. The owl motif is a heritage homage to the Wise token community and an independent mark of Wise Stake Consulting, LLC. &copy; 2026 Wise Stake Consulting LLC &middot; wisestake.consulting &middot; wisestake.eth</p>
+</div></footer>
 
 <script>
 const MAINNET = '0x1'; // Ethereum Mainnet - the WSC mint contract lives here
@@ -223,7 +384,7 @@ async function doMint(){
     st('mintStatus','<b>Done. The record is yours, forever.</b> Your wallet is the creator of record.','ok');
     const link=document.getElementById('etherscan');
     link.style.display='block';
-    link.innerHTML='See it on Etherscan: <a href="https://sepolia.etherscan.io/tx/'+tx.hash+'" target="_blank">'+tx.hash.slice(0,10)+'...</a>';
+    link.innerHTML='See it on Etherscan: <a href="https://etherscan.io/tx/'+tx.hash+'" target="_blank" rel="noopener">'+tx.hash.slice(0,10)+'...</a>';
   }catch(e){st('mintStatus','Mint: '+(e.data?e.data.message:e.message),'err');}
 }
 </script>
