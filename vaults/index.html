@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Vault: 20% APY &amp; 40% APR Fixed-Yield | Wise Stake Consulting</title>
+<title>The Vault: Deposit USDC, Earn 20% APY Fixed | Wise Stake Consulting</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wise Stake Consulting">
-<meta property="og:title" content="The Vault: 20% APY &amp; 40% APR Fixed-Yield | Wise Stake Consulting">
-<meta property="og:description" content="One vault, two engines: the people-owned carrier at 20% APY and the node economy at 40% APR. Fixed yield on stablecoins, backed by real-world infrastructure. Get deposit-ready in four steps.">
+<meta property="og:title" content="The Vault: Deposit USDC, Earn 20% APY Fixed | Wise Stake Consulting">
+<meta property="og:description" content="Deposit USDC and earn a fixed 20% APY backed by a people-owned telecom network - plus a limited 40% APR node window while it lasts. Get deposit-ready in four steps.">
 <meta property="og:url" content="https://wisestake.consulting/vaults/">
 <meta property="og:image" content="https://wisestake.consulting/assets/img/share-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Vault: 20% APY &amp; 40% APR Fixed-Yield | Wise Stake Consulting">
-<meta name="twitter:description" content="One vault, two engines: the people-owned carrier at 20% APY and the node economy at 40% APR. Fixed yield on stablecoins, backed by real-world infrastructure.">
+<meta name="twitter:title" content="The Vault: Deposit USDC, Earn 20% APY Fixed | Wise Stake Consulting">
+<meta name="twitter:description" content="Deposit USDC and earn a fixed 20% APY backed by a people-owned telecom network - plus a limited 40% APR node window while it lasts.">
 <meta name="twitter:image" content="https://wisestake.consulting/assets/img/share-card.png">
-<meta name="description" content="One vault, two engines: the people-owned carrier at 20% APY and the node economy at 40% APR. Fixed yield on stablecoins, backed by real-world infrastructure. Get deposit-ready in four steps.">
+<meta name="description" content="Deposit USDC and earn a fixed 20% APY backed by a people-owned telecom network - plus a limited 40% APR node window while it lasts. Get deposit-ready in four steps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -66,19 +64,18 @@ section{padding:90px 0}
 .sec-head{max-width:760px;margin:0 auto 54px;text-align:center}
 .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:14px 0 16px;line-height:1.15}
 .sec-head p{color:var(--muted);font-size:1.02rem}
-.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.plan{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:26px 22px;position:relative}
-.plan.best{border-color:var(--gold);box-shadow:0 0 40px rgba(212,168,67,.15)}
-.plan .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:4px 14px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
-.plan h3{font-size:1.25rem;margin-bottom:4px}
-.plan .price{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--gold2);margin:8px 0 14px}
-.plan .price small{font-size:.85rem;color:var(--muted);font-family:'Spline Sans',sans-serif}
-.plan ul{list-style:none;font-size:.86rem;color:var(--cream2)}
-.plan li{padding:6px 0;border-bottom:1px dashed rgba(143,163,189,.15)}
-.plan li::before{content:"\2713";color:var(--gold);margin-right:9px;font-weight:700}
-.plan .btn{display:block;text-align:center;margin-top:20px;padding:11px 10px;font-size:.88rem}
-@media(max-width:960px){.plans{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.plans{grid-template-columns:1fr}}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:1050px;margin:0 auto}
+@media(max-width:900px){.dual{grid-template-columns:1fr}}
+.engine{background:var(--navy2);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.engine img.art{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.engine .body{padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px;flex:1}
+.engine h3{font-size:1.45rem;color:var(--gold2)}
+.engine .rate{font-family:'Fraunces',serif;font-size:2.4rem;color:var(--gold2);line-height:1}
+.engine .rate small{font-size:1rem;color:var(--muted);font-family:'Spline Sans',sans-serif}
+.engine p{font-size:.95rem;color:var(--cream2)}
+.engine .pillrow{margin-top:auto;padding-top:14px}
+.pill{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:5px 16px;border-radius:999px;font-size:.82rem;margin:4px 6px 0 0}
+.pill.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold2)}
 .own{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 50%,var(--navy) 100%)}
 .own-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
 @media(max-width:900px){.own-grid{grid-template-columns:1fr}}
@@ -100,12 +97,6 @@ section{padding:90px 0}
 .step h3{font-size:1.15rem;margin-bottom:10px}
 .step p{font-size:.92rem;color:var(--muted)}
 .apy-pill{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:5px 16px;border-radius:999px;font-size:.9rem;margin-top:14px}
-.dual{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin:0 auto}
-@media(max-width:720px){.dual{grid-template-columns:1fr}}
-.cta-card{border-radius:22px;padding:40px 34px;text-align:center;border:1px solid var(--line);background:var(--navy2)}
-.cta-card img{height:74px;margin-bottom:18px}
-.cta-card h3{font-size:1.4rem;margin-bottom:10px}
-.cta-card p{color:var(--muted);font-size:.92rem;margin-bottom:24px}
 details{background:var(--navy2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
 summary{cursor:pointer;padding:18px 22px;font-weight:600;color:var(--cream);list-style:none;position:relative}
 summary::-webkit-details-marker{display:none}
@@ -122,6 +113,19 @@ details .a{padding:0 22px 20px;color:var(--muted);font-size:.93rem}
 .warnbox{background:#2a1c08;border:1px solid #e67e22;border-radius:10px;padding:18px 22px;margin-top:22px;font-size:15px;color:#f0d9b5}
 .chains{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .chain{background:var(--navy3);border:1px solid var(--line);border-radius:8px;padding:8px 16px;font-size:14px;color:var(--muted)}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.plan{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:26px 22px;position:relative}
+.plan.best{border-color:var(--gold);box-shadow:0 0 40px rgba(212,168,67,.15)}
+.plan .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:4px 14px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.plan h3{font-size:1.25rem;margin-bottom:4px}
+.plan .price{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--gold2);margin:8px 0 14px}
+.plan .price small{font-size:.85rem;color:var(--muted);font-family:'Spline Sans',sans-serif}
+.plan ul{list-style:none;font-size:.86rem;color:var(--cream2)}
+.plan li{padding:6px 0;border-bottom:1px dashed rgba(143,163,189,.15)}
+.plan li::before{content:"\2713";color:var(--gold);margin-right:9px;font-weight:700}
+.plan .btn{display:block;text-align:center;margin-top:20px;padding:11px 10px;font-size:.88rem}
+@media(max-width:960px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.plans{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:.8rem}
 footer .wrap{display:flex;gap:30px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
 footer img{height:56px}
@@ -143,6 +147,8 @@ footer img{height:56px}
 .how .hstep:before{counter-increment:how;content:counter(how);flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center}
 .how h3{font-size:1.15rem;margin-bottom:6px}
 .how p{color:var(--muted);font-size:.95rem}
+.src{font-size:.8rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--muted)}
 </style>
 <!-- MailerLite Universal -->
 <script>
@@ -160,7 +166,7 @@ ml('account', '2732159');
       <span class="serif" style="color:var(--cream);font-size:1.05rem">Wise Stake <span style="color:var(--gold2)">Consulting</span></span>
     </a>
     <div class="links">
-      <a href="/">Home</a><a href="/signature-staking/">Signature Staking</a><a href="/vaults/"><strong style="color:var(--gold2)">The Vault</strong></a><a class="sec" href="#engine1">20% APY</a><a class="sec" href="#engine2">40% APR</a><a class="sec" href="#how">How to Deposit</a><a class="sec" href="#faq">FAQ</a><a href="/pbs-1/">PBS-1</a><a href="/book-a-session/" style="color:var(--navy);background:var(--gold2);padding:8px 16px;border-radius:999px;font-weight:700">Book a Session</a><a href="/es/vaults/" style="color:var(--gold2)">Espa&ntilde;ol</a>
+      <a href="/">Home</a><a href="/signature-staking/">Signature Staking</a><a href="/vaults/"><strong style="color:var(--gold2)">The Vault</strong></a><a class="sec" href="#earn">20% APY</a><a class="sec" href="#window">40% Window</a><a class="sec" href="#how">How to Deposit</a><a class="sec" href="#faq">FAQ</a><a href="/pbs-1/">PBS-1</a><a href="/book-a-session/" style="color:var(--navy);background:var(--gold2);padding:8px 16px;border-radius:999px;font-weight:700">Book a Session</a><a href="/es/vaults/" style="color:var(--gold2)">Espa&ntilde;ol</a>
     </div>
   </div>
 </nav>
@@ -169,8 +175,8 @@ ml('account', '2732159');
   <img class="bg" src="/assets/img/sv-hero-d38a13e5.png" alt="Operator-owned nodes span the horizon while gold flows into a staking vault">
   <div class="wrap">
     <div class="eyebrow">Wise Vaults &times; Real-World Infrastructure</div>
-    <h1>One vault.<br>Two <em>engines</em>.</h1>
-    <p class="lead">Stablecoin vaults backed by things that actually earn: a carrier owned by its people at a fixed <strong style="color:var(--gold2)">20% APY</strong>, and a node economy at <strong style="color:var(--gold2)">40% APR</strong> while the early window lasts. Leave the dashboard open and watch your balance tick.</p>
+    <h1>Deposit USDC.<br>Earn from <em>real networks</em>.</h1>
+    <p class="lead">A fixed <strong style="color:var(--gold2)">20% APY</strong> backed by a telecom network owned by its people &mdash; the long-term rate that's always on. And a <strong style="color:var(--gold2)">40% APR</strong> node window, open now, closing when the first pool fills. Your dollars, working on infrastructure that actually earns.</p>
     <div class="cta-row">
       <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Deposit now &rarr;</a>
       <a class="btn btn-ghost" href="#how">Get deposit-ready</a>
@@ -180,140 +186,58 @@ ml('account', '2732159');
 
 <div class="stats reveal">
   <div class="wrap">
-    <div><b>20%</b><span>APY, compoundable carrier pool</span></div>
-    <div><b>40%</b><span>APR, node pool &middot; Tier 01</span></div>
-    <div><b>~5 months</b><span>Left on the 40% window</span></div>
+    <div><b>20%</b><span>APY fixed &middot; the long-term rate</span></div>
+    <div><b>40%</b><span>APR &middot; limited node window</span></div>
     <div><b>4</b><span>Chains: Ethereum, Base, Arbitrum, Robinhood</span></div>
+    <div><b>100%</b><span>Stablecoin deposits &middot; you hold the keys</span></div>
   </div>
 </div>
 
-<!-- ENGINE 1: WORLD MOBILE -->
-<section id="engine1">
+<!-- DEPOSIT TO EARN -->
+<section id="earn">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Engine one &middot; 20% APY</div>
-      <h2>The carrier owned by its people.</h2>
-      <p>World Mobile is telecom built the other way: the network is made of AirNodes owned by ordinary people, and the subscribers' revenue flows to the owners &mdash; not to a corporation. Deposit into the stablecoin vault and that same network revenue pays you a fixed 20% APY, compounded.</p>
+      <div class="eyebrow">Deposit to earn</div>
+      <h2>Two pools. Two real revenue engines.</h2>
+      <p>Both pools pay on stablecoin deposits. Both are funded by infrastructure with real customers &mdash; not by new depositors. Pick your engine, or run both.</p>
     </div>
-    <div class="plans reveal">
-      <div class="plan">
-        <h3>Starter</h3>
-        <div class="price">$15<small>/mo</small></div>
-        <ul>
-          <li>2GB high-speed data</li>
-          <li>Unlimited calls &amp; texts</li>
-          <li>Hotspot included</li>
-          <li>Built-in VPN</li>
-        </ul>
-        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Choose Starter</a>
-      </div>
-      <div class="plan">
-        <h3>Standard</h3>
-        <div class="price">$25<small>/mo</small></div>
-        <ul>
-          <li>8GB high-speed data</li>
-          <li>Unlimited calls &amp; texts</li>
-          <li>Hotspot included</li>
-          <li>Built-in VPN</li>
-        </ul>
-        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Choose Standard</a>
-      </div>
-      <div class="plan best">
-        <div class="tag">Best value</div>
-        <h3>Unlimited</h3>
-        <div class="price">$40<small>/mo</small></div>
-        <ul>
-          <li>25GB high-speed data</li>
-          <li>ID protection included</li>
-          <li>Free calls to 60 countries</li>
-          <li>Built-in VPN</li>
-        </ul>
-        <a class="btn btn-gold" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Choose Unlimited</a>
-      </div>
-      <div class="plan">
-        <h3>Unlimited+</h3>
-        <div class="price">$55<small>/mo</small></div>
-        <ul>
-          <li>50GB high-speed data</li>
-          <li>15GB hotspot</li>
-          <li>SIM-swap protection</li>
-          <li>Enhanced ID protection</li>
-        </ul>
-        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Choose Unlimited+</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ENGINE 1 DEEP -->
-<section class="own" style="padding-top:60px">
-  <div class="wrap">
-    <div class="own-grid">
-      <div class="reveal">
-        <div class="eyebrow">Why it works</div>
-        <h2>Every other network is owned by a corporation. This one is owned by its people.</h2>
-        <p>Verizon's towers belong to Verizon. When you pay your bill, the revenue flows one way: up.</p>
-        <p>World Mobile flips it. The network is built out of <strong style="color:var(--gold2)">AirNodes</strong> &mdash; telecom hardware owned by ordinary people. Buy one, the team deploys it where connectivity is needed, and when subscribers make calls and use data through it, <strong style="color:var(--gold2)">the owner earns</strong>. Real hardware, real usage, real earnings in USD.</p>
-        <p>The vault is the same story one step removed: the network's subscriber revenue funds the pool that pays your 20% APY on stablecoin deposits.</p>
-        <div class="strip">
-          <div><b>13,346+</b><span>AirNodes worldwide</span></div>
-          <div><b>3M+</b><span>Subscribers</span></div>
-          <div><b>3</b><span>Continents</span></div>
+    <div class="dual reveal">
+      <div class="engine">
+        <img class="art" src="/assets/img/wm-plane.png" alt="A World Mobile aircraft beams gold 5G signal rings over a coastline, connecting thousands of lights below while the Wise Stake owl flies alongside">
+        <div class="body">
+          <h3>The People's Network</h3>
+          <div class="rate">20% <small>APY &middot; fixed &middot; compounded</small></div>
+          <p>World Mobile is telecom built the other way: AirNodes owned by ordinary people, subscriber revenue flowing to the owners &mdash; and that same revenue funds your fixed 20% APY on USDC. This is the long-term rate. No countdown, no cap chase. It is the anchor of the Vault.</p>
+          <p>And the network keeps reaching further: World Mobile Stratospheric is fitting aircraft to beam 5G from the sky &mdash; one aircraft covering a 15km radius, headed toward the Stratomast platform connecting half a million phones from 60,000 feet.</p>
+          <div class="pillrow"><span class="pill">Always on</span><span class="pill ghost">Compounds automatically</span></div>
         </div>
       </div>
-      <div class="reveal">
-        <div class="node-card">
-          <h3>The phone plan <small>from $15/mo</small></h3>
-          <p>No contract, no credit check, VPN built in, your data never sold. The bill you already pay &mdash; pointed in the right direction.</p>
-        </div>
-        <div class="node-card">
-          <h3>The nodes <small>from $165</small></h3>
-          <p>Own a piece of the network itself. The team deploys and activates it; subscribers' usage pays the owner in USD, tracked live.</p>
-        </div>
-        <div class="node-card" style="border-color:var(--gold)">
-          <h3>The vault <small>20% APY &middot; stablecoin</small></h3>
-          <p>Deposit USDC, earn a fixed 20% APY compounded, funded by real network revenue. Your principal stays in dollars.</p>
+      <div class="engine">
+        <img class="art" src="/assets/img/sovren-40.png" alt="A Wise Nodes dashboard card showing 40% APR on USDC yield on Ethereum, with a Position created confirmation">
+        <div class="body">
+          <h3>The Node Economy</h3>
+          <div class="rate">40% <small>APR &middot; while the window lasts</small></div>
+          <p>Sovren pays operators for verifiable work: every SOVR settled splits 50% burned, 25% to the operator pool, 25% to the company. Your USDC purchases node infrastructure, and that operator revenue funds the 40% APR pool &mdash; published honestly as APR, because it doesn't compound for you.</p>
+          <p>This is the early-window rate, and it is temporary by design. Tier 01 closes when a large December deposit caps the pool.</p>
+          <div class="pillrow"><span class="pill">Limited window</span><span class="pill ghost">Tier 01 &mdash; closing</span></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ENGINE 2: SOVREN -->
-<section class="flow" id="engine2">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Engine two &middot; 40% APR</div>
-      <h2>The node economy. The math compounds.</h2>
-      <p>Sovren is real-world infrastructure that pays its operators for verifiable work. Deposit USDC, it purchases the node infrastructure, and the network's revenue funds a 40% APR pool &mdash; while Tier 01 pricing lasts. You deposit in Wise Vaults, you don't lock a position.</p>
-    </div>
-    <div class="steps reveal">
-      <div class="step">
-        <h3>Where the 40% comes from</h3>
-        <p>Every SOVR settled on the network splits by hard rule: <strong style="color:var(--cream2)">50% burned and recycled, 25% to the operator pool, 25% to the company</strong>. The operator pool is real revenue from real usage &mdash; and it funds your rate.</p>
-      </div>
-      <div class="step">
-        <h3>Your deposit becomes machines</h3>
-        <p>USDC deposits purchase node licenses and hardware. The nodes serve real services, get paid in SOVR under published rules, and the pool's revenue pays you. Money in, machines working, revenue out.</p>
-      </div>
-      <div class="step">
-        <h3>Why Tier 01 is the one</h3>
-        <p>Only 10,000 licenses will ever exist. Tier 01 is $3,000, the 40% APR is guaranteed for five months, and a large December deposit is expected to cap the pool. Later tiers are projected well under 40%.</p>
-        <span class="apy-pill">Tier 01 &mdash; closing window</span>
-      </div>
+    <div class="sec-head reveal" style="margin-top:60px;margin-bottom:0">
+      <p class="src">Network facts sourced from Britten-Norman and World Mobile Stratospheric announcements (April 2026) and HackerNoon's Stratomast coverage (2025). Rates are shown by the platform and change over time.</p>
     </div>
   </div>
 </section>
 
 <!-- WINDOW -->
-<section class="own" style="padding-top:70px">
+<section class="own" id="window" style="padding-top:70px">
   <div class="wrap">
     <div class="own-grid">
       <div class="reveal">
-        <div class="eyebrow">The clock</div>
-        <h2>Why first movers win.</h2>
+        <div class="eyebrow">The 40% clock</div>
+        <h2>Why first movers win the node window.</h2>
         <p>A very large deposit is scheduled to arrive in December. When it lands, <strong style="color:var(--gold2)">the 40% APR node pool caps</strong> &mdash; closed to new deposits. After the cap, re-entry is secondary sell orders only, at whatever the market asks.</p>
-        <p>The platform team projects the next pool at ~60% APR, potentially three digits as the network grows &mdash; but node prices rise with each tier, so later entries buy in worse. First movers lock the rate, keep the full window, and enter at the lowest price.</p>
+        <p>The platform team projects the next pool higher as the network grows &mdash; but node prices rise with each tier, so later entries buy in worse. First movers lock the rate, keep the full window, and enter at the lowest price.</p>
         <p style="font-size:.85rem;color:var(--muted)">Sources: platform team announcements (Oct 25 and 31, 2026) and the live dashboard. Projections are the team's, not ours &mdash; nothing is guaranteed, and rates change.</p>
       </div>
       <div class="reveal">
@@ -322,8 +246,8 @@ ml('account', '2732159');
           <p>The 40% APR is published as APR, not APY &mdash; the honest label, because the pool doesn't compound for you. Compound it yourself and the effective return is higher.</p>
         </div>
         <div class="node-card" style="border-color:var(--gold)">
-          <h3>20% or 40% &mdash; or both <small>same app</small></h3>
-          <p>Both engines live in the same platform, funded by the same referral rail. Many members run the 20% pool for stability and the 40% pool for the early window.</p>
+          <h3>20% stays put <small>the long game</small></h3>
+          <p>When the 40% window closes, the 20% APY carrier pool keeps running exactly as always. That's the design: one engine for the sprint, one for the marathon.</p>
         </div>
       </div>
     </div>
@@ -386,10 +310,91 @@ ml('account', '2732159');
     <div class="reveal" style="max-width:860px;margin:0 auto">
       <details><summary>Is my deposit guaranteed?</summary><div class="a">Honest split: your deposit is USDC, a dollar stablecoin &mdash; your principal does not swing with token prices. That is the strongpoint: both rates pay on stable money. It is not risk-free: USDC is built to hold $1 but is issued by a company and has wobbled before; the yield depends on the platform reward buffer and real asset revenue; exits can have a queue; and the contracts, while exact, are still software. Stable describes your deposit, not the future. Do your own research, and never deposit money you need back on a schedule.</div></details>
       <details><summary>Do you hold my money?</summary><div class="a">No. Wise Stake Consulting never touches your funds. You deposit from your own wallet into the protocol. We earn referral commission from the platform on deposits made through our links &mdash; that's our disclosure, up front.</div></details>
+      <details><summary>Is the 40% permanent?</summary><div class="a">No &mdash; and we won't pretend otherwise. The 40% APR is the Tier 01 early-window rate: it closes when the first pool fills, expected with a large December deposit. The permanent product is the 20% APY carrier pool, which has no closing window and keeps compounding as long as you hold your position.</div></details>
       <details><summary>What happens after the 40% pool caps?</summary><div class="a">Existing positions keep earning their locked rate for the rest of the window. New entries close. The platform team has stated the next pool will open at a different rate with higher node prices &mdash; their projection is ~60% APR, potentially three digits as the network grows. Nothing is set in stone until the capital lands.</div></details>
-      <details><summary>What's the actual difference between the 20% and the 40%?</summary><div class="a">Two different engines. The 20% pool is funded by World Mobile's telecom revenue and compounds automatically (APY). The 40% pool is funded by Sovren's node-economy revenue, is published as APR because it does not compound for you (compound it yourself and the effective return is higher), and carries the Tier 01 closing window. Both pay in stablecoin; both are deposited from the same app.</div></details>
-      <details><summary>Can I get the phone plan without depositing, or deposit without the plan?</summary><div class="a">Either, or both. The phone plan is just a better bill. The vault is just a better yield. Run one, the other, or stack them &mdash; plenty of members pay for their plan out of the yield.</div></details>
+      <details><summary>What's the actual difference between the 20% and the 40%?</summary><div class="a">Two different engines. The 20% pool is funded by World Mobile's telecom revenue and compounds automatically (APY) &mdash; it's the long-term rate with no deadline. The 40% pool is funded by Sovren's node-economy revenue, is published as APR because it does not compound for you, and carries the Tier 01 closing window. Both pay in stablecoin; both are deposited from the same app.</div></details>
       <details><summary>Where do I ask a human?</summary><div class="a">Join a free 40-minute session or book a consultation at wisestake.consulting. We walk through wallets, chains and deposits with you &mdash; that's the job.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- OWN THE NETWORK - PHONE PLANS (BOTTOM) -->
+<section class="own" id="switch" style="padding-top:80px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">One more thing</div>
+      <h2>Would you like to switch your phone service to own the network?</h2>
+      <p>The same network that pays your 20% APY also sells phone service &mdash; and the bill you already pay every month can point in the right direction instead of up to a corporation.</p>
+    </div>
+    <div class="plans reveal">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">$15<small>/mo</small></div>
+        <ul>
+          <li>2GB high-speed data</li>
+          <li>Unlimited calls &amp; texts</li>
+          <li>Hotspot + built-in VPN</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Switch to Starter</a>
+      </div>
+      <div class="plan">
+        <h3>Standard</h3>
+        <div class="price">$25<small>/mo</small></div>
+        <ul>
+          <li>8GB high-speed data</li>
+          <li>Unlimited calls &amp; texts</li>
+          <li>Hotspot + built-in VPN</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Switch to Standard</a>
+      </div>
+      <div class="plan best">
+        <div class="tag">Best value</div>
+        <h3>Unlimited</h3>
+        <div class="price">$40<small>/mo</small></div>
+        <ul>
+          <li>25GB high-speed data</li>
+          <li>ID protection included</li>
+          <li>Free calls to 60 countries</li>
+        </ul>
+        <a class="btn btn-gold" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Switch to Unlimited</a>
+      </div>
+      <div class="plan">
+        <h3>Unlimited+</h3>
+        <div class="price">$55<small>/mo</small></div>
+        <ul>
+          <li>50GB high-speed data</li>
+          <li>15GB hotspot</li>
+          <li>SIM-swap &amp; ID protection</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://my.worldmobile.io/plans/sims?affiliate=78BHK7" rel="noopener">Switch to Unlimited+</a>
+      </div>
+    </div>
+    <div class="own-grid reveal" style="margin-top:54px">
+      <div>
+        <div class="eyebrow">Go one step further</div>
+        <h2>Own a piece of the network itself.</h2>
+        <p>Verizon's towers belong to Verizon. When you pay your bill, the revenue flows one way: up. World Mobile flips it &mdash; the network is built out of <strong style="color:var(--gold2)">AirNodes</strong>, telecom hardware owned by ordinary people. Buy one from $165, the team deploys it where connectivity is needed, and when subscribers make calls and use data through it, <strong style="color:var(--gold2)">the owner earns</strong> in USD.</p>
+        <p>Plenty of Vault members do both: the phone plan they already pay for, plus the vault that pays them. Some eventually pay for the plan out of the yield.</p>
+        <div class="strip">
+          <div><b>13,346+</b><span>AirNodes worldwide</span></div>
+          <div><b>3M+</b><span>Subscribers</span></div>
+          <div><b>3</b><span>Continents</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="node-card">
+          <h3>The phone plan <small>from $15/mo</small></h3>
+          <p>No contract, no credit check, VPN built in, your data never sold. The bill you already pay &mdash; pointed in the right direction.</p>
+        </div>
+        <div class="node-card" style="border-color:var(--gold)">
+          <h3>The nodes <small>from $165</small></h3>
+          <p>Own a piece of the network itself. The team deploys and activates it; subscribers' usage pays the owner in USD, tracked live.</p>
+        </div>
+        <div class="node-card">
+          <h3>In the sky next <small>Stratomast &middot; 2027</small></h3>
+          <p>World Mobile Stratospheric is flight-testing aircraft that beam 5G over a 15km radius &mdash; headed toward a high-altitude platform connecting ~500,000 phones over 15,000 sq km, and restoring coverage when disasters take towers down.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -417,7 +422,7 @@ ml('account', '2732159');
     <div class="sec-head reveal">
       <div class="eyebrow">One door, two engines</div>
       <h2>Stablecoin in. Real infrastructure owned. Revenue out.</h2>
-      <p>The window is open. It will not stay open.</p>
+      <p>The 20% is always on. The 40% window is closing.</p>
     </div>
     <a class="btn btn-gold reveal" href="https://app.wisetoken.com/?ref=0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" rel="noopener">Deposit now &rarr;</a>
   </div>
