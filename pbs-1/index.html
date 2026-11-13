@@ -56,7 +56,9 @@ section{padding:70px 0}
 .step h3{margin:6px 0 8px}
 .step p{font-size:.93rem}
 .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:30px}
-.cat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;cursor:pointer;transition:transform .18s,border-color .18s}
+.cat{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .18s}
+.cat img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.cat .inner{padding:16px 18px 18px}
 .cat:hover{transform:translateY(-3px);border-color:var(--gold)}
 .cat h3{color:var(--gold2);font-size:1rem;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.04em}
 .cat p{font-size:.85rem;margin-top:4px}
@@ -263,7 +265,14 @@ const ABI=[
  'function vaultCount() view returns (uint256)',
  'function vaultAt(uint256 i) view returns (address)',
  'function vaultUnderlying(address v) view returns (address)',
- 'function isCategory(bytes32 c) view returns (bool)'
+ 'function isCategory(bytes32 c) view returns (bool)',
+ 'function balanceOf(address a) view returns (uint256)',
+ 'function decimals(address a) view returns (uint8)',
+ 'function approve(address a, uint256 v) returns (bool)',
+ 'function setApprovalForAll(address a, bool v)',
+ 'function ownerOf(uint256 id) view returns (address)',
+ 'function walletOfOwner(address o) view returns (uint256[])',
+ 'function resolveName(string n) view returns (address)'
 ];
 const ERC20_ABI=['function balanceOf(address) view returns (uint256)','function decimals() view returns (uint8)','function approve(address,uint256) returns (bool)','function symbol() view returns (string)'];
 const CARD_ABI=['function ownerOf(uint256) view returns (address)','function walletOfOwner(address) view returns (uint256[])','function setApprovalForAll(address,bool)'];
@@ -492,8 +501,11 @@ async function doWrap(){
 }
 
 // init
-document.getElementById('catGrid').innerHTML=CATEGORIES.map(c=>
-  '<div class="cat" onclick="setCat(\''+c[0]+'\')"><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div>').join('');
+const CAT_IMG={MUSIC:'/assets/img/door-songs.png',ART:'/assets/img/door-easel.png'};
+document.getElementById('catGrid').innerHTML=CATEGORIES.map(c=>{
+  const img=CAT_IMG[c[0]]||'/assets/img/cat-'+c[0].toLowerCase()+'.png';
+  return '<div class="cat" onclick="setCat(\''+c[0]+'\')"><img src="'+img+'" alt="Live navy owl representing the '+c[0]+' category" onerror="this.style.display=\'none\'"><div class="inner"><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div></div>';
+}).join('');
 document.getElementById('catSel').innerHTML=CATEGORIES.map(c=>'<option>'+c[0]+'</option>').join('');
 addPatron();addPatron();
 document.getElementById('vaultSel').addEventListener('change',refreshBalances);
