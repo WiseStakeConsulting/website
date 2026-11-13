@@ -77,7 +77,7 @@ section{padding:70px 0}
 .studio-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:20px}
 .studio-box h3{color:var(--gold2);margin-bottom:10px}
 .studio-box label{display:block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:14px 0 5px}
-.studio-box input[type=text],.studio-box textarea{width:100%;background:var(--navy);border:1px solid var(--line);border-radius:8px;color:var(--cream);padding:10px 12px;font-family:Georgia,serif;font-size:.95rem}
+.studio-box select,.studio-box input[type=text],.studio-box textarea{width:100%;background:var(--navy);border:1px solid var(--line);border-radius:8px;color:var(--cream);padding:10px 12px;font-family:Georgia,serif;font-size:.95rem}
 .studio-box input[type=file]{width:100%;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;margin-top:6px}
 .check{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;color:var(--cream);margin:4px 0;padding-left:22px;position:relative}
 .check::before{content:"\2713";color:var(--gold);position:absolute;left:2px}
@@ -229,6 +229,11 @@ footer.site a{color:var(--gold2);text-decoration:none}
     <textarea id="artDesc" rows="3" placeholder="What is this piece? What does it mean? Who made it?"></textarea>
     <label for="certText">Certificate line (creator, date, edition)</label>
     <input type="text" id="certText" placeholder="e.g. Original work by the wallet holder, November 2026, 1 of 1">
+    <label for="catSel">Bundle category (where this work sits when bundled)</label>
+    <select id="catSel">
+      <option>SECURITY</option><option>MUSIC</option><option>DONOR</option><option>LOYALTY</option><option>TITHE</option><option>ART</option><option>MERCHANT</option><option>BUSINESS</option><option>ENS</option><option>FAMILY</option><option>PODCAST</option>
+    </select>
+    <p style="font-size:.8rem;margin-top:5px">Set automatically by the door you picked - change it if the work belongs somewhere else. The category goes on-chain when the bundle is wrapped.</p>
   </div>
 
   <div class="studio-box">
@@ -339,13 +344,13 @@ async function pinJSON(obj){
 }
 
 const DOORS={
- songs:{name:'Songs That Pay',head:'Step 2 &mdash; The upload (your track)',cert:'Original song by the wallet holder, November 2026, 1 of 1',
+ songs:{cat:'MUSIC',name:'Songs That Pay',head:'Step 2 &mdash; The upload (your track)',cert:'Original song by the wallet holder, November 2026, 1 of 1',
   checks:['Recorded in a quiet room, good levels','Full playthrough, no stops','Cover art exported as an image'],
   rows:[{id:'fAudio',stat:'sAudio',lbl:'Main audio track',acc:'audio/*'},{id:'fCover',stat:'sCover',lbl:'Cover art',acc:'image/*'}]},
  signatures:{name:'Signatures That Last',head:'Step 2 &mdash; The captures (done before the call)',cert:'Signature of the wallet holder, witnessed on-chain, November 2026',
   checks:['Your signature on plain paper, good light','One close-up, one angled shot','Bonus: a 10-sec video of you signing'],
   rows:[{id:'fSign',stat:'sSign',lbl:'Signature close-up',acc:'image/*'},{id:'fVid',stat:'sVid',lbl:'Video of you signing (10 sec)',acc:'video/*'}]},
- easel:{name:'Art, From the Easel',head:'Step 2 &mdash; The captures (done before the call)',cert:'Original work by the wallet holder, November 2026, 1 of 1',
+ easel:{cat:'ART',name:'Art, From the Easel',head:'Step 2 &mdash; The captures (done before the call)',cert:'Original work by the wallet holder, November 2026, 1 of 1',
   checks:['The whole piece, straight on','Your signature or mark, close up','The texture - brushwork, grain, canvas','A short video, ten slow seconds','You, holding the piece'],
   rows:[{id:'fImage',stat:'sImage',lbl:'Main image',acc:'image/*'},{id:'fSign',stat:'sSign',lbl:'Signature close-up',acc:'image/*'},{id:'fTex',stat:'sTex',lbl:'Texture shot',acc:'image/*'},{id:'fVid',stat:'sVid',lbl:'Video (10 sec)',acc:'video/*'},{id:'fHold',stat:'sHold',lbl:'Holding shot',acc:'image/*'}]},
  bundle:{name:'Bundle It',head:'Step 2 &mdash; The pieces of the bundle',cert:'Bundle of the wallet holder, work + stake, November 2026',
@@ -356,6 +361,7 @@ let currentDoor='easel';
 function renderDoor(){
   const d=DOORS[currentDoor];
   document.getElementById('step2Head').innerHTML=d.head;
+  if(d.cat)document.getElementById('catSel').value=d.cat;
   document.getElementById('certText').placeholder=d.cert;
   document.getElementById('capRows').innerHTML=d.rows.map(r=>
     '<div class="upload-row"><span class="lbl">'+r.lbl+'</span><input type="file" id="'+r.id+'" accept="'+r.acc+'"></div>'+
@@ -376,7 +382,7 @@ async function prepareMetadata(){
     const title=document.getElementById('artTitle').value.trim();
     if(!title){st('prepStatus','Give the piece a title first.','err');return;}
     const files={};DOORS[currentDoor].rows.forEach((r,i)=>{files[i]=r;});
-    const meta={name:title,description:document.getElementById('artDesc').value.trim(),certificate:document.getElementById('certText').value.trim(),properties:{}};
+    const meta={name:title,description:document.getElementById('artDesc').value.trim(),certificate:document.getElementById('certText').value.trim(),properties:{category:document.getElementById('catSel').value}};
     let haveMain=false;
     let first=true;
     for(const k in files){
