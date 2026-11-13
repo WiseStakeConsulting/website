@@ -3,23 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PBS-1 - Coming Soon | Wise Stake Consulting</title>
+<title>PBS-1 - Patronage Bundles | Wise Stake Consulting</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wise Stake Consulting">
-<meta property="og:title" content="PBS-1 - Coming Soon | Wise Stake Consulting">
-<meta property="og:description" content="The Patronage Bundle Standard: memberships people hold as stakes, not bills they pay forever. In testing - coming soon.">
+<meta property="og:title" content="PBS-1 - Patronage Bundles | Wise Stake Consulting">
+<meta property="og:description" content="The Patronage Bundle Standard: wrap a stake or vault position with up to 6 beneficiaries. Pick a category, fund it, set the splits, wrap it - from your own wallet.">
 <meta property="og:url" content="https://wisestake.consulting/pbs-1/">
 <meta property="og:image" content="https://wisestake.consulting/assets/img/share-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PBS-1 - Coming Soon | Wise Stake Consulting">
-<meta name="twitter:description" content="The Patronage Bundle Standard: memberships people hold as stakes, not bills they pay forever. In testing - coming soon.">
+<meta name="twitter:title" content="PBS-1 - Patronage Bundles | Wise Stake Consulting">
+<meta name="twitter:description" content="Wrap a stake or vault position with up to 6 beneficiaries. Pick a category, fund it, set the splits, wrap it.">
 <meta name="twitter:image" content="https://wisestake.consulting/assets/img/share-card.png">
-<meta name="description" content="The Patronage Bundle Standard: memberships people hold as stakes, not bills they pay forever. In testing - coming soon.">
+<meta name="description" content="Wrap a stake or vault position with up to 6 beneficiaries. Pick a category, fund it, set the splits, wrap it - from your own wallet.">
+<script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
 <style>
 :root{--navy:#0a1128;--navy2:#101a3a;--panel:#0d1733;--gold:#d4a13a;--gold2:#e8c15a;--cream:#f5efe0;--muted:#9aa5c0;--line:rgba(232,193,90,.18)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -35,8 +34,8 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(10,17,40,.92);backd
 nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 nav a{color:var(--muted);text-decoration:none;font-size:.86rem;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.03em}
 nav a:hover{color:var(--gold2)}
+nav a.active{color:var(--gold2)}
 nav .nav-cta{color:var(--navy);background:var(--gold);padding:8px 16px;border-radius:999px;font-weight:700}
-nav .soon{font-size:.62rem;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:1px 6px;margin-left:4px;vertical-align:middle;font-family:Arial}
 .eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;font-family:'Helvetica Neue',Arial,sans-serif}
 h1{font-size:clamp(2.2rem,4.8vw,3.5rem);line-height:1.12;font-weight:400;margin:18px 0 22px}
 h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;font-weight:400;margin-bottom:18px}
@@ -46,45 +45,47 @@ p{color:var(--muted)}
 .btn{display:inline-block;padding:14px 28px;border-radius:999px;text-decoration:none;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.02em}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
 .btn-ghost{border:1px solid var(--gold);color:var(--gold2)}
-.hero{padding:84px 0 60px}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-.hero img{width:100%;border-radius:18px;border:1px solid var(--line);box-shadow:0 24px 70px rgba(0,0,0,.5)}
-.hero p.lede{font-size:1.12rem;margin-bottom:30px}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap}
-.strip{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0;text-align:center}
-.strip h2{font-style:italic}
-.strip p{max-width:680px;margin:0 auto 8px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;margin-top:34px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--cream);transition:transform .18s,border-color .18s}
-.card:hover{transform:translateY(-4px);border-color:var(--gold)}
-.card .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
-.card h3{color:var(--gold2)}
-.card p{font-size:.94rem}
-.card .go{color:var(--gold2);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;margin-top:auto}
-.card.plain{justify-content:center;min-height:260px}
 .badge{display:inline-block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:3px 10px}
-.usecases{padding:70px 0}
-.uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:36px}
-.uc{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.uc img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
-.uc .ph{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#1a2a55,var(--navy2));color:var(--gold2);font-size:2.2rem}
-.uc .body{padding:22px 24px 26px}
-.uc h3{color:var(--gold2);margin-bottom:8px}
-.uc p{font-size:.95rem}
-.book-strip{background:linear-gradient(160deg,var(--navy2),var(--navy));border-top:1px solid var(--line);padding:70px 0;text-align:center}
-.book-strip p{max-width:640px;margin:0 auto 26px}
+.hero{padding:84px 0 50px}
+.hero p.lede{font-size:1.12rem;max-width:800px;margin-bottom:12px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+section{padding:70px 0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:30px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+.step .num{font-size:2rem;color:var(--gold2)}
+.step h3{margin:6px 0 8px}
+.step p{font-size:.93rem}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:30px}
+.cat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;cursor:pointer;transition:transform .18s,border-color .18s}
+.cat:hover{transform:translateY(-3px);border-color:var(--gold)}
+.cat h3{color:var(--gold2);font-size:1rem;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.04em}
+.cat p{font-size:.85rem;margin-top:4px}
+.studio{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.studio-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:20px}
+.studio-box h3{color:var(--gold2);margin-bottom:10px}
+.studio-box label{display:block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:14px 0 5px}
+.studio-box select,.studio-box input[type=text],.studio-box input[type=number],.studio-box textarea{width:100%;background:var(--navy);border:1px solid var(--line);border-radius:8px;color:var(--cream);padding:10px 12px;font-family:Georgia,serif;font-size:.95rem}
+.engines{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.engines button{background:var(--navy);border:1px solid var(--line);border-radius:12px;color:var(--cream);padding:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.86rem;cursor:pointer;text-align:left}
+.engines button.sel{border-color:var(--gold);color:var(--gold2)}
+.engines button small{display:block;color:var(--muted);font-size:.76rem;margin-top:3px}
+.patron-row{display:grid;grid-template-columns:1fr 130px 40px;gap:10px;align-items:center;margin-bottom:10px}
+.patron-row button{background:none;border:1px solid var(--line);border-radius:8px;color:var(--muted);cursor:pointer;padding:8px}
+.patron-row button:hover{color:#e08080;border-color:#e08080}
+.sumline{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;margin-top:8px}
+.sumline.ok{color:#7fd48a}.sumline.bad{color:#e08080}
+.status-line{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;margin-top:12px;display:none}
+.status-line.show{display:block}
+.status-line.ok{color:#7fd48a}.status-line.err{color:#e08080}.status-line.wait{color:var(--gold2)}
+button.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border:none;border-radius:999px;padding:14px 30px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:.95rem;cursor:pointer}
+button.gold:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:.82rem}
+.ethscan{font-family:monospace;font-size:.75rem;color:var(--muted);word-break:break-all}
 footer.site{border-top:1px solid var(--line);padding:44px 0 30px;font-family:'Helvetica Neue',Arial,sans-serif}
 footer.site .cols{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:26px}
 footer.site a{color:var(--gold2);text-decoration:none}
 .fnote{color:var(--muted);font-size:.78rem;line-height:1.55}
-.ml-embedded{min-height:320px}
-.book-card{background:var(--cream);border-radius:22px;padding:22px 18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
-.svc{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
-.svc .card .body{gap:6px}
-.price{color:var(--gold2);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
-.steps .num{font-size:2rem;color:var(--gold2)}
-@media(max-width:880px){.hero-grid,.uc-grid,.svc,.steps{grid-template-columns:1fr}.hero{padding:56px 0 40px}}
+@media(max-width:880px){.steps,.engines{grid-template-columns:1fr}.hero{padding:56px 0 40px}}
 </style>
 </head>
 <body>
@@ -95,20 +96,130 @@ footer.site a{color:var(--gold2);text-decoration:none}
   <a href="/signature-staking/">Signature Staking</a>
   <a href="/vaults/">The Vault</a>
   <a href="/mint/">Minting</a>
-  <a href="/pbs-1/">PBS-1 <span class="soon">Soon</span></a>
+  <a href="/pbs-1/" class="active">PBS-1</a>
   <a href="/book-a-session/" class="nav-cta">Book a Session</a>
 </nav>
 </div></header>
 
-<section class="hero"><div class="wrap" style="max-width:820px">
-  <div class="eyebrow">PBS-1 <span class="badge" style="margin-left:10px">In testing</span></div>
-  <h1>The Patronage Bundle<br>Standard. Coming soon.</h1>
-  <p class="lede">Every membership today is a bill that never ends. PBS-1 is the standard we're building so any business &mdash; a gallery, a shop, a charity, a dealership &mdash; can offer the other version: a membership their people <strong class="gold">hold as a stake</strong>, placed once, in their own wallet, earning while it serves them.</p>
-  <p class="lede">It's the last piece we're testing before the full launch. When it goes live, it changes what every page on this site can do &mdash; and we'll say so loudly, right here.</p>
-  <div class="cta-row" style="margin-top:30px">
-    <a class="btn btn-gold" href="/book-a-session/">Curious? Book a free session</a>
-    <a class="btn btn-ghost" href="/signature-staking/">Meanwhile: Signature Staking</a>
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">PBS-1 &middot; The Patronage Bundle Standard <span class="badge" style="margin-left:10px">In testing</span></div>
+  <h1>Memberships people <em class="gold">hold</em>,<br>not bills they pay forever.</h1>
+  <p class="lede">A PBS-1 bundle wraps a stake or a vault position with its beneficiaries, permanently, on-chain. The work keeps earning; the daily interest flows to the people and causes of record. Set once, from your own wallet, and it runs without anybody chasing anybody.</p>
+  <p class="lede">Below is the whole workflow, and a live studio wired to the real contract. If a step feels unfamiliar, <a class="gold" href="/book-a-session/">book the free call</a> and we'll drive it with you.</p>
+  <div class="cta-row">
+    <a class="btn btn-gold" href="#studio">Open the Bundle Studio</a>
+    <a class="btn btn-ghost" href="#workflow">See how it works</a>
   </div>
+</div></section>
+
+<section id="workflow"><div class="wrap">
+  <div class="eyebrow">The workflow</div>
+  <h2>Four steps. One transaction to finish it.</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3>Pick the category</h3><p>What is this bundle for? A song, a family, a tithe, a membership. The category is permanent, on-chain, and keys the receipt's art.</p></div>
+    <div class="step"><div class="num">2</div><h3>Fund it</h3><p>Back the bundle with a vault position (like a World Mobile wtnUSDC deposit), a fresh USDC deposit, a Signature card, or a brand-new stake.</p></div>
+    <div class="step"><div class="num">3</div><h3>Set the beneficiaries</h3><p>Up to 6 wallets, each with a share of the daily interest. Splits are set at creation and permanent - the bundle pays them on every scrape, forever.</p></div>
+    <div class="step"><div class="num">4</div><h3>Wrap it</h3><p>One signature from your wallet. You get a receipt NFT that controls the bundle - scrape it, close it, or hold it. The interest splits automatically.</p></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="eyebrow">Eleven doors</div>
+  <h2>Every category, one standard.</h2>
+  <p style="max-width:820px">Click a category to pre-select it in the studio below. This is the on-chain registry - not marketing labels. Each one keys its own receipt art in the PBS-ART set.</p>
+  <div class="cats" id="catGrid"></div>
+</div></section>
+
+<section class="studio" id="studio"><div class="wrap">
+  <div class="eyebrow">The Bundle Studio</div>
+  <h2>Wrap one now, from your own wallet.</h2>
+  <p style="max-width:760px">This studio is live on Ethereum mainnet against PBS1WrapperV3. Whatever you wrap is held by the wrapper contract - you keep the receipt. First time? Use a small amount first. We always will on a guided call.</p>
+
+  <div class="studio-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+      <h3 style="margin:0">Step 0 &mdash; Connect your wallet</h3>
+      <button class="gold" id="walletBtn" onclick="connectWallet()" style="padding:10px 22px;font-size:.85rem">Connect Wallet</button>
+    </div>
+    <p class="note" style="margin-top:8px">MetaMask, Rabby, or any Ethereum wallet. Bundles happen on Ethereum Mainnet only.</p>
+  </div>
+
+  <div class="studio-box">
+    <h3>Step 1 &mdash; What backs this bundle?</h3>
+    <div class="engines">
+      <button id="eng-vault" class="sel" onclick="setEngine('vault')">Vault position I already hold<small>e.g. wtnUSDC from a World Mobile deposit. Wraps your existing receipt tokens.</small></button>
+      <button id="eng-newvault" onclick="setEngine('newvault')">Fresh USDC deposit<small>Pulls USDC from your wallet, deposits into the vault, wraps the receipt.</small></button>
+      <button id="eng-card" onclick="setEngine('card')">Signature card I already hold<small>Wraps an existing Signature Stakes card into the bundle.</small></button>
+      <button id="eng-stake" onclick="setEngine('stake')">Brand-new stake<small>Stakes WISE into a fresh Signature card inside the bundle. Lock 366+ days.</small></button>
+    </div>
+    <div id="vaultPick" style="margin-top:16px">
+      <label for="vaultSel">Vault</label>
+      <select id="vaultSel"></select>
+      <label for="vaultAmt">Receipt amount to wrap</label>
+      <input type="text" id="vaultAmt" placeholder="e.g. 10">
+      <p class="note" id="vaultBal"></p>
+    </div>
+    <div id="newvaultPick" style="margin-top:16px;display:none">
+      <label for="nvSel">Vault</label>
+      <select id="nvSel"></select>
+      <label for="nvAmt">USDC amount to deposit</label>
+      <input type="text" id="nvAmt" placeholder="e.g. 100">
+      <p class="note" id="nvBal"></p>
+    </div>
+    <div id="cardPick" style="margin-top:16px;display:none">
+      <label for="cardSel">Your Signature card</label>
+      <select id="cardSel"></select>
+      <p class="note" id="cardInfo"></p>
+    </div>
+    <div id="stakePick" style="margin-top:16px;display:none">
+      <label for="stakeAmt">WISE to stake</label>
+      <input type="text" id="stakeAmt" placeholder="e.g. 50">
+      <label for="lockDays">Lock days (366 minimum)</label>
+      <input type="number" id="lockDays" value="366" min="366">
+      <label for="modeSel">At maturity</label>
+      <select id="modeSel">
+        <option value="0">Off - hold until I act</option>
+        <option value="1">Restake automatically</option>
+        <option value="2">Restake + top up from pot</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="studio-box">
+    <h3>Step 2 &mdash; The beneficiaries</h3>
+    <p class="note">Up to 6 wallets, shares of the daily interest (post-fee). Whatever you don't assign stays with whoever holds the receipt. Splits are permanent once wrapped.</p>
+    <div id="patronRows" style="margin-top:14px"></div>
+    <div class="sumline" id="sumLine"></div>
+    <div style="margin-top:10px"><button class="gold" onclick="addPatron()" id="addPatronBtn" style="padding:9px 20px;font-size:.82rem">Add beneficiary</button></div>
+  </div>
+
+  <div class="studio-box">
+    <h3>Step 3 &mdash; Category &amp; label</h3>
+    <label for="catSel">Category (permanent, keys the receipt art)</label>
+    <select id="catSel"></select>
+    <label for="bundleLabel">Label (permanent, max 64 characters)</label>
+    <input type="text" id="bundleLabel" maxlength="64" placeholder='e.g. "The Warchest" or "denise.eth" or "For Maya"'>
+    <label for="referrer" style="margin-top:14px">Referrer address (optional)</label>
+    <input type="text" id="referrer" placeholder="Leave blank for the default WSC rail">
+  </div>
+
+  <div class="studio-box">
+    <h3>Step 4 &mdash; Approve &amp; wrap</h3>
+    <p class="note" id="wrapWhat"></p>
+    <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="gold" id="approveBtn" onclick="doApprove()" style="padding:12px 26px;font-size:.9rem">1 &middot; Approve</button>
+      <button class="gold" id="wrapBtn" onclick="doWrap()" style="padding:12px 26px;font-size:.9rem">2 &middot; Wrap the Bundle</button>
+    </div>
+    <div class="status-line" id="wrapStatus"></div>
+    <p class="ethscan" id="txLink" style="display:none"></p>
+    <p class="note" style="margin-top:14px">Management (scrape, close, release) lives in the private-beta <a class="gold" href="/app/">Bundle Console</a>. The wrapper is fork-tested, not audited - start small, and never wrap more than you'd leave in someone else's safe.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap" style="max-width:820px;text-align:center">
+  <div class="eyebrow">Rather we drive?</div>
+  <h2>Book the free call.</h2>
+  <p>Thirty minutes on Zoom. We'll walk your bundle through all four steps, you sign, and you leave with the receipt in your wallet.</p>
+  <a class="btn btn-gold" href="/book-a-session/">Book a free session</a>
 </div></section>
 
 <footer class="site"><div class="wrap">
@@ -120,7 +231,274 @@ footer.site a{color:var(--gold2);text-decoration:none}
     <div><div class="eyebrow" style="margin-bottom:8px">Site</div>
       <p style="font-size:.9rem"><a href="/signature-staking/">Signature Staking</a> &middot; <a href="/vaults/">The Vault</a> &middot; <a href="/mint/">Minting</a> &middot; <a href="/pbs-1/">PBS-1</a> &middot; <a href="/book-a-session/">Book a Session</a></p></div>
   </div>
-  <p class="fnote">Wise Stake Consulting, LLC provides business consulting and education only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Rates shown are published by the underlying platforms at the time of writing, are not guaranteed, and change over time. Digital assets involve risk, including loss of principal. Links marked as referral links build Wise Stake Consulting's referral credit at no cost to you. The owl motif is a heritage homage to the Wise token community and an independent mark of Wise Stake Consulting, LLC. &copy; 2026 Wise Stake Consulting LLC &middot; wisestake.consulting &middot; wisestake.eth</p>
+  <p class="fnote">Wise Stake Consulting, LLC provides business consulting and education only. Nothing on this site is financial, investment, legal, or tax advice, and no returns are promised or implied. Rates shown are published by the underlying platforms at the time of writing, are not guaranteed, and change over time. Digital assets involve risk, including loss of principal. The bundle wrapper is fork-tested but not audited; custody of wrapped assets passes to the wrapper contract until released. Links marked as referral links build Wise Stake Consulting's referral credit at no cost to you. The owl motif is a heritage homage to the Wise token community and an independent mark of Wise Stake Consulting, LLC. &copy; 2026 Wise Stake Consulting LLC &middot; wisestake.consulting &middot; wisestake.eth</p>
 </div></footer>
+
+<script>
+const V3 = '0x2dD7FFb8571ce9C70110d039fb07C84c27b82A82'; // PBS1WrapperV3
+const WISE = '0x66a0f676479Cee1d7373f3DC2e2952778BfF5bd6';
+const CARD = '0x48791DbDFB38bAA58e48329148C321bF33B3c1e1';
+const CATEGORIES = [
+ ['SECURITY','Self-funded bug bounties and security pots - the Warchest pattern.'],
+ ['MUSIC','Songs that pay: a master or catalog card riding the yield engine.'],
+ ['DONOR','A giving card - proceeds and yield flows to a cause of record.'],
+ ['LOYALTY','Memberships customers hold as stakes, not bills they pay forever.'],
+ ['TITHE','A tithe that funds itself - steady yield to a congregation or ministry.'],
+ ['ART','Physical art wrapped with its funding stake - the Paco pattern.'],
+ ['MERCHANT','A merchant account whose yield pays the processor, the supplier, or the shop.'],
+ ['BUSINESS','Any operating arrangement funded by a position instead of invoices.'],
+ ['ENS','A name that pays its own renewal - the label is the ENS name.'],
+ ['FAMILY','Large deposit, yield split to children or heirs - set once, permanent.'],
+ ['PODCAST','Show and episode support funded by the position behind it.']
+];
+let provider=null, signer=null, wrapper=null, account=null, engine='vault';
+let vaultAddrs=[], vaultNames=[];
+let patrons=[];
+
+const ABI=[
+ 'function wrapVault(address vaultToken, uint256 receiptAmount, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
+ 'function createVaultBundle(address vaultToken, uint256 usdcAmount, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
+ 'function wrapCard(uint256 cardId, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
+ 'function createBundle(uint256 amount, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
+ 'function vaultCount() view returns (uint256)',
+ 'function vaultAt(uint256 i) view returns (address)',
+ 'function vaultUnderlying(address v) view returns (address)',
+ 'function isCategory(bytes32 c) view returns (bool)'
+];
+const ERC20_ABI=['function balanceOf(address) view returns (uint256)','function decimals() view returns (uint8)','function approve(address,uint256) returns (bool)','function symbol() view returns (string)'];
+const CARD_ABI=['function ownerOf(uint256) view returns (address)','function walletOfOwner(address) view returns (uint256[])','function setApprovalForAll(address,bool)'];
+
+function st(id,msg,cls){const el=document.getElementById(id);el.className='status-line show '+cls;el.innerHTML=msg;}
+function short(a){return a.slice(0,6)+'...'+a.slice(-4);}
+
+async function connectWallet(){
+  try{
+    if(!window.ethereum){st('wrapStatus','Install MetaMask first - we will walk you through it.','err');return;}
+    provider=new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts',[]);
+    signer=provider.getSigner(); account=await signer.getAddress();
+    const net=await provider.getNetwork();
+    document.getElementById('walletBtn').textContent=short(account);
+    if(net.chainId!==1){
+      try{await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x1'}]});}
+      catch(e){st('wrapStatus','Switch your wallet to Ethereum Mainnet, then reconnect.','err');return;}
+    }
+    wrapper=new ethers.Contract(V3,ABI,signer);
+    st('wrapStatus','Wallet connected on Ethereum mainnet.','ok');
+    await loadVaults(); await loadCards(); await refreshBalances();
+  }catch(e){st('wrapStatus','Wallet: '+(e.message||e),'err');}
+}
+
+function setCat(c){document.getElementById('catSel').value=c;
+  document.getElementById('studio').scrollIntoView({behavior:'smooth'});
+  st('wrapStatus','Category set to <b>'+c+'</b>.','ok');}
+
+function setEngine(e){
+  engine=e;
+  ['vault','newvault','card','stake'].forEach(k=>{
+    document.getElementById('eng-'+k).classList.toggle('sel',k===e);
+  });
+  document.getElementById('vaultPick').style.display=e==='vault'?'block':'none';
+  document.getElementById('newvaultPick').style.display=e==='newvault'?'block':'none';
+  document.getElementById('cardPick').style.display=e==='card'?'block':'none';
+  document.getElementById('stakePick').style.display=e==='stake'?'block':'none';
+  updateWrapWhat();
+}
+
+async function loadVaults(){
+  try{
+    const n=await wrapper.vaultCount();
+    vaultAddrs=[];vaultNames=[];
+    for(let i=0;i<n;i++){
+      const a=await wrapper.vaultAt(i);
+      vaultAddrs.push(a);
+      let nm='Vault '+i;
+      try{const t=new ethers.Contract(a,ERC20_ABI,provider);nm=await t.symbol();}catch(e){nm=a.slice(0,8)+'...';}
+      vaultNames.push(nm);
+    }
+    const opts=vaultAddrs.map((a,i)=>'<option value="'+i+'">'+vaultNames[i]+'</option>').join('');
+    document.getElementById('vaultSel').innerHTML=opts;
+    document.getElementById('nvSel').innerHTML=opts;
+    await refreshBalances();
+  }catch(e){}
+}
+
+async function loadCards(){
+  if(!signer)return;
+  try{
+    const c=new ethers.Contract(CARD,CARD_ABI,signer);
+    const ids=await c.walletOfOwner(account);
+    const sel=document.getElementById('cardSel');
+    if(ids.length===0){sel.innerHTML='<option>No Signature cards in this wallet</option>';return;}
+    sel.innerHTML=ids.map(i=>'<option value="'+i.toString()+'">Card #'+i.toString()+'</option>').join('');
+  }catch(e){}
+}
+
+async function refreshBalances(){
+  if(!signer||!vaultAddrs.length)return;
+  const i=parseInt(document.getElementById('vaultSel').value||'0');
+  const j=parseInt(document.getElementById('nvSel').value||'0');
+  try{
+    const t=new ethers.Contract(vaultAddrs[i],ERC20_ABI,signer);
+    const dec=await t.decimals();
+    const bal=await t.balanceOf(account);
+    document.getElementById('vaultBal').textContent='Your balance: '+ethers.utils.formatUnits(bal,dec)+' '+vaultNames[i]+' (receipt tokens)';
+  }catch(e){}
+  try{
+    const under=await wrapper.vaultUnderlying(vaultAddrs[j]);
+    const u=new ethers.Contract(under,ERC20_ABI,signer);
+    const dec=await u.decimals();
+    const bal=await u.balanceOf(account);
+    const sym=await u.symbol();
+    document.getElementById('nvBal').textContent='Your balance: '+ethers.utils.formatUnits(bal,dec)+' '+sym;
+  }catch(e){}
+}
+
+function addPatron(){
+  if(patrons.length>=6)return;
+  patrons.push({addr:'',pct:''});
+  renderPatrons();
+}
+function renderPatrons(){
+  document.getElementById('patronRows').innerHTML=patrons.map((p,i)=>
+    '<div class="patron-row">'+
+    '<input type="text" placeholder="Beneficiary wallet or ens.eth" value="'+p.addr+'" onchange="patrons['+i+'].addr=this.value">'+
+    '<input type="number" placeholder="% share" min="0" max="100" value="'+p.pct+'" onchange="patrons['+i+'].pct=this.value;updateSum()">'+
+    '<button onclick="patrons.splice('+i+',1);renderPatrons()" title="Remove">x</button>'+
+    '</div>').join('');
+  document.getElementById('addPatronBtn').disabled=patrons.length>=6;
+  updateSum();
+}
+function updateSum(){
+  const sum=patrons.reduce((t,p)=>t+(parseFloat(p.pct)||0),0);
+  const el=document.getElementById('sumLine');
+  if(sum>100){el.className='sumline bad';el.textContent='Shares add up to '+sum+'% - over 100%. Reduce a share.';}
+  else if(sum===100){el.className='sumline ok';el.textContent='Shares add up to 100%. The receipt holder gets none of the flow.';}
+  else{el.className='sumline';el.textContent='Shares add up to '+sum+'%. The remaining '+(100-sum)+'% of the flow stays with whoever holds the receipt.';}
+}
+
+async function buildSpec(){
+  const catName=document.getElementById('catSel').value;
+  if(!catName)throw new Error('Pick a category first.');
+  const category=ethers.utils.formatBytes32String(catName);
+  const label=document.getElementById('bundleLabel').value.trim();
+  if(!label.length)throw new Error('Give the bundle a label.');
+  if(label.length>64)throw new Error('Label too long (64 characters max).');
+  let referrer=document.getElementById('referrer').value.trim();
+  if(referrer.endsWith('.eth')&&provider){const r=await provider.resolveName(referrer);if(r)referrer=r;}
+  if(referrer&&!ethers.utils.isAddress(referrer))throw new Error('Referrer is not a valid address.');
+  const plist=[],blist=[];
+  for(const p of patrons){
+    if(!p.addr&&!p.pct)continue;
+    let a=p.addr;
+    if(a.endsWith('.eth')&&provider){const r=await provider.resolveName(a);if(r)a=r;}
+    if(!ethers.utils.isAddress(a))throw new Error('Beneficiary "'+p.addr+'" is not a valid address.');
+    const pct=parseFloat(p.pct);
+    if(!(pct>0))throw new Error('Beneficiary '+short(a)+' needs a share above zero.');
+    plist.push(a);blist.push(Math.round(pct*100));
+  }
+  if(plist.length>6)throw new Error('Six beneficiaries maximum.');
+  const sum=blist.reduce((a,b)=>a+b,0);
+  if(sum>10000)throw new Error('Beneficiary shares exceed 100%.');
+  const lockDays=engine==='stake'?parseInt(document.getElementById('lockDays').value||'366'):0;
+  if(engine==='stake'&&lockDays<366)throw new Error('Lock days must be at least 366 for stake bundles.');
+  const mode=engine==='stake'?parseInt(document.getElementById('modeSel').value||'0'):0;
+  const topUp=0;
+  return [plist,blist,lockDays,mode,topUp,referrer===''?ethers.constants.AddressZero:referrer,category,label];
+}
+
+function updateWrapWhat(){
+  const map={vault:'You will approve the wrapper to hold your receipt tokens, then wrap them into the bundle.',
+             newvault:'You will approve USDC, the wrapper deposits it into the vault, and the receipt lands in the bundle.',
+             card:'You will approve the wrapper as a card operator, then wrap the selected card.',
+             stake:'You will approve WISE, and the wrapper stakes it into a fresh Signature card inside the bundle.'};
+  document.getElementById('wrapWhat').textContent=map[engine];
+}
+
+async function doApprove(){
+  try{
+    if(!wrapper){st('wrapStatus','Connect your wallet first.','err');return;}
+    if(engine==='vault'){
+      const token=vaultAddrs[parseInt(document.getElementById('vaultSel').value||'0')];
+      const t=new ethers.Contract(token,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('vaultAmt').value||'0',dec);
+      if(amt.lte(0))throw new Error('Enter a receipt amount first.');
+      st('wrapStatus','Approving wrapper to hold your receipt tokens...','wait');
+      const tx=await t.approve(V3,amt);
+      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
+    }else if(engine==='newvault'){
+      const v=vaultAddrs[parseInt(document.getElementById('nvSel').value||'0')];
+      const under=await wrapper.vaultUnderlying(v);
+      const t=new ethers.Contract(under,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('nvAmt').value||'0',dec);
+      if(amt.lte(0))throw new Error('Enter a USDC amount first.');
+      st('wrapStatus','Approving USDC...','wait');
+      const tx=await t.approve(V3,amt);
+      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
+    }else if(engine==='card'){
+      const c=new ethers.Contract(CARD,CARD_ABI,signer);
+      st('wrapStatus','Approving wrapper as card operator...','wait');
+      const tx=await c.setApprovalForAll(V3,true);
+      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
+    }else{
+      const t=new ethers.Contract(WISE,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('stakeAmt').value||'0',dec);
+      if(amt.lte(0))throw new Error('Enter a WISE amount first.');
+      st('wrapStatus','Approving WISE...','wait');
+      const tx=await t.approve(V3,amt);
+      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
+    }
+  }catch(e){st('wrapStatus','Approve: '+(e.data?e.data.message:e.message),'err');}
+}
+
+async function doWrap(){
+  try{
+    if(!wrapper){st('wrapStatus','Connect your wallet first.','err');return;}
+    const spec=await buildSpec();
+    st('wrapStatus','Confirm in your wallet - wrapping the bundle...','wait');
+    let tx;
+    if(engine==='vault'){
+      const token=vaultAddrs[parseInt(document.getElementById('vaultSel').value||'0')];
+      const t=new ethers.Contract(token,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('vaultAmt').value||'0',dec);
+      tx=await wrapper.wrapVault(token,amt,spec);
+    }else if(engine==='newvault'){
+      const v=vaultAddrs[parseInt(document.getElementById('nvSel').value||'0')];
+      const under=await wrapper.vaultUnderlying(v);
+      const t=new ethers.Contract(under,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('nvAmt').value||'0',dec);
+      tx=await wrapper.createVaultBundle(v,amt,spec);
+    }else if(engine==='card'){
+      const cid=document.getElementById('cardSel').value;
+      tx=await wrapper.wrapCard(cid,spec);
+    }else{
+      const t=new ethers.Contract(WISE,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('stakeAmt').value||'0',dec);
+      tx=await wrapper.createBundle(amt,spec);
+    }
+    st('wrapStatus','Recording on Ethereum... under a minute.','wait');
+    await tx.wait();
+    st('wrapStatus','<b>Wrapped.</b> The receipt is yours; the splits are set forever.','ok');
+    const link=document.getElementById('txLink');
+    link.style.display='block';
+    link.innerHTML='tx: <a href="https://etherscan.io/tx/'+tx.hash+'" target="_blank" rel="noopener">'+tx.hash.slice(0,10)+'...</a>';
+  }catch(e){st('wrapStatus','Wrap: '+(e.data?e.data.message:e.message),'err');}
+}
+
+// init
+document.getElementById('catGrid').innerHTML=CATEGORIES.map(c=>
+  '<div class="cat" onclick="setCat(\''+c[0]+'\')"><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div>').join('');
+document.getElementById('catSel').innerHTML=CATEGORIES.map(c=>'<option>'+c[0]+'</option>').join('');
+addPatron();addPatron();
+document.getElementById('vaultSel').addEventListener('change',refreshBalances);
+document.getElementById('nvSel').addEventListener('change',refreshBalances);
+updateWrapWhat();
+</script>
 </body>
 </html>
