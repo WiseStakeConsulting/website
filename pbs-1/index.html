@@ -501,10 +501,10 @@ async function doWrap(){
 }
 
 // init
-const CAT_IMG={MUSIC:'/assets/img/door-songs.png',ART:'/assets/img/door-easel.png'};
+const CAT_IMG={};
 document.getElementById('catGrid').innerHTML=CATEGORIES.map(c=>{
-  const img=CAT_IMG[c[0]]||'/assets/img/cat-'+c[0].toLowerCase()+'.png';
-  return '<div class="cat" onclick="setCat(\''+c[0]+'\')"><img src="'+img+'" alt="Live navy owl representing the '+c[0]+' category" onerror="this.style.display=\'none\'"><div class="inner"><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div></div>';
+  const img='/assets/img/cat-'+c[0].toLowerCase()+'.png';
+  return '<div class="cat" onclick="setCat(\''+c[0]+'\')"><img src="'+img+'" alt="Live navy owl representing the '+c[0]+' category, in a sealed frame" onerror="this.style.display=\'none\'"><div class="inner"><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div></div>';
 }).join('');
 document.getElementById('catSel').innerHTML=CATEGORIES.map(c=>'<option>'+c[0]+'</option>').join('');
 addPatron();addPatron();
