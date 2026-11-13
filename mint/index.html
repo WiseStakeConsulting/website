@@ -53,6 +53,7 @@ section{padding:70px 0}
 .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:36px}
 .door{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--cream);transition:transform .18s,border-color .18s}
 .door:hover{transform:translateY(-4px);border-color:var(--gold)}
+.door.clickable{cursor:pointer}
 .door img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
 .door .ph{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#1a2a55,var(--navy2));color:var(--gold2);font-size:2rem}
 .door .body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:9px;flex:1}
@@ -131,32 +132,32 @@ footer.site a{color:var(--gold2);text-decoration:none}
   <div class="eyebrow">Four doors</div>
   <h2>What are we putting on-chain today?</h2>
   <div class="doors">
-    <div class="door">
-      <img src="/assets/img/door-songs.png" alt="A golden owl sings at a vintage studio microphone, gold music notes rising" onerror="this.style.display='none'">
+    <div class="door clickable" onclick="setDoor('songs')">
+      <img src="/assets/img/door-songs.png" alt="A navy wise owl sings at a vintage studio microphone, gold music notes rising" onerror="this.style.display='none'">
       <div class="body">
         <h3>Songs That Pay</h3>
         <p>Your song as a permanent record, minted from your wallet. The master's certificate lives on-chain with you as creator of record &mdash; and your Wise Stake position behind it earns daily interest.</p>
         <span class="go">For musicians &rarr;</span>
       </div>
     </div>
-    <div class="door">
-      <img src="/assets/img/door-signatures.png" alt="A golden owl signs a glowing signature with a quill" onerror="this.style.display='none'">
+    <div class="door clickable" onclick="setDoor('signatures')">
+      <img src="/assets/img/door-signatures.png" alt="A navy wise owl signs a glowing signature with a quill" onerror="this.style.display='none'">
       <div class="body">
         <h3>Signatures That Last</h3>
         <p>Your signature, sealed on-chain forever. For performers, athletes, authors &mdash; anyone whose name is the asset. One signing moment, a mark that outlives paper.</p>
         <span class="go">For names that matter &rarr;</span>
       </div>
     </div>
-    <div class="door">
-      <img src="/assets/img/door-easel.png" alt="A golden owl paints at a glowing easel in a navy studio" onerror="this.style.display='none'">
+    <div class="door clickable" onclick="setDoor('easel')">
+      <img src="/assets/img/door-easel.png" alt="A navy wise owl paints at a glowing easel in a studio" onerror="this.style.display='none'">
       <div class="body">
         <h3>Art, From the Easel</h3>
         <p>The white-glove original: five captures of your physical piece, done before our call, then minted together on the guided Zoom. You click the one button that signs.</p>
         <span class="go">For visual artists &rarr;</span>
       </div>
     </div>
-    <div class="door">
-      <img src="/assets/img/door-bundle.png" alt="A golden owl guards a bundle of glowing cards bound with a gold ribbon" onerror="this.style.display='none'">
+    <div class="door clickable" onclick="setDoor('bundle')">
+      <img src="/assets/img/door-bundle.png" alt="A navy wise owl guards a bundle of glowing cards bound with a gold ribbon" onerror="this.style.display='none'">
       <div class="body">
         <h3>Bundle It</h3>
         <p>Already have a stake or vault position? Wrap your work and your stake together as a bundle &mdash; the work on-chain, the yield paying daily interest to the holder.</p>
@@ -211,6 +212,7 @@ footer.site a{color:var(--gold2);text-decoration:none}
   <h2>Mint now, from your own wallet.</h2>
   <p style="max-width:760px">Prefer to do it yourself, right now? Everything below is the real minting studio on Ethereum mainnet &mdash; the same flow we drive on the guided call. If any step feels unfamiliar, book the free call and we'll drive it with you.</p>
 
+  <p class="status-line" id="doorLine" style="margin-bottom:14px"></p>
   <div class="studio-box">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
       <h3 style="margin:0">Step 0 &mdash; Connect your wallet</h3>
@@ -230,23 +232,10 @@ footer.site a{color:var(--gold2);text-decoration:none}
   </div>
 
   <div class="studio-box">
-    <h3>Step 2 &mdash; The captures (done before the call)</h3>
-    <p style="font-size:.9rem">Five phone shots, good light, no flash:</p>
-    <p class="check">The whole piece, straight on</p>
-    <p class="check">Your signature or mark, close up</p>
-    <p class="check">The texture &mdash; brushwork, grain, canvas</p>
-    <p class="check">A short video, ten slow seconds</p>
-    <p class="check">You, holding the piece</p>
-    <div class="upload-row"><span class="lbl">Main image <span class="gold">*</span></span><input type="file" id="fImage" accept="image/*"></div>
-    <div class="upload-row" id="sImage"><span class="lbl">stored to</span><span class="status">not yet</span></div>
-    <div class="upload-row"><span class="lbl">Signature close-up</span><input type="file" id="fSign" accept="image/*"></div>
-    <div class="upload-row" id="sSign"><span class="lbl">stored to</span><span class="status">not yet</span></div>
-    <div class="upload-row"><span class="lbl">Texture shot</span><input type="file" id="fTex" accept="image/*"></div>
-    <div class="upload-row" id="sTex"><span class="lbl">stored to</span><span class="status">not yet</span></div>
-    <div class="upload-row"><span class="lbl">Video (10 sec)</span><input type="file" id="fVid" accept="video/*"></div>
-    <div class="upload-row" id="sVid"><span class="lbl">stored to</span><span class="status">not yet</span></div>
-    <div class="upload-row"><span class="lbl">Holding shot</span><input type="file" id="fHold" accept="image/*"></div>
-    <div class="upload-row" id="sHold"><span class="lbl">stored to</span><span class="status">not yet</span></div>
+    <h3 id="step2Head">Step 2 &mdash; The captures (done before the call)</h3>
+    <p style="font-size:.9rem" id="capIntro">Five phone shots, good light, no flash:</p>
+    <span id="capChecks" style="display:none"></span>
+    <div id="capRows"></div>
   </div>
 
   <div class="studio-box">
@@ -349,24 +338,57 @@ async function pinJSON(obj){
   return 'ipfs://'+j.IpfsHash;
 }
 
+const DOORS={
+ songs:{name:'Songs That Pay',head:'Step 2 &mdash; The upload (your track)',cert:'Original song by the wallet holder, November 2026, 1 of 1',
+  checks:['Recorded in a quiet room, good levels','Full playthrough, no stops','Cover art exported as an image'],
+  rows:[{id:'fAudio',stat:'sAudio',lbl:'Main audio track',acc:'audio/*'},{id:'fCover',stat:'sCover',lbl:'Cover art',acc:'image/*'}]},
+ signatures:{name:'Signatures That Last',head:'Step 2 &mdash; The captures (done before the call)',cert:'Signature of the wallet holder, witnessed on-chain, November 2026',
+  checks:['Your signature on plain paper, good light','One close-up, one angled shot','Bonus: a 10-sec video of you signing'],
+  rows:[{id:'fSign',stat:'sSign',lbl:'Signature close-up',acc:'image/*'},{id:'fVid',stat:'sVid',lbl:'Video of you signing (10 sec)',acc:'video/*'}]},
+ easel:{name:'Art, From the Easel',head:'Step 2 &mdash; The captures (done before the call)',cert:'Original work by the wallet holder, November 2026, 1 of 1',
+  checks:['The whole piece, straight on','Your signature or mark, close up','The texture - brushwork, grain, canvas','A short video, ten slow seconds','You, holding the piece'],
+  rows:[{id:'fImage',stat:'sImage',lbl:'Main image',acc:'image/*'},{id:'fSign',stat:'sSign',lbl:'Signature close-up',acc:'image/*'},{id:'fTex',stat:'sTex',lbl:'Texture shot',acc:'image/*'},{id:'fVid',stat:'sVid',lbl:'Video (10 sec)',acc:'video/*'},{id:'fHold',stat:'sHold',lbl:'Holding shot',acc:'image/*'}]},
+ bundle:{name:'Bundle It',head:'Step 2 &mdash; The pieces of the bundle',cert:'Bundle of the wallet holder, work + stake, November 2026',
+  checks:['A picture or document representing the work','Your stake or vault title goes in the story field below'],
+  rows:[{id:'fImage',stat:'sImage',lbl:'Main image or document',acc:'image/*'},{id:'fDoc',stat:'sDoc',lbl:'Supporting file (optional)',acc:'*'}]},
+};
+let currentDoor='easel';
+function renderDoor(){
+  const d=DOORS[currentDoor];
+  document.getElementById('step2Head').innerHTML=d.head;
+  document.getElementById('certText').placeholder=d.cert;
+  document.getElementById('capRows').innerHTML=d.rows.map(r=>
+    '<div class="upload-row"><span class="lbl">'+r.lbl+'</span><input type="file" id="'+r.id+'" accept="'+r.acc+'"></div>'+
+    '<div class="upload-row" id="'+r.stat+'"><span class="lbl">stored to</span><span class="status">not yet</span></div>').join('');
+}
+
+function renderChecks(){document.getElementById('capIntro').textContent=currentDoor==='songs'?'Three quick things before you upload:':currentDoor==='bundle'?'Two things make the bundle:':'Five phone shots, good light, no flash:';const box=document.getElementById('capChecks');
+ box.innerHTML=DOORS[currentDoor].checks.map(c=>'<p class="check">'+c+'</p>').join('');}
+function setDoor(d){currentDoor=d;renderDoor();renderChecks();
+  document.getElementById('studio').scrollIntoView({behavior:'smooth'});
+  const line=document.getElementById('doorLine');line.style.display='block';line.innerHTML='Door selected: <b class="gold">'+DOORS[d].name+'</b> - the studio below is set for it.';}
+renderDoor();renderChecks();
+
 async function prepareMetadata(){
   try{
     const manual=document.getElementById('manualURI').value.trim();
     if(manual){preparedURI=manual;st('prepStatus','Manual metadata URI set: '+manual,'ok');return;}
     const title=document.getElementById('artTitle').value.trim();
     if(!title){st('prepStatus','Give the piece a title first.','err');return;}
-    const files={image:['fImage','sImage'],signature:['fSign','sSign'],texture:['fTex','sTex'],video:['fVid','sVid'],holding:['fHold','sHold']};
+    const files={};DOORS[currentDoor].rows.forEach((r,i)=>{files[i]=r;});
     const meta={name:title,description:document.getElementById('artDesc').value.trim(),certificate:document.getElementById('certText').value.trim(),properties:{}};
     let haveMain=false;
+    let first=true;
     for(const k in files){
-      const el=document.getElementById(files[k][0]);
-      if(el.files[0]){
-        document.querySelector('#'+files[k][1]+' .status').textContent='uploading...';
-        const uri=await pinFile(el.files[0],k,files[k][1]);
-        if(k==='image'){meta.image=uri;haveMain=true;}else{meta.properties[k]=uri;}
+      const r=files[k];
+      const el=document.getElementById(r.id);
+      if(el && el.files[0]){
+        document.querySelector('#'+r.stat+' .status').textContent='uploading...';
+        const uri=await pinFile(el.files[0],r.lbl,r.stat);
+        if(first){meta.image=uri;haveMain=true;first=false;}else{meta.properties[r.id]=uri;}
       }
     }
-    if(!haveMain){st('prepStatus','The main image is required.','err');return;}
+    if(!haveMain){st('prepStatus','The first file (main) is required.','err');return;}
     preparedURI=await pinJSON(meta);
     st('prepStatus','Record prepared and permanently stored: <br><code>'+preparedURI+'</code>','ok');
   }catch(e){st('prepStatus','Upload: '+(e.message||e),'err');}
