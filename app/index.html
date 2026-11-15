@@ -77,13 +77,15 @@ footer.site{border-top:1px solid var(--line);padding:30px 0;font-family:'Helveti
 
   <section id="createSection" style="display:none">
     <h2>Create a Bundle</h2>
-    <p class="sub">Three guided transactions: approve the stake collection, approve the kitty, create the bundle. Everything is checked before you sign.</p>
+    <p class="sub">Three guided transactions: approve the stake collection, approve the membership NFT, create the bundle. Everything is checked before you sign.</p>
     <div class="panel">
       <div class="grid">
         <div><label>Signature Stake (yield engine)</label>
           <select id="pickStake" style="width:100%"><option>Connect wallet first</option></select></div>
-        <div><label>CryptoKitty (the rider)</label>
-          <select id="pickKitty" style="width:100%"><option>Connect wallet first</option></select></div>
+        <div><label>Membership NFT contract (any ERC-721 - the rider)</label>
+          <input id="nftAddr" style="width:100%" value="0x06012c8cf97BEaD5deAe237070F9587f8E7A266d" placeholder="0x... NFT contract address">
+          <div style="display:flex;gap:8px;margin-top:6px"><select id="pickNft" style="flex:1"><option>Enter contract, then Load NFTs</option></select><button class="btn ghost" onclick="loadNfts()">Load NFTs</button></div>
+          <input id="nftTokenId" style="width:100%;margin-top:6px" placeholder="...or paste a token ID manually (overrides the list)"></div>
         <div><label>Patron address (gets the patron share)</label>
           <input id="patronAddr" style="width:100%" placeholder="0x... or an ENS name"></div>
         <div><label>Patron share (basis points)</label>
@@ -96,10 +98,10 @@ footer.site{border-top:1px solid var(--line);padding:30px 0;font-family:'Helveti
       </div>
       <div class="row">
         <button class="btn ghost" id="step1Btn" onclick="approveStakes()">1 &middot; Approve Stakes</button>
-        <button class="btn ghost" id="step2Btn" onclick="approveKitty()">2 &middot; Approve Kitty</button>
+        <button class="btn ghost" id="step2Btn" onclick="approveNft()">2 &middot; Approve NFT</button>
         <button class="btn" id="step3Btn" onclick="createBundle()">3 &middot; Create Bundle</button>
       </div>
-      <div class="note" id="approvalsNote">Approvals are one-time per collection: if you already approved, step 1 detects it and skips. Kitty approval is per-cat.</div>
+      <div class="note" id="approvalsNote">Approvals are one-time per collection: if you already approved, step 1 detects it and skips. NFT approval is per-token.</div>
       <div class="status" id="createStatus"></div>
     </div>
   </section>
@@ -239,24 +241,36 @@ async function closeB(i){
 
 async function loadPickers(){
   const sigC=new ethers.Contract(SIG,ERC721,provider);
-  const ckC=new ethers.Contract(CK,ERC721,provider);
-  const ss=document.getElementById('pickStake'),kk=document.getElementById('pickKitty');
-  ss.innerHTML='';kk.innerHTML='';
+  const ss=document.getElementById('pickStake');
+  ss.innerHTML='';
   try{
     const stakes=await sigC.walletOfOwner(acct);
     stakes.forEach(t=>{const o=document.createElement('option');o.value=t.toString();o.textContent='Signature Stake #'+t.toString();ss.appendChild(o);});
     if(!stakes.length){const o=document.createElement('option');o.textContent='No stakes in this wallet';ss.appendChild(o);}
   }catch(e){ss.innerHTML='<option>Could not read stakes</option>';}
+}
+async function loadNfts(){
+  const kk=document.getElementById('pickNft');
+  const addr=document.getElementById('nftAddr').value.trim();
+  kk.innerHTML='';
+  if(!/^0x[a-fA-F0-9]{40}$/.test(addr)){kk.innerHTML='<option>Enter a valid NFT contract address</option>';return;}
   try{
-    const bal=(await ckC.balanceOf(acct)).toNumber();
+    const nftC=new ethers.Contract(addr,ERC721,provider);
+    const bal=(await nftC.balanceOf(acct)).toNumber();
     for(let i=0;i<Math.min(bal,50);i++){
       try{
-        const id=await ckC.tokenOfOwnerByIndex(acct,i);
-        const o=document.createElement('option');o.value=id.toString();o.textContent='CryptoKitty #'+id.toString();kk.appendChild(o);
-      }catch(e){break;}
+        const id=await nftC.tokenOfOwnerByIndex(acct,i);
+        const o=document.createElement('option');o.value=id.toString();o.textContent='Token #'+id.toString();kk.appendChild(o);
+      }catch(e){kk.innerHTML='<option>Contract not enumerable - paste the token ID manually</option>';break;}
     }
-    if(!kk.children.length){const o=document.createElement('option');o.textContent='No kitties in this wallet';kk.appendChild(o);}
-  }catch(e){kk.innerHTML='<option>Could not read kitties</option>';}
+    if(!kk.children.length){const o=document.createElement('option');o.textContent='No NFTs from this contract in this wallet';kk.appendChild(o);}
+  }catch(e){kk.innerHTML='<option>Could not read that contract - paste the token ID manually</option>';}
+}
+function nftChoice(){
+  const manual=document.getElementById('nftTokenId').value.trim();
+  if(/^[0-9]+$/.test(manual))return {addr:document.getElementById('nftAddr').value.trim(),id:manual};
+  const sel=document.getElementById('pickNft').value;
+  return (/^[0-9]+$/.test(sel))?{addr:document.getElementById('nftAddr').value.trim(),id:sel}:null;
 }
 
 async function approveStakes(){
@@ -268,34 +282,35 @@ async function approveStakes(){
     st('createStatus','Sending collection approval (one-time)...','wait');
     const tx=await sigC.setApprovalForAll(WRAPPER,true);
     await tx.wait();
-    st('createStatus','Stakes approved. Next: approve the kitty.','ok');
+    st('createStatus','Stakes approved. Next: approve the membership NFT.','ok');
   }catch(e){st('createStatus','Approval failed: '+(e.data?e.data.message:e.message),'err');}
 }
 
-async function approveKitty(){
+async function approveNft(){
   try{
-    const kid=document.getElementById('pickKitty').value;
-    if(!/^\d+$/.test(kid)){st('createStatus','Pick a kitty first.','err');return;}
-    st('createStatus','Approving kitty #'+kid+'...','wait');
-    const ckC=new ethers.Contract(CK,ERC721,provider).connect(signer);
-    const tx=await ckC.approve(WRAPPER,kid);
+    const n=nftChoice();
+    if(!n||!/^0x[a-fA-F0-9]{40}$/.test(n.addr)){st('createStatus','Enter the NFT contract address and pick or paste a token ID first.','err');return;}
+    st('createStatus','Approving NFT #'+n.id+'...','wait');
+    const nftC=new ethers.Contract(n.addr,ERC721,provider).connect(signer);
+    const tx=await nftC.approve(WRAPPER,n.id);
     await tx.wait();
-    st('createStatus','Kitty #'+kid+' approved. Ready to create the bundle.','ok');
-  }catch(e){st('createStatus','Kitty approval failed: '+(e.data?e.data.message:e.message),'err');}
+    st('createStatus','NFT #'+n.id+' approved. Ready to create the bundle.','ok');
+  }catch(e){st('createStatus','NFT approval failed: '+(e.data?e.data.message:e.message),'err');}
 }
 
 async function createBundle(){
   try{
     const sid=document.getElementById('pickStake').value;
-    const kid=document.getElementById('pickKitty').value;
+    const n=nftChoice();
     let patron=document.getElementById('patronAddr').value.trim();
     const bps=document.getElementById('bps').value;
-    if(!/^\d+$/.test(sid)||!/^\d+$/.test(kid)){st('createStatus','Pick a stake and a kitty first.','err');return;}
+    if(!/^\d+$/.test(sid)){st('createStatus','Pick a stake first.','err');return;}
+    if(!n||!/^0x[a-fA-F0-9]{40}$/.test(n.addr)){st('createStatus','Enter the NFT contract address and pick or paste a token ID.','err');return;}
     if(patron.endsWith('.eth')){try{patron=await provider.resolveName(patron);}catch(e){st('createStatus','Could not resolve that ENS name.','err');return;}}
     if(!/^0x[a-fA-F0-9]{40}$/.test(patron)){st('createStatus','Enter a valid patron address (0x...).','err');return;}
-    st('createStatus','Creating bundle: stake #'+sid+' + kitty #'+kid+', patron '+short(patron)+' at '+(bps/100)+'%...','wait');
+    st('createStatus','Creating bundle: stake #'+sid+' + NFT #'+n.id+', patron '+short(patron)+' at '+(bps/100)+'%...','wait');
     const w=wrap.connect(signer);
-    const tx=await w.createBundle(SIG,sid,WISE,CK,kid,patron,bps);
+    const tx=await w.createBundle(SIG,sid,WISE,n.addr,n.id,patron,bps);
     st('createStatus','Bundle sent - waiting for confirmation...','wait');
     await tx.wait();
     st('createStatus','Bundle created on-chain. Welcome to the receiving side.','ok');
