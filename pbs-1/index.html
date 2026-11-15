@@ -70,6 +70,7 @@ section{padding:70px 0}
 .engines{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .engines button{background:var(--navy);border:1px solid var(--line);border-radius:12px;color:var(--cream);padding:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.86rem;cursor:pointer;text-align:left}
 .engines button.sel{border-color:var(--gold);color:var(--gold2)}
+.engines button.soon{opacity:.5;cursor:not-allowed;border-style:dashed}
 .engines button small{display:block;color:var(--muted);font-size:.76rem;margin-top:3px}
 .patron-row{display:grid;grid-template-columns:1fr 130px 40px;gap:10px;align-items:center;margin-bottom:10px}
 .patron-row button{background:none;border:1px solid var(--line);border-radius:8px;color:var(--muted);cursor:pointer;padding:8px}
@@ -147,12 +148,13 @@ footer.site a{color:var(--gold2);text-decoration:none}
 
   <div class="studio-box">
     <h3>Step 1 &mdash; What backs this bundle?</h3>
+    <p class="note">A bundle holds <b>up to two of these three</b> - and the NFT never rides alone. Positions must already be in your wallet: the bundle wraps what you hold, it doesn't buy for you.</p>
     <div class="engines">
-      <button id="eng-vault" class="sel" onclick="setEngine('vault')">Vault position I already hold<small>e.g. wtnUSDC from a World Mobile deposit. Wraps your existing receipt tokens.</small></button>
-      <button id="eng-newvault" onclick="setEngine('newvault')">Fresh USDC deposit<small>Pulls USDC from your wallet, deposits into the vault, wraps the receipt.</small></button>
-      <button id="eng-card" onclick="setEngine('card')">Signature card I already hold<small>Wraps an existing Signature Stakes card into the bundle.</small></button>
-      <button id="eng-stake" onclick="setEngine('stake')">Brand-new stake<small>Stakes WISE into a fresh Signature card inside the bundle. Lock 366+ days.</small></button>
+      <button id="eng-vault" class="sel" onclick="toggleEngine('vault')">Vault position I already hold<small>e.g. wtnUSDC from a World Mobile deposit. Your receipt tokens move into the bundle.</small></button>
+      <button id="eng-card" onclick="toggleEngine('card')">Signature card I already hold<small>Your existing Signature Stakes card moves in whole - yield engine and all.</small></button>
+      <button id="eng-nft" class="soon" tabindex="-1">Minted NFT rider<small>Pairs with a yield position in the Bundle Console (stake route) today. Vault + NFT arrives with the next wrapper release.</small></button>
     </div>
+    <p class="note" id="pairNote" style="display:none"></p>
     <div id="vaultPick" style="margin-top:16px">
       <label for="vaultSel">Vault</label>
       <select id="vaultSel"></select>
@@ -160,34 +162,18 @@ footer.site a{color:var(--gold2);text-decoration:none}
       <input type="text" id="vaultAmt" placeholder="e.g. 10">
       <p class="note" id="vaultBal"></p>
     </div>
-    <div id="newvaultPick" style="margin-top:16px;display:none">
-      <label for="nvSel">Vault</label>
-      <select id="nvSel"></select>
-      <label for="nvAmt">USDC amount to deposit</label>
-      <input type="text" id="nvAmt" placeholder="e.g. 100">
-      <p class="note" id="nvBal"></p>
-    </div>
     <div id="cardPick" style="margin-top:16px;display:none">
       <label for="cardSel">Your Signature card</label>
       <select id="cardSel"></select>
       <p class="note" id="cardInfo"></p>
-    </div>
-    <div id="stakePick" style="margin-top:16px;display:none">
-      <label for="stakeAmt">WISE to stake</label>
-      <input type="text" id="stakeAmt" placeholder="e.g. 50">
-      <label for="lockDays">Lock days (366 minimum)</label>
-      <input type="number" id="lockDays" value="366" min="366">
       <label for="modeSel">At maturity</label>
       <select id="modeSel">
         <option value="0">Off - hold until I act</option>
         <option value="1">Restake automatically</option>
-        <option value="2">Restake + top up from pot</option>
       </select>
     </div>
-  </div>
-
-  <div class="studio-box">
-    <h3>Step 2 &mdash; The beneficiaries</h3>
+    <p class="note" style="margin-top:12px">Don't hold a position yet? <a class="gold" href="/vaults/">Fund a vault</a> or <a class="gold" href="https://app.wisetoken.com/?ref=0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" target="_blank" rel="noopener">stake WISE into a Signature card</a> first - then wrap it here.</p>
+  <h3>Step 2 &mdash; The beneficiaries</h3>
     <p class="note">Up to 6 wallets, shares of the daily interest (post-fee). Whatever you don't assign stays with whoever holds the receipt. Splits are permanent once wrapped.</p>
     <div id="patronRows" style="margin-top:14px"></div>
     <div class="sumline" id="sumLine"></div>
@@ -254,7 +240,7 @@ const CATEGORIES = [
  ['LEGACY','The reward for outliving it - or the inheritance that lands in days, not years.'],
  ['PODCAST','Show and episode support funded by the position behind it.']
 ];
-let provider=null, signer=null, wrapper=null, account=null, engine='vault';
+let provider=null, signer=null, wrapper=null, account=null, useVault=true, useCard=false, lastBundleId=0;
 let vaultAddrs=[], vaultNames=[];
 let patrons=[];
 
@@ -263,6 +249,8 @@ const ABI=[
  'function createVaultBundle(address vaultToken, uint256 usdcAmount, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
  'function wrapCard(uint256 cardId, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
  'function createBundle(uint256 amount, (address[],uint16[],uint64,uint8,uint16,address,bytes32,string) spec) returns (uint256)',
+ 'function attachVault(uint256 bundleId, address vaultToken, uint256 receiptAmount)',
+ 'function totalSupply() view returns (uint256)',
  'function vaultCount() view returns (uint256)',
  'function vaultAt(uint256 i) view returns (address)',
  'function vaultUnderlying(address v) view returns (address)',
@@ -303,15 +291,19 @@ function setCat(c){document.getElementById('catSel').value=c;
   document.getElementById('studio').scrollIntoView({behavior:'smooth'});
   st('wrapStatus','Category set to <b>'+c+'</b>.','ok');}
 
-function setEngine(e){
-  engine=e;
-  ['vault','newvault','card','stake'].forEach(k=>{
-    document.getElementById('eng-'+k).classList.toggle('sel',k===e);
-  });
-  document.getElementById('vaultPick').style.display=e==='vault'?'block':'none';
-  document.getElementById('newvaultPick').style.display=e==='newvault'?'block':'none';
-  document.getElementById('cardPick').style.display=e==='card'?'block':'none';
-  document.getElementById('stakePick').style.display=e==='stake'?'block':'none';
+function toggleEngine(which){
+  if(which==='vault')useVault=!useVault;
+  if(which==='card')useCard=!useCard;
+  if(!useVault&&!useCard){ // never leave zero selections
+    if(which==='vault')useCard=true;else useVault=true;
+  }
+  document.getElementById('eng-vault').classList.toggle('sel',useVault);
+  document.getElementById('eng-card').classList.toggle('sel',useCard);
+  document.getElementById('vaultPick').style.display=useVault?'block':'none';
+  document.getElementById('cardPick').style.display=useCard?'block':'none';
+  const pn=document.getElementById('pairNote');
+  pn.style.display=(useVault&&useCard)?'block':'none';
+  pn.innerHTML='You picked <b>both</b>. Two signings: the bundle wraps your card first, then attaches the vault position to it.';
   updateWrapWhat();
 }
 
@@ -328,7 +320,6 @@ async function loadVaults(){
     }
     const opts=vaultAddrs.map((a,i)=>'<option value="'+i+'">'+vaultNames[i]+'</option>').join('');
     document.getElementById('vaultSel').innerHTML=opts;
-    document.getElementById('nvSel').innerHTML=opts;
     await refreshBalances();
   }catch(e){}
 }
@@ -347,20 +338,11 @@ async function loadCards(){
 async function refreshBalances(){
   if(!signer||!vaultAddrs.length)return;
   const i=parseInt(document.getElementById('vaultSel').value||'0');
-  const j=parseInt(document.getElementById('nvSel').value||'0');
   try{
     const t=new ethers.Contract(vaultAddrs[i],ERC20_ABI,signer);
     const dec=await t.decimals();
     const bal=await t.balanceOf(account);
     document.getElementById('vaultBal').textContent='Your balance: '+ethers.utils.formatUnits(bal,dec)+' '+vaultNames[i]+' (receipt tokens)';
-  }catch(e){}
-  try{
-    const under=await wrapper.vaultUnderlying(vaultAddrs[j]);
-    const u=new ethers.Contract(under,ERC20_ABI,signer);
-    const dec=await u.decimals();
-    const bal=await u.balanceOf(account);
-    const sym=await u.symbol();
-    document.getElementById('nvBal').textContent='Your balance: '+ethers.utils.formatUnits(bal,dec)+' '+sym;
   }catch(e){}
 }
 
@@ -410,25 +392,23 @@ async function buildSpec(){
   if(plist.length>6)throw new Error('Six beneficiaries maximum.');
   const sum=blist.reduce((a,b)=>a+b,0);
   if(sum>10000)throw new Error('Beneficiary shares exceed 100%.');
-  const lockDays=engine==='stake'?parseInt(document.getElementById('lockDays').value||'366'):0;
-  if(engine==='stake'&&lockDays<366)throw new Error('Lock days must be at least 366 for stake bundles.');
-  const mode=engine==='stake'?parseInt(document.getElementById('modeSel').value||'0'):0;
-  const topUp=0;
-  return [plist,blist,lockDays,mode,topUp,referrer===''?ethers.constants.AddressZero:referrer,category,label];
+  const mode=useCard?parseInt(document.getElementById('modeSel').value||'0'):0;
+  const lockDays=useCard?366:0;
+  return [plist,blist,lockDays,mode,0,referrer===''?ethers.constants.AddressZero:referrer,category,label];
 }
 
 function updateWrapWhat(){
-  const map={vault:'You will approve the wrapper to hold your receipt tokens, then wrap them into the bundle.',
-             newvault:'You will approve USDC, the wrapper deposits it into the vault, and the receipt lands in the bundle.',
-             card:'You will approve the wrapper as a card operator, then wrap the selected card.',
-             stake:'You will approve WISE, and the wrapper stakes it into a fresh Signature card inside the bundle.'};
-  document.getElementById('wrapWhat').textContent=map[engine];
+  let t;
+  if(useVault&&useCard)t='You will approve the wrapper for your receipt tokens AND as card operator, then wrap the card, then attach the vault position. Three signings total, each shown before you sign.';
+  else if(useVault)t='You will approve the wrapper to hold your receipt tokens, then wrap them into the bundle.';
+  else t='You will approve the wrapper as a card operator, then wrap the selected card.';
+  document.getElementById('wrapWhat').textContent=t;
 }
 
 async function doApprove(){
   try{
     if(!wrapper){st('wrapStatus','Connect your wallet first.','err');return;}
-    if(engine==='vault'){
+    if(useVault){
       const token=vaultAddrs[parseInt(document.getElementById('vaultSel').value||'0')];
       const t=new ethers.Contract(token,ERC20_ABI,signer);
       const dec=await t.decimals();
@@ -436,29 +416,13 @@ async function doApprove(){
       if(amt.lte(0))throw new Error('Enter a receipt amount first.');
       st('wrapStatus','Approving wrapper to hold your receipt tokens...','wait');
       const tx=await t.approve(V3,amt);
-      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
-    }else if(engine==='newvault'){
-      const v=vaultAddrs[parseInt(document.getElementById('nvSel').value||'0')];
-      const under=await wrapper.vaultUnderlying(v);
-      const t=new ethers.Contract(under,ERC20_ABI,signer);
-      const dec=await t.decimals();
-      const amt=ethers.utils.parseUnits(document.getElementById('nvAmt').value||'0',dec);
-      if(amt.lte(0))throw new Error('Enter a USDC amount first.');
-      st('wrapStatus','Approving USDC...','wait');
-      const tx=await t.approve(V3,amt);
-      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
-    }else if(engine==='card'){
+      await tx.wait();
+      st('wrapStatus',useCard?'Receipt approved. Now approving the card operator...':'Approved. Now wrap the bundle.','ok');
+    }
+    if(useCard){
       const c=new ethers.Contract(CARD,CARD_ABI,signer);
       st('wrapStatus','Approving wrapper as card operator...','wait');
       const tx=await c.setApprovalForAll(V3,true);
-      await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
-    }else{
-      const t=new ethers.Contract(WISE,ERC20_ABI,signer);
-      const dec=await t.decimals();
-      const amt=ethers.utils.parseUnits(document.getElementById('stakeAmt').value||'0',dec);
-      if(amt.lte(0))throw new Error('Enter a WISE amount first.');
-      st('wrapStatus','Approving WISE...','wait');
-      const tx=await t.approve(V3,amt);
       await tx.wait();st('wrapStatus','Approved. Now wrap the bundle.','ok');
     }
   }catch(e){st('wrapStatus','Approve: '+(e.data?e.data.message:e.message),'err');}
@@ -470,31 +434,41 @@ async function doWrap(){
     const spec=await buildSpec();
     st('wrapStatus','Confirm in your wallet - wrapping the bundle...','wait');
     let tx;
-    if(engine==='vault'){
+    if(useCard){
+      const cid=document.getElementById('cardSel').value;
+      tx=await wrapper.wrapCard(cid,spec);
+    }else if(useVault){
       const token=vaultAddrs[parseInt(document.getElementById('vaultSel').value||'0')];
       const t=new ethers.Contract(token,ERC20_ABI,signer);
       const dec=await t.decimals();
       const amt=ethers.utils.parseUnits(document.getElementById('vaultAmt').value||'0',dec);
       tx=await wrapper.wrapVault(token,amt,spec);
-    }else if(engine==='newvault'){
-      const v=vaultAddrs[parseInt(document.getElementById('nvSel').value||'0')];
-      const under=await wrapper.vaultUnderlying(v);
-      const t=new ethers.Contract(under,ERC20_ABI,signer);
-      const dec=await t.decimals();
-      const amt=ethers.utils.parseUnits(document.getElementById('nvAmt').value||'0',dec);
-      tx=await wrapper.createVaultBundle(v,amt,spec);
-    }else if(engine==='card'){
-      const cid=document.getElementById('cardSel').value;
-      tx=await wrapper.wrapCard(cid,spec);
-    }else{
-      const t=new ethers.Contract(WISE,ERC20_ABI,signer);
-      const dec=await t.decimals();
-      const amt=ethers.utils.parseUnits(document.getElementById('stakeAmt').value||'0',dec);
-      tx=await wrapper.createBundle(amt,spec);
-    }
+    }else{st('wrapStatus','Pick at least one backing.','err');return;}
     st('wrapStatus','Recording on Ethereum... under a minute.','wait');
     await tx.wait();
-    st('wrapStatus','<b>Wrapped.</b> The receipt is yours; the splits are set forever.','ok');
+    if(useCard&&useVault){
+      lastBundleId=(await wrapper.totalSupply()).toNumber();
+      const token=vaultAddrs[parseInt(document.getElementById('vaultSel').value||'0')];
+      const t=new ethers.Contract(token,ERC20_ABI,signer);
+      const dec=await t.decimals();
+      const amt=ethers.utils.parseUnits(document.getElementById('vaultAmt').value||'0',dec);
+      st('wrapStatus','<b>Card wrapped as bundle #'+lastBundleId+'.</b> Now attach the vault position - one more signature.','ok');
+      const btn=document.createElement('button');
+      btn.className='gold';btn.style.padding='12px 26px';btn.style.fontSize='.9rem';
+      btn.textContent='3 - Attach vault position';
+      btn.onclick=async()=>{
+        try{
+          st('wrapStatus','Attaching vault position to bundle #'+lastBundleId+'...','wait');
+          const atx=await wrapper.attachVault(lastBundleId,token,amt);
+          await atx.wait();
+          st('wrapStatus','<b>Done.</b> Bundle #'+lastBundleId+' holds your card AND the vault position.','ok');
+          btn.remove();
+        }catch(e){st('wrapStatus','Attach: '+(e.data?e.data.message:e.message),'err');}
+      };
+      document.getElementById('wrapStatus').after(btn);
+    }else{
+      st('wrapStatus','<b>Wrapped.</b> The receipt is yours; the splits are set forever.','ok');
+    }
     const link=document.getElementById('txLink');
     link.style.display='block';
     link.innerHTML='tx: <a href="https://etherscan.io/tx/'+tx.hash+'" target="_blank" rel="noopener">'+tx.hash.slice(0,10)+'...</a>';
@@ -510,8 +484,7 @@ document.getElementById('catGrid').innerHTML=CATEGORIES.map(c=>{
 document.getElementById('catSel').innerHTML=CATEGORIES.map(c=>'<option>'+c[0]+'</option>').join('');
 addPatron();addPatron();
 document.getElementById('vaultSel').addEventListener('change',refreshBalances);
-document.getElementById('nvSel').addEventListener('change',refreshBalances);
-updateWrapWhat();
+toggleEngine('vault');
 </script>
 </body>
 </html>
