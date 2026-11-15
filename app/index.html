@@ -87,6 +87,7 @@ footer.site{border-top:1px solid var(--line);padding:30px 0;font-family:'Helveti
           <div style="display:flex;gap:8px;margin-top:6px"><select id="pickNft" style="flex:1"><option>Enter contract, then Load NFTs</option></select><button class="btn ghost" onclick="loadNfts()">Load NFTs</button></div>
           <input id="nftTokenId" style="width:100%;margin-top:6px" placeholder="...or paste a token ID manually (overrides the list)"></div>
           <div id="nftHint" style="font-size:.78rem;color:var(--muted);margin-top:8px">Just minted on our Minting page? Your NFT contract is already filled in &mdash; click <b>Load NFTs</b>, pick your token, and sign the three steps below.</div>
+        <div id="carryNote" style="display:none;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.4);border-radius:8px;padding:8px 12px;font-size:.8rem;color:var(--muted);grid-column:1/-1">Carried from PBS-1: patron, share, stake and NFT are pre-filled. Change anything you want before creating.</div>
         <div><label>Patron address (gets the patron share)</label>
           <input id="patronAddr" style="width:100%" placeholder="0x... or an ENS name"></div>
         <div><label>Patron share (basis points)</label>
@@ -132,6 +133,7 @@ const CK='0x06012c8cf97BEaD5deAe237070F9587f8E7A266d';
 const GATE=['0xF2aCF5bA7ac4af87e1B15770Da5002a6894397BF'.toLowerCase(),'0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f'.toLowerCase()];
 const ERC721=[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"ownerOf","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
  {"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"name":"","type":"bool"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"getApproved","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
  {"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"approved","type":"bool"}],"name":"setApprovalForAll","type":"function"},
  {"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"approve","type":"function"},
  {"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"transferFrom","type":"function"},
@@ -148,6 +150,34 @@ let provider,signer,wrap,acct=null,wrapOwner=null,allowed=false;
 
 function st(el,txt,cls){const e=document.getElementById(el);e.textContent=txt;e.className='status '+(cls||'');}
 function short(a){return a?a.slice(0,6)+'...'+a.slice(-4):''}
+
+const CARRY_KEY='wsc_pbs1_carry';
+function getCarry(){
+  let c=null;
+  try{c=JSON.parse(localStorage.getItem(CARRY_KEY)||'null');}catch(e){c=null;}
+  const p=new URLSearchParams(location.search);
+  if(p.get('nft')){c=Object.assign({},c||{});c.nftAddr=p.get('nft');}
+  return c;
+}
+function applyCarry(){
+  const c=getCarry();if(!c)return;
+  const set=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined&&v!==null&&v!=='')e.value=v;};
+  if(c.nftAddr)set('nftAddr',c.nftAddr);
+  if(c.patron)set('patronAddr',c.patron);
+  if(c.bps)set('bps',String(c.bps));
+  if(c.nftTokenId)set('nftTokenId',String(c.nftTokenId));
+  if(c.stakeId){
+    const ss=document.getElementById('pickStake');
+    for(const o of ss.options){if(o.value===String(c.stakeId)){ss.value=o.value;break;}}
+  }
+  const note=document.getElementById('carryNote');
+  if(note){note.style.display='block';}
+}
+function applyCarryToStakes(){
+  const c=getCarry();if(!c||!c.stakeId)return;
+  const ss=document.getElementById('pickStake');
+  for(const o of ss.options){if(o.value===String(c.stakeId)){ss.value=o.value;break;}}
+}
 
 async function stillAllowed(){
   const now=(await (new ethers.providers.Web3Provider(window.ethereum).getSigner()).getAddress()).toLowerCase();
@@ -254,6 +284,7 @@ async function loadPickers(){
     const seen=new Set();
     stakes.forEach(t=>{const v=t.toString();if(seen.has(v))return;seen.add(v);const o=document.createElement('option');o.value=v;o.textContent='Signature Stake #'+v;ss.appendChild(o);});
     if(!stakes.length){const o=document.createElement('option');o.textContent='No stakes in this wallet';ss.appendChild(o);}
+    applyCarryToStakes();
   }catch(e){ss.innerHTML='<option>Could not read stakes</option>';}
 }
 async function loadNfts(){
@@ -297,8 +328,12 @@ async function approveNft(){
   try{
     const n=nftChoice();
     if(!n||!/^0x[a-fA-F0-9]{40}$/.test(n.addr)){st('createStatus','Enter the NFT contract address and pick or paste a token ID first.','err');return;}
-    st('createStatus','Approving NFT #'+n.id+'...','wait');
     const nftC=new ethers.Contract(n.addr,ERC721,provider).connect(signer);
+    let owner=null;try{owner=await nftC.ownerOf(n.id);}catch(e){}
+    if(owner&&owner.toLowerCase()!==acct.toLowerCase()){st('createStatus','Token #'+n.id+' lives in wallet '+short(owner)+' - connect that wallet (or paste a token you own), then approve.','err');return;}
+    let appr=null;try{appr=await nftC.getApproved(n.id);}catch(e){}
+    if(appr&&appr.toLowerCase()===WRAPPER.toLowerCase()){st('createStatus','NFT #'+n.id+' is already approved - nothing to sign. Go to step 3.','ok');return;}
+    st('createStatus','Approving NFT #'+n.id+'...','wait');
     const tx=await nftC.approve(WRAPPER,n.id);
     await tx.wait();
     st('createStatus','NFT #'+n.id+' approved. Ready to create the bundle.','ok');
@@ -315,6 +350,16 @@ async function createBundle(){
     if(!n||!/^0x[a-fA-F0-9]{40}$/.test(n.addr)){st('createStatus','Enter the NFT contract address and pick or paste a token ID.','err');return;}
     if(patron.endsWith('.eth')){try{patron=await provider.resolveName(patron);}catch(e){st('createStatus','Could not resolve that ENS name.','err');return;}}
     if(!/^0x[a-fA-F0-9]{40}$/.test(patron)){st('createStatus','Enter a valid patron address (0x...).','err');return;}
+    const nftC=new ethers.Contract(n.addr,ERC721,provider).connect(signer);
+    let owner=null;try{owner=await nftC.ownerOf(n.id);}catch(e){}
+    if(owner&&owner.toLowerCase()!==acct.toLowerCase()){st('createStatus','Token #'+n.id+' is in wallet '+short(owner)+', not the connected wallet. Pick a token you own.','err');return;}
+    let appr=null;try{appr=await nftC.getApproved(n.id);}catch(e){}
+    let allOk=false;try{allOk=await nftC.isApprovedForAll(acct,WRAPPER);}catch(e){}
+    if(!(appr&&appr.toLowerCase()===WRAPPER.toLowerCase())&&!allOk){
+      st('createStatus','NFT #'+n.id+' is not approved yet - signing the approval first, then the bundle. Two signatures, one moment.','wait');
+      const atx=await nftC.approve(WRAPPER,n.id);await atx.wait();
+      st('createStatus','NFT approved. Now confirm the bundle itself.','ok');
+    }
     st('createStatus','Creating bundle: stake #'+sid+' + NFT #'+n.id+', patron '+short(patron)+' at '+(bps/100)+'%...','wait');
     const w=wrap.connect(signer);
     const tx=await w.createBundle(SIG,sid,WISE,n.addr,n.id,patron,bps);
@@ -437,6 +482,7 @@ function doRelease(i){v3send(i,w=>w.releaseCard(i),'Executing release - unwindin
     }
   }catch(e){}
 })();
+applyCarry();
 </script>
 </body>
 </html>
