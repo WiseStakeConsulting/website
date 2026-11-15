@@ -59,15 +59,20 @@ footer.site{border-top:1px solid var(--line);padding:30px 0;font-family:'Helveti
 <main><div class="wrap">
   <div class="eyebrow">PBS-1 &middot; Bundle Console &middot; Private Beta</div>
   <h1>The <span class="gold">Patronage Bundle</span> Console</h1>
-  <p class="sub">Create bundles, scrape yield, and watch both NFTs work. Wrapper v0 on Ethereum mainnet.</p>
+  <p class="sub">Create bundles, scrape yield, request emergency release, and watch your positions work. Wrapper v0 (legacy) and Wrapper V3 (live) on Ethereum mainnet.</p>
 
   <div class="gate" id="gateBox" style="display:none">
     <b>Read-only view.</b> Bundle actions are limited to the owner and patrons while the console is in private beta. You can inspect every bundle below - the chain is public, even in beta.
   </div>
 
   <section>
-    <h2>Your Bundles</h2>
-    <div id="bundles" class="empty">Connect a wallet to load bundles.</div>
+    <h2>Your Bundles - Wrapper V3 (live)</h2>
+    <div id="bundlesV3" class="empty">Connect a wallet to load V3 bundles.</div>
+  </section>
+
+  <section>
+    <h2>Your Bundles - Wrapper v0 (legacy)</h2>
+    <div id="bundles" class="empty">Connect a wallet to load legacy bundles.</div>
   </section>
 
   <section id="createSection" style="display:none">
@@ -101,7 +106,8 @@ footer.site{border-top:1px solid var(--line);padding:30px 0;font-family:'Helveti
 
   <section>
     <h2>Protocol</h2>
-    <div class="panel"><div class="kv"><span>Wrapper (v0, fork-validated)</span><b class="gold">0xD4007f3C899fDb8A98A891173766dB8929Ae82ef</b></div>
+    <div class="panel"><div class="kv"><span>Wrapper V3 (live)</span><b class="gold">0x2dD7FFb8571ce9C70110d039fb07C84c27b82A82</b></div>
+    <div class="kv"><span>Wrapper (v0, fork-validated)</span><b class="gold">0xD4007f3C899fDb8A98A891173766dB8929Ae82ef</b></div>
     <div class="kv"><span>Signature Stakes collection</span><b>0x48791DbD...c1e1</b></div>
     <div class="kv"><span>WISE engine</span><b>0x66a0f676...5bd6</b></div>
     <div class="kv"><span>CryptoKitties (2017)</span><b>0x06012c8c...266d</b></div>
@@ -167,12 +173,14 @@ async function connect(){
   signer=provider.getSigner();
   acct=(await signer.getAddress()).toLowerCase();
   wrap=new ethers.Contract(WRAPPER,WRAP_ABI,provider);
+  v3=new ethers.Contract(V3,V3_ABI,provider);
   wrapOwner=(await wrap.owner()).toLowerCase();
   allowed=GATE.includes(acct);
   document.getElementById('connectBtn').textContent=short(acct);
   document.getElementById('gateBox').style.display=allowed?'none':'block';
   document.getElementById('createSection').style.display=allowed?'block':'none';
   await loadBundles();
+  await loadV3();
   if(allowed)await loadPickers();
 }
 
@@ -294,6 +302,95 @@ async function createBundle(){
     await loadBundles();
   }catch(e){st('createStatus','Create failed: '+(e.data?e.data.message:e.message),'err');}
 }
+
+const V3='0x2dD7FFb8571ce9C70110d039fb07C84c27b82A82';
+const V3_ABI=[
+ {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundles","outputs":[{"name":"cardId","type":"uint256"},{"name":"patrons","type":"address[6]"},{"name":"patronBps","type":"uint16[6]"},{"name":"patronCount","type":"uint8"},{"name":"mode","type":"uint8"},{"name":"topUpBps","type":"uint16"},{"name":"potBalance","type":"uint256"},{"name":"active","type":"bool"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundleCategory","outputs":[{"name":"","type":"bytes32"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundleLabel","outputs":[{"name":"","type":"string"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundleVault","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"vaultPrincipal","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"releaseAt","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"ownerOf","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
+ {"constant":true,"inputs":[],"name":"defaultReferrer","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
+ {"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"scrapeVault","type":"function"},
+ {"constant":false,"inputs":[{"name":"id","type":"uint256"},{"name":"scrapeDays","type":"uint64"}],"name":"scrape","type":"function"},
+ {"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"close","type":"function"},
+ {"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"requestRelease","type":"function"},
+ {"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"cancelRelease","type":"function"},
+ {"constant":false,"inputs":[{"name":"id","type":"uint256"}],"name":"releaseCard","type":"function"}];
+const VAULT_LABELS={'0x7e1eff4301defc24936470b30bd1c686d2a295dc':'WiseTelecom vault (wtnUSD)'};
+const NAME_LABELS={'0x84ebf885b2655e8be3d3492ca81dfacad04b5e7f':'Denise (wisestakes.eth)','0x142a534c60e16695cfe2abab86f8decb85d568c0':'WSC rail (wisestake.eth)','0xf2acf5ba7ac4af87e1b15770da5002a6894397bf':'Deployer (0xF2aC...97BF)'};
+function label(a){if(!a)return '';const k=a.toLowerCase();return NAME_LABELS[k]||short(a)}
+function parseCat(b32){try{const s=ethers.utils.parseBytes32String(b32);return s||'-'}catch(e){return '-'}}
+let v3;
+
+async function loadV3(){
+  const box=document.getElementById('bundlesV3');
+  try{
+    const n=(await v3.totalSupply()).toNumber();
+    if(n<1){box.textContent='No V3 bundles minted yet.';box.className='empty';return;}
+    let html='';
+    for(let i=1;i<=n;i++){
+      const b=await v3.bundles(i);
+      const owner=await v3.ownerOf(i).catch(()=>'0x');
+      const cat=parseCat(await v3.bundleCategory(i));
+      const lab=await v3.bundleLabel(i);
+      const vault=await v3.bundleVault(i);
+      const principal=await v3.vaultPrincipal(i);
+      const rel=await v3.releaseAt(i);
+      const isVault=vault!=='0x0000000000000000000000000000000000000000'&&b.cardId.eq(0);
+      const mine=acct&&owner.toLowerCase()===acct;
+      const relTs=rel&&rel.gt(0)?rel.toNumber():0;
+      const relNow=relTs*1000, relDone=relTs&&Date.now()>=relNow;
+      const relTxt=relTs?new Date(relNow).toLocaleString()+' UTC'+(relDone?' - READY':''):'not requested';
+      let patrons='';
+      for(let j=0;j<b.patronCount;j++){patrons+=`<div class="kv"><span>Patron ${j+1}</span><b class="gold">${label(b.patrons[j])} - ${(b.patronBps[j]/100)}%</b></div>`;}
+      html+=`<div class="panel"><h3>Bundle #${i} <span class="badge ${b.active?'live':'off'}">${b.active?'Active':'Closed'}</span><span class="badge">V3</span></h3>
+      <div class="kv"><span>Receipt owner</span><b>${label(owner)}</b></div>
+      <div class="kv"><span>Category / label</span><b class="gold">${cat} / "${lab}"</b></div>
+      ${isVault?`
+      <div class="kv"><span>Type</span><b>Vault bundle</b></div>
+      <div class="kv"><span>Vault</span><b>${VAULT_LABELS[vault.toLowerCase()]||short(vault)}</b></div>
+      <div class="kv"><span>Position held</span><b class="gold">${ethers.utils.formatUnits(principal,6)} receipt tokens</b></div>
+      `:`
+      <div class="kv"><span>Type</span><b>Stake bundle</b></div>
+      <div class="kv"><span>Signature Stake</span><b class="gold">Token #${b.cardId.toString()}</b></div>
+      <div class="kv"><span>Renewal pot</span><b>${ethers.utils.formatEther(b.potBalance)} WISE</b></div>
+      `}
+      ${patrons||'<div class="kv"><span>Patrons</span><b>none configured</b></div>'}
+      <div class="kv"><span>Emergency release</span><b>${relTxt}</b></div>
+      ${allowed&&mine&&b.active?`<div class="row">
+        ${isVault?`<button class="btn" onclick="scrapeVaultB(${i})">Scrape Vault Yield</button>`:`<label style="margin:0">Days</label><input id="v3days${i}" value="30" style="width:70px"><button class="btn" onclick="scrapeV3(${i})">Scrape Yield</button><button class="btn ghost" onclick="closeV3(${i})">Close Bundle</button>`}
+        ${!relTs?`<button class="btn ghost" onclick="requestRel(${i})">Request Emergency Release</button>`:relDone?`<button class="btn" onclick="doRelease(${i})">Release Card (execute)</button>`:`<button class="btn ghost" onclick="cancelRel(${i})">Cancel Release (7d clock running)</button>`}
+      </div>`:''}
+      ${!mine&&b.active?`<div class="note">Not your receipt - actions belong to ${label(owner)}.</div>`:''}
+      <div class="status" id="v3stat${i}"></div></div>`;
+    }
+    box.innerHTML=html;box.className='';
+  }catch(err){box.textContent='Could not load V3 bundles: '+short(err.message||err);box.className='empty';}
+}
+function vst(i,txt,cls){const e=document.getElementById('v3stat'+i);if(e){e.textContent=txt;e.className='status '+(cls||'');}}
+async function v3send(i,fn,waitMsg,okMsg){
+  try{
+    if(!await stillAllowed())return;
+    const w=v3.connect(signer);
+    vst(i,waitMsg,'wait');
+    const tx=await fn(w);
+    vst(i,'Sent - waiting for confirmation ('+tx.hash.slice(0,10)+'...)','wait');
+    await tx.wait();
+    vst(i,okMsg,'ok');
+    await loadV3();
+  }catch(e){vst(i,'Failed: '+(e.data&&e.data.message?e.data.message:(e.message||e)),'err');}
+}
+function scrapeVaultB(i){v3send(i,w=>w.scrapeVault(i),'Claiming vault yield - patron and owner shares paid in USDC...','Vault yield scraped.')}
+function scrapeV3(i){const d=document.getElementById('v3days'+i).value||'30';v3send(i,w=>w.scrape(i,d),'Sending scrape for '+d+' days...','Scraped.')}
+function closeV3(i){v3send(i,w=>w.close(i),'Closing bundle - stake returns to you...','Bundle closed. Stake returned.')}
+function requestRel(i){v3send(i,w=>w.requestRelease(i),'Requesting emergency release - 7-day clock starts...','Release requested. Executable after the 7-day delay.')}
+function cancelRel(i){v3send(i,w=>w.cancelRelease(i),'Cancelling release request...','Release cancelled - bundle stays active.')}
+function doRelease(i){v3send(i,w=>w.releaseCard(i),'Executing release - unwinding position to your wallet...','Released. Position returned, receipt burned.')}
+
 </script>
 </body>
 </html>
