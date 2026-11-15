@@ -326,6 +326,24 @@ function label(a){if(!a)return '';const k=a.toLowerCase();return NAME_LABELS[k]|
 function parseCat(b32){try{const s=ethers.utils.parseBytes32String(b32);return s||'-'}catch(e){return '-'}}
 let v3;
 
+
+async function bundleRaw(i){
+  const data='0x'+ethers.utils.id('bundles(uint256)').slice(2,10)+i.toString(16).padStart(64,'0');
+  const r=await provider.call({to:V3,data:data});
+  const words=[];for(let k=2;k<r.length;k+=64)words.push(r.substr(k,64));
+  const dec=h=>new ethers.BigNumber(h,16);
+  if(words.length>=18){
+    return {cardId:dec(words[0]),patrons:words.slice(2,8).map(w=>'0x'+w.slice(24)),
+            patronBps:words.slice(8,14).map(w=>dec(w).toNumber()),
+            patronCount:dec(words[14]).toNumber(),
+            potBalance:dec(words[20]),active:dec(words[21]).eq(1)};
+  }
+  const patron='0x'+words[1].slice(24);
+  const cnt=(patron==='0x'+'0'.repeat(40))?0:1;
+  return {cardId:dec(words[0]),patrons:[patron],patronBps:[dec(words[2]).toNumber()],
+          patronCount:cnt,potBalance:dec(words[4]),active:dec(words[5]).eq(1)};
+}
+
 async function loadV3(){
   const box=document.getElementById('bundlesV3');
   try{
@@ -333,7 +351,7 @@ async function loadV3(){
     if(n<1){box.textContent='No V3 bundles minted yet.';box.className='empty';return;}
     let html='';
     for(let i=1;i<=n;i++){
-      const b=await v3.bundles(i);
+      const b=await bundleRaw(i);
       const owner=await v3.ownerOf(i).catch(()=>'0x');
       const cat=parseCat(await v3.bundleCategory(i));
       const lab=await v3.bundleLabel(i);
