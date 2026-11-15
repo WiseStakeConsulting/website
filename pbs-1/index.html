@@ -7,7 +7,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wise Stake Consulting">
 <meta property="og:title" content="PBS-1 - Patronage Bundles | Wise Stake Consulting">
-<meta property="og:description" content="The Patronage Bundle Standard: wrap a stake or vault position with up to 6 beneficiaries. Pick a category, fund it, set the splits, wrap it - from your own wallet.">
+<meta property="og:description" content="The Patronage Bundle Standard: wrap a stake or vault position with its beneficiary of record. Pick a category, fund it, set the splits, wrap it - from your own wallet.">
 <meta property="og:url" content="https://wisestake.consulting/pbs-1/">
 <meta property="og:image" content="https://wisestake.consulting/assets/img/share-card.png">
 <meta property="og:image:width" content="1200">
@@ -15,9 +15,9 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PBS-1 - Patronage Bundles | Wise Stake Consulting">
-<meta name="twitter:description" content="Wrap a stake or vault position with up to 6 beneficiaries. Pick a category, fund it, set the splits, wrap it.">
+<meta name="twitter:description" content="Wrap a stake or vault position with its beneficiary of record. Pick a category, fund it, set the split, wrap it.">
 <meta name="twitter:image" content="https://wisestake.consulting/assets/img/share-card.png">
-<meta name="description" content="Wrap a stake or vault position with up to 6 beneficiaries. Pick a category, fund it, set the splits, wrap it - from your own wallet.">
+<meta name="description" content="Wrap a stake or vault position with its beneficiary of record. Pick a category, fund it, set the split, wrap it - from your own wallet.">
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 <style>
 :root{--navy:#0a1128;--navy2:#101a3a;--panel:#0d1733;--gold:#d4a13a;--gold2:#e8c15a;--cream:#f5efe0;--muted:#9aa5c0;--line:rgba(232,193,90,.18)}
@@ -121,7 +121,7 @@ footer.site a{color:var(--gold2);text-decoration:none}
   <div class="steps">
     <div class="step"><div class="num">1</div><h3>Pick the category</h3><p>What is this bundle for? A song, a family, a tithe, a membership. The category is permanent, on-chain, and keys the receipt's art.</p></div>
     <div class="step"><div class="num">2</div><h3>Fund it</h3><p>Back the bundle with a vault position (like a World Mobile wtnUSDC deposit), a fresh USDC deposit, a Wise Signature Stake, or a brand-new stake.</p></div>
-    <div class="step"><div class="num">3</div><h3>Set the beneficiaries</h3><p>Up to 6 wallets, each with a share of the daily interest. Splits are set at creation and permanent - the bundle pays them on every scrape, forever.</p></div>
+    <div class="step"><div class="num">3</div><h3>Set the beneficiaries</h3><p>Name who the interest flows to. Today the on-chain bundle records one beneficiary of record; your full split plan (up to 6 wallets) is kept with your bundle papers and paid out through WSC servicing - on-chain multi-beneficiary lands with our V4 contract.</p></div>
     <div class="step"><div class="num">4</div><h3>Wrap it</h3><p>One signature from your wallet. You get a receipt NFT that controls the bundle - scrape it, close it, or hold it. The interest splits automatically.</p></div>
   </div>
 </div></section>
@@ -175,7 +175,8 @@ footer.site a{color:var(--gold2);text-decoration:none}
     </div>
     <p class="note" style="margin-top:12px">Don't hold a position yet? <a class="gold" href="/vaults/">Fund a vault</a> or <a class="gold" href="https://app.wisetoken.com/?ref=0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" target="_blank" rel="noopener">stake WISE into a Wise Signature Stake</a> first - then wrap it here.</p>
   <h3>Step 2 &mdash; The beneficiaries</h3>
-    <p class="note">Up to 6 wallets, shares of the daily interest (post-fee). Whatever you don't assign stays with whoever holds the receipt. Splits are permanent once wrapped.</p>
+  <p class="note">One beneficiary of record goes on-chain today (choose the person or trust that receives the interest). Listing several here keeps the full split on file with WSC until the V4 contract writes all of them on-chain.</p>
+    <p class="note">List everyone the interest is meant for - shares of the daily interest (post-fee). The first wallet goes on-chain as the beneficiary of record today; the full split is kept with your bundle papers and honored through WSC servicing until the V4 contract writes all of them on-chain. Whatever you don't assign stays with whoever holds the receipt.</p>
     <div id="patronRows" style="margin-top:14px"></div>
     <div class="sumline" id="sumLine"></div>
     <div style="margin-top:10px"><button class="gold" onclick="addPatron()" id="addPatronBtn" style="padding:9px 20px;font-size:.82rem">Add beneficiary</button></div>
@@ -435,11 +436,27 @@ async function buildSpec(){
   return [plist,blist,lockDays,mode,0,referrer===''?ethers.constants.AddressZero:referrer,category,label];
 }
 
+function saveCarry(){
+  try{
+    const patrons=window.patrons||[];
+    const first=patrons.find(p=>p.addr&&p.addr.trim());
+    const stakeSel=document.getElementById('cardSel');
+    localStorage.setItem('wsc_pbs1_carry',JSON.stringify({
+      patron:first?first.addr.trim():'',
+      bps:first?Math.round((parseFloat(first.pct)||0)*100):'',
+      nftAddr:'0xEda93378F2d17747657d16B7EEB4bAf2E4a46a94',
+      stakeId:stakeSel&&/^[0-9]+$/.test(stakeSel.value)?stakeSel.value:'',
+      ts:Date.now()
+    }));
+  }catch(e){}
+}
+
 function updateWrapWhat(){
   let t;
   const nftRoute=document.getElementById('nftRoute');
   if(useCard&&useNft){
     t='Your NFT rides with your Wise Signature Stake. The Bundle Console handles the three signings (approve stakes, approve NFT, create the bundle) - continue below.';
+    saveCarry();
     nftRoute.style.display='block';
     document.getElementById('approveBtn').style.display='none';
     document.getElementById('wrapBtn').style.display='none';
