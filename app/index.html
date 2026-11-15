@@ -321,7 +321,7 @@ async function createBundle(){
 const V3='0x2dD7FFb8571ce9C70110d039fb07C84c27b82A82';
 const V3_ABI=[
  {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"type":"function","stateMutability":"view"},
- {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundles","outputs":[{"name":"cardId","type":"uint256"},{"name":"patrons","type":"address[6]"},{"name":"patronBps","type":"uint16[6]"},{"name":"patronCount","type":"uint8"},{"name":"mode","type":"uint8"},{"name":"topUpBps","type":"uint16"},{"name":"potBalance","type":"uint256"},{"name":"active","type":"bool"}],"type":"function","stateMutability":"view"},
+
  {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundleCategory","outputs":[{"name":"","type":"bytes32"}],"type":"function","stateMutability":"view"},
  {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundleLabel","outputs":[{"name":"","type":"string"}],"type":"function","stateMutability":"view"},
  {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bundleVault","outputs":[{"name":"","type":"address"}],"type":"function","stateMutability":"view"},
@@ -346,17 +346,12 @@ async function bundleRaw(i){
   const data='0x'+ethers.utils.id('bundles(uint256)').slice(2,10)+i.toString(16).padStart(64,'0');
   const r=await provider.call({to:V3,data:data});
   const words=[];for(let k=2;k<r.length;k+=64)words.push(r.substr(k,64));
+  if(words.length!==6)throw new Error('V3 struct mismatch: got '+words.length+' words, expected 6');
   const dec=h=>ethers.BigNumber.from(h);
-  if(words.length>=18){
-    return {cardId:dec(words[0]),patrons:words.slice(2,8).map(w=>'0x'+w.slice(24)),
-            patronBps:words.slice(8,14).map(w=>dec(w).toNumber()),
-            patronCount:dec(words[14]).toNumber(),
-            potBalance:dec(words[20]),active:dec(words[21]).eq(1)};
-  }
   const patron='0x'+words[1].slice(24);
-  const cnt=(patron==='0x'+'0'.repeat(40))?0:1;
-  return {cardId:dec(words[0]),patrons:[patron],patronBps:[dec(words[2]).toNumber()],
-          patronCount:cnt,potBalance:dec(words[4]),active:dec(words[5]).eq(1)};
+  const hasPatron=parseInt(words[1].slice(24),16)!==0;
+  return {cardId:dec(words[0]),patron:hasPatron?patron:null,patronBps:hasPatron?dec(words[2]).toNumber():0,
+          mode:dec(words[3]).toNumber(),topUpBps:dec(words[4]).toNumber(),active:dec(words[5]).eq(1)};
 }
 
 async function loadV3(){
@@ -377,9 +372,8 @@ async function loadV3(){
       const mine=acct&&owner.toLowerCase()===acct;
       const relTs=rel&&rel.gt(0)?rel.toNumber():0;
       const relNow=relTs*1000, relDone=relTs&&Date.now()>=relNow;
-      const relTxt=relTs?new Date(relNow).toLocaleString()+' UTC'+(relDone?' - READY':''):'not requested';
-      let patrons='';
-      for(let j=0;j<b.patronCount;j++){patrons+=`<div class="kv"><span>Patron ${j+1}</span><b class="gold">${label(b.patrons[j])} - ${(b.patronBps[j]/100)}%</b></div>`;}
+      const relTxt=relTs?(relDone?new Date(relNow).toLocaleString()+' UTC - window OPEN':'window opens '+new Date(relNow).toLocaleString()+' UTC'):'not requested';
+      let patrons=b.patron?`<div class="kv"><span>Patron</span><b class="gold">${label(b.patron)} - ${(b.patronBps/100)}%</b></div>`:'<div class="kv"><span>Patrons</span><b>none - yield follows the receipt owner</b></div>';
       html+=`<div class="panel"><h3>Bundle #${i} <span class="badge ${b.active?'live':'off'}">${b.active?'Active':'Closed'}</span><span class="badge">V3</span></h3>
       <div class="kv"><span>Receipt owner</span><b>${label(owner)}</b></div>
       <div class="kv"><span>Category / label</span><b class="gold">${cat} / "${lab}"</b></div>
@@ -390,7 +384,7 @@ async function loadV3(){
       `:`
       <div class="kv"><span>Type</span><b>Stake bundle</b></div>
       <div class="kv"><span>Signature Stake</span><b class="gold">Token #${b.cardId.toString()}</b></div>
-      <div class="kv"><span>Renewal pot</span><b>${ethers.utils.formatEther(b.potBalance)} WISE</b></div>
+      <div class="kv"><span>Maturity mode</span><b class="gold">${['Off','Restake','Restake + top-up'][b.mode]||b.mode}${b.mode===2?' ('+(b.topUpBps/100)+'%)':''}</b></div>
       `}
       ${patrons||'<div class="kv"><span>Patrons</span><b>none configured</b></div>'}
       <div class="kv"><span>Emergency release</span><b>${relTxt}</b></div>
