@@ -152,7 +152,7 @@ footer.site a{color:var(--gold2);text-decoration:none}
     <div class="engines">
       <button id="eng-vault" class="sel" onclick="toggleEngine('vault')">Vault position I already hold<small>e.g. wtnUSDC from a World Mobile deposit. Your receipt tokens move into the bundle.</small></button>
       <button id="eng-card" onclick="toggleEngine('card')">Signature card I already hold<small>Your existing Signature Stakes card moves in whole - yield engine and all.</small></button>
-      <button id="eng-nft" class="soon" tabindex="-1">Minted NFT rider<small>Pairs with a yield position in the Bundle Console (stake route) today. Vault + NFT arrives with the next wrapper release.</small></button>
+      <button id="eng-nft" onclick="toggleEngine('nft')">Minted NFT rider<small>Already minted on our Minting page? Pair it with your Signature card - the pairing finishes in the Bundle Console stake route. (Vault + NFT arrives with the next wrapper release.)</small></button>
     </div>
     <p class="note" id="pairNote" style="display:none"></p>
     <div id="vaultPick" style="margin-top:16px">
@@ -196,6 +196,7 @@ footer.site a{color:var(--gold2);text-decoration:none}
     <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
       <button class="gold" id="approveBtn" onclick="doApprove()" style="padding:12px 26px;font-size:.9rem">1 &middot; Approve</button>
       <button class="gold" id="wrapBtn" onclick="doWrap()" style="padding:12px 26px;font-size:.9rem">2 &middot; Wrap the Bundle</button>
+      <div id="nftRoute" style="display:none;width:100%"><a class="btn btn-gold" href="/app/?nft=0xEda93378F2d17747657d16B7EEB4bAf2E4a46a94">Continue to the Bundle Console &rarr;</a></div>
     </div>
     <div class="status-line" id="wrapStatus"></div>
     <p class="ethscan" id="txLink" style="display:none"></p>
@@ -240,7 +241,7 @@ const CATEGORIES = [
  ['LEGACY','The reward for outliving it - or the inheritance that lands in days, not years.'],
  ['PODCAST','Show and episode support funded by the position behind it.']
 ];
-let provider=null, signer=null, wrapper=null, account=null, useVault=true, useCard=false, lastBundleId=0;
+let provider=null, signer=null, wrapper=null, account=null, useVault=true, useCard=false, useNft=false, lastBundleId=0;
 let vaultAddrs=[], vaultNames=[];
 let patrons=[];
 
@@ -292,18 +293,30 @@ function setCat(c){document.getElementById('catSel').value=c;
   st('wrapStatus','Category set to <b>'+c+'</b>.','ok');}
 
 function toggleEngine(which){
-  if(which==='vault')useVault=!useVault;
-  if(which==='card')useCard=!useCard;
-  if(!useVault&&!useCard){ // never leave zero selections
-    if(which==='vault')useCard=true;else useVault=true;
+  const pn=document.getElementById('pairNote');
+  if(which==='vault'){
+    if(useNft){ // NFT locks the pair to card + NFT (max two, and vault+NFT is not in V3)
+      pn.style.display='block';
+      pn.innerHTML='With the NFT rider on, your pair is <b>card + NFT</b>. Vault + NFT arrives with the next wrapper release.';
+      return;
+    }
+    useVault=!useVault;
+  }else if(which==='card'){
+    useCard=!useCard;
+    if(!useCard&&useNft)useNft=false; // NFT never rides alone
+  }else if(which==='nft'){
+    useNft=!useNft;
+    if(useNft){useCard=true;useVault=false;}
   }
+  if(!useVault&&!useCard&&!useNft)useVault=true; // never leave zero selections
   document.getElementById('eng-vault').classList.toggle('sel',useVault);
   document.getElementById('eng-card').classList.toggle('sel',useCard);
+  document.getElementById('eng-nft').classList.toggle('sel',useNft);
   document.getElementById('vaultPick').style.display=useVault?'block':'none';
   document.getElementById('cardPick').style.display=useCard?'block':'none';
-  const pn=document.getElementById('pairNote');
-  pn.style.display=(useVault&&useCard)?'block':'none';
-  pn.innerHTML='You picked <b>both</b>. Two signings: the bundle wraps your card first, then attaches the vault position to it.';
+  if(useVault&&useCard){pn.style.display='block';pn.innerHTML='You picked <b>both</b>. Two signings: the bundle wraps your card first, then attaches the vault position to it.';}
+  else if(useCard&&useNft){pn.style.display='block';pn.innerHTML='You picked <b>card + NFT rider</b>. The pairing finishes in the Bundle Console stake route: approve the stakes, approve the NFT, create the bundle.';}
+  else{pn.style.display='none';pn.innerHTML='';}
   updateWrapWhat();
 }
 
@@ -399,9 +412,20 @@ async function buildSpec(){
 
 function updateWrapWhat(){
   let t;
-  if(useVault&&useCard)t='You will approve the wrapper for your receipt tokens AND as card operator, then wrap the card, then attach the vault position. Three signings total, each shown before you sign.';
-  else if(useVault)t='You will approve the wrapper to hold your receipt tokens, then wrap them into the bundle.';
-  else t='You will approve the wrapper as a card operator, then wrap the selected card.';
+  const nftRoute=document.getElementById('nftRoute');
+  if(useCard&&useNft){
+    t='Your NFT rides with your Signature card. The Bundle Console handles the three signings (approve stakes, approve NFT, create the bundle) - continue below.';
+    nftRoute.style.display='block';
+    document.getElementById('approveBtn').style.display='none';
+    document.getElementById('wrapBtn').style.display='none';
+  }else{
+    nftRoute.style.display='none';
+    document.getElementById('approveBtn').style.display='';
+    document.getElementById('wrapBtn').style.display='';
+    if(useVault&&useCard)t='You will approve the wrapper for your receipt tokens AND as card operator, then wrap the card, then attach the vault position. Three signings total, each shown before you sign.';
+    else if(useVault)t='You will approve the wrapper to hold your receipt tokens, then wrap them into the bundle.';
+    else t='You will approve the wrapper as a card operator, then wrap the selected card.';
+  }
   document.getElementById('wrapWhat').textContent=t;
 }
 
@@ -430,6 +454,7 @@ async function doApprove(){
 
 async function doWrap(){
   try{
+    if(useNft){st('wrapStatus','Card + NFT pairing finishes in the Bundle Console - use the continue button above.','err');return;}
     if(!wrapper){st('wrapStatus','Connect your wallet first.','err');return;}
     const spec=await buildSpec();
     st('wrapStatus','Confirm in your wallet - wrapping the bundle...','wait');
