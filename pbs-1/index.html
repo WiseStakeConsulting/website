@@ -120,7 +120,7 @@ footer.site a{color:var(--gold2);text-decoration:none}
   <h2>Four steps. One transaction to finish it.</h2>
   <div class="steps">
     <div class="step"><div class="num">1</div><h3>Pick the category</h3><p>What is this bundle for? A song, a family, a tithe, a membership. The category is permanent, on-chain, and keys the receipt's art.</p></div>
-    <div class="step"><div class="num">2</div><h3>Fund it</h3><p>Back the bundle with a vault position (like a World Mobile wtnUSDC deposit), a fresh USDC deposit, a Signature card, or a brand-new stake.</p></div>
+    <div class="step"><div class="num">2</div><h3>Fund it</h3><p>Back the bundle with a vault position (like a World Mobile wtnUSDC deposit), a fresh USDC deposit, a Wise Signature Stake, or a brand-new stake.</p></div>
     <div class="step"><div class="num">3</div><h3>Set the beneficiaries</h3><p>Up to 6 wallets, each with a share of the daily interest. Splits are set at creation and permanent - the bundle pays them on every scrape, forever.</p></div>
     <div class="step"><div class="num">4</div><h3>Wrap it</h3><p>One signature from your wallet. You get a receipt NFT that controls the bundle - scrape it, close it, or hold it. The interest splits automatically.</p></div>
   </div>
@@ -151,8 +151,8 @@ footer.site a{color:var(--gold2);text-decoration:none}
     <p class="note">A bundle holds <b>up to two of these three</b> - and the NFT never rides alone. Positions must already be in your wallet: the bundle wraps what you hold, it doesn't buy for you.</p>
     <div class="engines">
       <button id="eng-vault" class="sel" onclick="toggleEngine('vault')">Vault position I already hold<small>e.g. wtnUSDC from a World Mobile deposit. Your receipt tokens move into the bundle.</small></button>
-      <button id="eng-card" onclick="toggleEngine('card')">Signature card I already hold<small>Your existing Signature Stakes card moves in whole - yield engine and all.</small></button>
-      <button id="eng-nft" onclick="toggleEngine('nft')">Minted NFT rider<small>Already minted on our Minting page? Pair it with your Signature card - the pairing finishes in the Bundle Console stake route. (Vault + NFT arrives with the next wrapper release.)</small></button>
+      <button id="eng-card" onclick="toggleEngine('card')">Wise Signature Stake I already hold<small>Your existing Signature Stakes card moves in whole - yield engine and all.</small></button>
+      <button id="eng-nft" onclick="toggleEngine('nft')">Minted NFT rider<small>Already minted on our Minting page? Pair it with your Wise Signature Stake - the pairing finishes in the Bundle Console stake route. (Vault + NFT arrives with the next wrapper release.)</small></button>
     </div>
     <p class="note" id="pairNote" style="display:none"></p>
     <div id="vaultPick" style="margin-top:16px">
@@ -163,16 +163,17 @@ footer.site a{color:var(--gold2);text-decoration:none}
       <p class="note" id="vaultBal"></p>
     </div>
     <div id="cardPick" style="margin-top:16px;display:none">
-      <label for="cardSel">Your Signature card</label>
+      <label for="cardSel">Your Wise Signature Stakes</label>
       <select id="cardSel"></select>
       <p class="note" id="cardInfo"></p>
       <label for="modeSel">At maturity</label>
       <select id="modeSel">
         <option value="0">Off - hold until I act</option>
-        <option value="1">Restake automatically</option>
+        <option value="1">Restake - I'll sign it in the Console</option>
       </select>
+      <p class="note" id="modeNote">Nothing restakes automatically today. At maturity the stake sits until you act - one signature in the Bundle Console. Our assisted restake with maturity reminders is <b>coming soon</b>; this choice is recorded with your bundle so it's ready when that launches.</p>
     </div>
-    <p class="note" style="margin-top:12px">Don't hold a position yet? <a class="gold" href="/vaults/">Fund a vault</a> or <a class="gold" href="https://app.wisetoken.com/?ref=0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" target="_blank" rel="noopener">stake WISE into a Signature card</a> first - then wrap it here.</p>
+    <p class="note" style="margin-top:12px">Don't hold a position yet? <a class="gold" href="/vaults/">Fund a vault</a> or <a class="gold" href="https://app.wisetoken.com/?ref=0x142A534C60e16695cfE2aBab86f8DEcb85d568c0" target="_blank" rel="noopener">stake WISE into a Wise Signature Stake</a> first - then wrap it here.</p>
   <h3>Step 2 &mdash; The beneficiaries</h3>
     <p class="note">Up to 6 wallets, shares of the daily interest (post-fee). Whatever you don't assign stays with whoever holds the receipt. Splits are permanent once wrapped.</p>
     <div id="patronRows" style="margin-top:14px"></div>
@@ -265,7 +266,8 @@ const ABI=[
  'function resolveName(string n) view returns (address)'
 ];
 const ERC20_ABI=['function balanceOf(address) view returns (uint256)','function decimals() view returns (uint8)','function approve(address,uint256) returns (bool)','function symbol() view returns (string)'];
-const CARD_ABI=['function ownerOf(uint256) view returns (address)','function walletOfOwner(address) view returns (uint256[])','function setApprovalForAll(address,bool)'];
+const CARD_ABI=['function ownerOf(uint256) view returns (address)','function walletOfOwner(address) view returns (uint256[])','function setApprovalForAll(address,bool)','function NFTStake(uint256) view returns (bytes16)'];
+const ENGINE_ABI=['function stakes(address,bytes16) view returns (uint256,uint256,uint256,uint64,uint64,uint64,uint64,uint256,uint256,uint256,address,bool)','function currentDay() view returns (uint256)'];
 
 function st(id,msg,cls){const el=document.getElementById(id);el.className='status-line show '+cls;el.innerHTML=msg;}
 function short(a){return a.slice(0,6)+'...'+a.slice(-4);}
@@ -339,13 +341,36 @@ async function loadVaults(){
 
 async function loadCards(){
   if(!signer)return;
+  const sel=document.getElementById('cardSel');
   try{
     const c=new ethers.Contract(CARD,CARD_ABI,signer);
+    const eng=new ethers.Contract(WISE,ENGINE_ABI,signer);
     const ids=await c.walletOfOwner(account);
-    const sel=document.getElementById('cardSel');
-    if(ids.length===0){sel.innerHTML='<option>No Signature cards in this wallet</option>';return;}
-    sel.innerHTML=ids.map(i=>'<option value="'+i.toString()+'">Card #'+i.toString()+'</option>').join('');
-  }catch(e){}
+    if(ids.length===0){sel.innerHTML='<option>No Wise Signature Stakes in this wallet</option>';return;}
+    sel.innerHTML='<option>Loading your stakes...</option>';
+    let day=null; try{day=await eng.currentDay();}catch(e){}
+    const opts=[];
+    for(const i of ids){
+      const v=i.toString();
+      let label='Wise Signature Stake #'+v;
+      try{
+        const sid=await c.NFTStake(i);
+        const st=await eng.stakes(CARD,sid);
+        const principal=st[1];
+        if(principal && principal.gt(0)){
+          label+=' - '+ethers.utils.formatUnits(principal,18).replace(/\.00$/,'')+' WISE';
+          if(day && st[2]){
+            const mature=parseInt(st[2])-parseInt(day);
+            if(mature>0) label+=' (matures in ~'+mature+' days)';
+            else label+=' (mature)';
+          }
+        }
+      }catch(e){}
+      opts.push('<option value="'+v+'">'+label+'</option>');
+    }
+    sel.innerHTML=opts.join('');
+  }catch(e){sel.innerHTML='<option>Could not read stakes - reconnect wallet</option>';
+    st('wrapStatus','Stake list: '+(e.message||e),'err');}
 }
 
 async function refreshBalances(){
@@ -414,7 +439,7 @@ function updateWrapWhat(){
   let t;
   const nftRoute=document.getElementById('nftRoute');
   if(useCard&&useNft){
-    t='Your NFT rides with your Signature card. The Bundle Console handles the three signings (approve stakes, approve NFT, create the bundle) - continue below.';
+    t='Your NFT rides with your Wise Signature Stake. The Bundle Console handles the three signings (approve stakes, approve NFT, create the bundle) - continue below.';
     nftRoute.style.display='block';
     document.getElementById('approveBtn').style.display='none';
     document.getElementById('wrapBtn').style.display='none';
