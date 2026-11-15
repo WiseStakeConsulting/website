@@ -3,203 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wise Stake Consulting - Las B&oacute;vedas Est&aacute;n Abiertas</title>
+<title>B&oacute;vedas: Deposita USDC, Gana 20% APY Fijo | Wise Stake Consulting</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wise Stake Consulting">
-<meta property="og:title" content="Wise Stake Consulting - Las B&amp;oacute;vedas Est&amp;aacute;n Abiertas">
-<meta property="og:description" content="B&amp;oacute;vedas de stablecoins de rendimiento fijo respaldadas por activos del mundo real. 20% APY compuesto. Pool respaldado por nodos al 40% APR con ventana de cierre. Listo para depositar en cuatro pasos.">
+<meta property="og:title" content="B&oacute;vedas: Deposita USDC, Gana 20% APY Fijo | Wise Stake Consulting">
+<meta property="og:description" content="Dos pozos de rendimiento respaldados por negocios reales: World Mobile al 20% APY fijo y Sovren al 40% APR en ventana limitada. Depositas en moneda estable, t&uacute; conservas las llaves, el inter&eacute;s corre diario.">
 <meta property="og:url" content="https://wisestake.consulting/es/vaults/">
 <meta property="og:image" content="https://wisestake.consulting/assets/img/share-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wise Stake Consulting - Las B&amp;oacute;vedas Est&amp;aacute;n Abiertas">
-<meta name="twitter:description" content="B&amp;oacute;vedas de stablecoins de rendimiento fijo respaldadas por activos del mundo real. 20% APY compuesto. Pool respaldado por nodos al 40% APR con ventana de cierre. Listo para depositar en cuatro pasos.">
+<meta name="twitter:title" content="B&oacute;vedas: Deposita USDC, Gana 20% APY Fijo | Wise Stake Consulting">
+<meta name="twitter:description" content="20% APY fijo respaldado por telecom real. 40% APR en ventana limitada. Tus llaves, tu decisi&oacute;n.">
 <meta name="twitter:image" content="https://wisestake.consulting/assets/img/share-card.png">
-<meta name="description" content="B&oacute;vedas de stablecoins de rendimiento fijo respaldadas por activos del mundo real. 20% APY compuesto. Pool respaldado por nodos al 40% APR con ventana de cierre. Listo para depositar en cuatro pasos.">
-<link rel="icon" type="image/png" href="/assets/logo.png">
+<meta name="description" content="Dos pozos de rendimiento respaldados por negocios reales: World Mobile al 20% APY fijo y Sovren al 40% APR en ventana limitada. Depositas en moneda estable, t&uacute; conservas las llaves.">
 <style>
-:root{--navy:#0b1020;--navy2:#111a33;--gold:#d4af37;--white:#f5f6fa;--muted:#9aa3b5;--ok:#2ecc71;--warn:#e67e22}
+:root{
+  --navy:#0A1A2F; --navy2:#0E2240; --navy3:#12294B;
+  --gold:#D4A843; --gold2:#E8C675; --cream:#F5EFDF; --cream2:#EFE6CE;
+  --ink:#0A1A2F; --muted:#8FA3BD; --line:rgba(212,168,67,.25);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--navy);color:var(--white);font-family:Helvetica,Arial,sans-serif;line-height:1.55}
-a{color:var(--gold)}
-.wrap{max-width:920px;margin:0 auto;padding:0 24px}
-header{position:sticky;top:0;background:rgba(11,16,32,.97);border-bottom:1px solid #1e2a4a;padding:12px 0;z-index:9}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{border-radius:50%;border:2px solid var(--gold);background:#fff;width:40px;height:40px}
-.bname{font-family:Georgia,serif;color:var(--gold);font-size:19px;display:flex;flex-direction:column}
-.bname small{font-family:Helvetica,Arial,sans-serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:normal}
-.cta{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;font-size:19px;padding:16px 34px;border-radius:8px;text-decoration:none;letter-spacing:.3px}
-.cta:hover{filter:brightness(1.1)}
-.cta.ghost{background:transparent;color:var(--gold);border:1.5px solid var(--gold);font-size:15px;padding:12px 24px}
-section{padding:56px 0;border-bottom:1px solid #1a2440}
-.eyebrow{color:var(--gold);letter-spacing:3px;font-size:12px;text-transform:uppercase;font-weight:bold;margin-bottom:14px}
-h1{font-size:44px;line-height:1.1;margin-bottom:18px}
-h2{font-size:30px;margin-bottom:16px}
-.lead{color:var(--muted);font-size:19px;max-width:680px}
-.nums{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
-.num{flex:1;min-width:240px;background:var(--navy2);border:1px solid #223055;border-radius:12px;padding:24px}
-.num .big{font-size:40px;font-weight:bold;color:var(--gold);line-height:1.1}
-.num .lbl{color:var(--muted);margin-top:8px;font-size:15px}
-.clock{background:linear-gradient(135deg,#1a2440,#0b1020);border:1px solid var(--gold);border-radius:14px;padding:30px;margin-top:8px}
-.clock h2{color:var(--gold)}
-.clock ul{margin:16px 0 0 20px;color:var(--muted)}
-.clock li{margin-bottom:10px}
-.steps{counter-reset:st}
-.step{display:flex;gap:18px;margin-top:26px;align-items:flex-start}
-.step:before{counter-increment:st;content:counter(st);flex:none;width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:bold;font-size:18px;display:flex;align-items:center;justify-content:center}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:'Spline Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Fraunces',serif}
+a{color:var(--gold2)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.eyebrow{letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:600}
+.btn{display:inline-block;padding:15px 30px;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;transition:.25s;border:1.5px solid transparent}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);box-shadow:0 8px 30px rgba(212,168,67,.35)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(212,168,67,.5)}
+.btn-ghost{border-color:var(--gold);color:var(--gold2)}
+.btn-ghost:hover{background:rgba(212,168,67,.12);transform:translateY(-2px)}
+nav{position:sticky;top:0;z-index:50;background:rgba(10,26,47,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:10px 0;flex-wrap:wrap;gap:10px 18px}
+nav img{height:44px}
+nav .links{display:flex;gap:18px;font-size:.84rem;flex-wrap:wrap;align-items:center}
+nav .links a{color:var(--cream);text-decoration:none;opacity:.85;white-space:nowrap}
+nav .links a:hover{opacity:1;color:var(--gold2)}
+@media(max-width:1150px){nav .links a.sec{display:none}}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.9}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,26,47,.05) 22%,rgba(10,26,47,.45) 52%,rgba(10,26,47,.9) 74%,rgba(10,26,47,.98) 100%)}
+.hero .wrap{position:relative;z-index:2;margin-left:auto;margin-right:0;text-align:right;max-width:600px;padding:120px 5vw 120px 24px}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.08;font-weight:700;margin:18px 0 22px}
+.hero h1 em{font-style:italic;color:var(--gold2)}
+.hero p.lead{font-size:1.08rem;color:var(--cream);opacity:.9;margin-bottom:34px}
+.cta-row{display:flex;gap:16px;justify-content:flex-end;flex-wrap:wrap}
+@media(max-width:720px){.hero .wrap{text-align:left;margin:0 auto;max-width:100%;padding:90px 24px}.cta-row{justify-content:flex-start}}
+.stats{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:34px 24px;text-align:center}
+.stats b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;color:var(--gold2)}
+.stats span{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:720px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+section{padding:90px 0}
+.sec-head{max-width:760px;margin:0 auto 54px;text-align:center}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:14px 0 16px;line-height:1.15}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:1050px;margin:0 auto}
+@media(max-width:900px){.dual{grid-template-columns:1fr}}
+.engine{background:var(--navy2);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.engine img.art{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.engine .body{padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px;flex:1}
+.engine h3{font-size:1.45rem;color:var(--gold2)}
+.engine .rate{font-family:'Fraunces',serif;font-size:2.4rem;color:var(--gold2);line-height:1}
+.engine .rate small{font-size:1rem;color:var(--muted);font-family:'Spline Sans',sans-serif}
+.engine p{font-size:.95rem;color:var(--cream2)}
+.engine .pillrow{margin-top:auto;padding-top:14px}
+.pill{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:5px 16px;border-radius:999px;font-size:.82rem;margin:4px 6px 0 0}
+.pill.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold2)}
+.own{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 50%,var(--navy) 100%)}
+.own-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+@media(max-width:900px){.own-grid{grid-template-columns:1fr}}
+.own h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.own p{color:var(--cream2);margin-bottom:18px}
+.node-card{background:var(--navy3);border:1px solid var(--line);border-radius:20px;padding:30px 28px;margin-bottom:20px;position:relative;overflow:hidden}
+.node-card::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.22),transparent 70%)}
+.node-card h3{color:var(--gold2);font-size:1.25rem;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.node-card h3 small{font-size:.8rem;color:var(--muted);font-family:'Spline Sans',sans-serif;font-weight:400;text-align:right}
+.node-card p{font-size:.9rem;margin:10px 0 0;color:var(--muted)}
+.own .strip{display:flex;gap:40px;margin-top:26px;flex-wrap:wrap}
+.own .strip div b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold2)}
+.own .strip div span{color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.flow{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{background:var(--navy3);border:1px solid var(--line);border-radius:18px;padding:32px 26px;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:'Fraunces',serif;font-size:2.6rem;color:var(--gold);opacity:.55;display:block;margin-bottom:10px}
+.step h3{font-size:1.15rem;margin-bottom:10px}
+.step p{font-size:.92rem;color:var(--muted)}
+.apy-pill{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:5px 16px;border-radius:999px;font-size:.9rem;margin-top:14px}
+details{background:var(--navy2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;padding:18px 22px;font-weight:600;color:var(--cream);list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:22px;color:var(--gold);font-size:1.3rem}
+details[open] summary::after{content:"\2212"}
+details .a{padding:0 22px 20px;color:var(--muted);font-size:.93rem}
 .ramps{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px}
-.ramp{flex:1;min-width:250px;background:var(--navy2);border:1px solid #223055;border-radius:12px;padding:24px}
-.ramp h3{color:var(--gold);margin-bottom:8px;font-size:19px}
+.ramp{flex:1;min-width:250px;background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:24px}
+.ramp h3{color:var(--gold2);margin-bottom:8px;font-size:19px}
 .ramp p{color:var(--muted);font-size:15px;margin-bottom:16px}
-.ramp a.btn{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;padding:10px 20px;border-radius:7px;text-decoration:none;font-size:15px}
+.ramp a.btn{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;padding:10px 20px;border-radius:7px;text-decoration:none;font-size:15px}
 .tag{display:inline-block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;background:#223055;color:var(--muted);border-radius:20px;padding:3px 12px;margin-bottom:10px}
-.tag.hot{background:#3a2a10;color:var(--gold)}
-.warnbox{background:#2a1c08;border:1px solid var(--warn);border-radius:10px;padding:18px 22px;margin-top:22px;font-size:15px;color:#f0d9b5}
+.tag.hot{background:#3a2a10;color:var(--gold2)}
+.warnbox{background:#2a1c08;border:1px solid #e67e22;border-radius:10px;padding:18px 22px;margin-top:22px;font-size:15px;color:#f0d9b5}
 .chains{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.chain{background:var(--navy2);border:1px solid #223055;border-radius:8px;padding:8px 16px;font-size:14px;color:var(--muted)}
-.faq div{margin-bottom:18px}
-.faq h3{color:var(--gold);font-size:17px;margin-bottom:4px}
-.faq p{color:var(--muted);font-size:15px}
-.disclaimer{font-size:12.5px;color:#6b7590;padding:34px 0 10px;max-width:860px}
-footer{padding:10px 0 50px;color:#6b7590;font-size:13px}
-.center{text-align:center}
-
-.topnav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
-.topnav a{color:var(--muted);text-decoration:none;font-size:13.5px;letter-spacing:.4px}
-.topnav a:hover{color:var(--gold)}
-.topnav a.active{color:var(--gold);font-weight:bold}
-.topnav .soon{font-size:9px;border:1px solid var(--gold);color:var(--gold);border-radius:20px;padding:1px 7px;margin-left:4px;vertical-align:middle}
-.topnav .nav-cta{background:var(--gold);color:var(--navy);font-weight:bold;padding:8px 18px;border-radius:8px}
-.topnav .lang{color:var(--gold)}
-@media(max-width:760px){.topnav{gap:12px}.topnav a{font-size:12px}}
+.chain{background:var(--navy3);border:1px solid var(--line);border-radius:8px;padding:8px 16px;font-size:14px;color:var(--muted)}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.plan{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:26px 22px;position:relative}
+.plan.best{border-color:var(--gold);box-shadow:0 0 40px rgba(212,168,67,.15)}
+.plan .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:4px 14px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.plan h3{font-size:1.25rem;margin-bottom:4px}
+.plan .price{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--gold2);margin:8px 0 14px}
+.plan .price small{font-size:.85rem;color:var(--muted);font-family:'Spline Sans',sans-serif}
+.plan ul{list-style:none;font-size:.86rem;color:var(--cream2)}
+.plan li{padding:6px 0;border-bottom:1px dashed rgba(143,163,189,.15)}
+.plan li::before{content:"\2713";color:var(--gold);margin-right:9px;font-weight:700}
+.plan .btn{display:block;text-align:center;margin-top:20px;padding:11px 10px;font-size:.88rem}
+@media(max-width:960px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.plans{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:.8rem}
+footer .wrap{display:flex;gap:30px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+footer img{height:56px}
+.disc{max-width:820px;font-size:.74rem;line-height:1.55;opacity:.8}
+.reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.book{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.book-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+@media(max-width:860px){.book-grid{grid-template-columns:1fr;gap:36px}}
+.book h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:14px 0 20px;line-height:1.15}
+.book .book-copy p{color:var(--muted);font-size:1.02rem}
+.book ul{list-style:none;margin-top:26px;padding:0}
+.book li{padding-left:28px;position:relative;margin-bottom:13px;color:var(--cream);font-size:.98rem}
+.book li::before{content:"\2726";color:var(--gold);position:absolute;left:0;top:1px}
+.book-card{background:var(--cream);border-radius:22px;padding:22px 18px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.book-card .ml-form-embedContainer{max-width:100%!important}
+.how{counter-reset:how}
+.how .hstep{display:flex;gap:18px;margin-top:26px;align-items:flex-start}
+.how .hstep:before{counter-increment:how;content:counter(how);flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center}
+.how h3{font-size:1.15rem;margin-bottom:6px}
+.how p{color:var(--muted);font-size:.95rem}
+.src{font-size:.8rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--muted)}
 </style>
-<!-- MailerLite Universal -->
-<script>
-(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f]||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-ml('account', '2732159');
-</script>
-<!-- End MailerLite Universal --></head>
+</head>
 <body>
-<header><div class="wrap">
-  <a class="brand" href="/es/"><img src="/assets/logo.png" alt="Wise Stake Consulting logo"><span class="bname">Wise Stake Consulting<small>The Receiving Side of Interest</small></span></a>
-  <nav class="topnav" aria-label="Main">
+<header class="site"><div class="bar">
+  <a class="brand" href="/es/"><img src="/assets/img/logo-seal.png" alt="Sello de Wise Stake Consulting"><b>Wise Stake Consulting<small>The Receiving Side of Interest</small></b></a>
+  <nav aria-label="Principal">
     <a href="/es/">Inicio</a>
     <a href="/es/signature-staking/">Staking con Firma</a>
     <a href="/es/vaults/" class="active">Vaults</a>
-    <a href="/world-mobile/es/">World Mobile</a>
-    <a href="/sovren/es/">Sovren</a>
     <a href="/es/pbs-1/">PBS-1</a>
     <a href="/es/book-a-session/" class="nav-cta">Reserva una sesi&oacute;n</a>
     <a href="/vaults/" class="lang">English</a>
   </nav>
 </div></header>
 
-<section><div class="wrap">
-  <div class="eyebrow">B&oacute;vedas de rendimiento fijo en activos del mundo real</div>
-  <h1>Las b&oacute;vedas est&aacute;n abiertas.<br>El reloj corre.</h1>
-  <p class="lead">B&oacute;vedas de stablecoins respaldadas por infraestructura del mundo real - redes de telecomunicaciones y econom&iacute;as de nodos - que pagan rendimiento fijo que ves llegar en tiempo real - deja el panel abierto y ver&aacute;s tu balance subir cada pocos segundos. Un pool cierra pronto a dinero nuevo. Los que ya est&aacute;n dentro llevan la ventaja. Esta p&aacute;gina te deja listo para depositar en cuatro pasos.</p>
-  <div class="nums">
-    <div class="num"><div class="big">20% APY</div><div class="lbl">B&oacute;vedas de stablecoins de rendimiento fijo, respaldadas por activos del mundo real. Compuesto - las recompensas llegan y crecen. Visible en vivo en el panel de la plataforma.</div></div>
-    <div class="num"><div class="big">40% APR</div><div class="lbl">El pool respaldado por nodos - pagado sobre dinero ESTABLE. Tu dep&oacute;sito se queda en d&oacute;lares; sin monta&ntilde;as rusas de precio de token sobre tu capital. No compone. Cierra pronto.</div></div>
-    <div class="num"><div class="big">~5 meses</div><div class="lbl">Restantes de la ventana del 40% del pool de nodos al 1 de noviembre de 2026. Despu&eacute;s del cierre, la &uacute;nica vuelta atr&aacute;s es comprar &oacute;rdenes de venta secundarias.</div></div>
+<section class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">WISE VAULTS &middot; LA OBERTURA</div>
+  <h1>Deposita USDC.<br>Gana de <em class="gold">redes de verdad</em>.</h1>
+  <p class="lede">Dos pozos, dos negocios que ya venden un servicio: <strong class="gold">World Mobile al 20% APY fijo</strong> &mdash; inter&eacute;s compuesto anual, para siempre &mdash; y <strong class="gold">Sovren al 40% APR</strong> &mdash; tasa simple anual &mdash; mientras est&eacute; abierta la ventana de nodos Tier 01. Tu dep&oacute;sito compra infraestructura de verdad. El inter&eacute;s corre todos los d&iacute;as, y t&uacute; te quedas con tus llaves.</p>
+  <div class="cta-row">
+    <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" rel="noopener">Deposita ahora &rarr;</a>
+    <a class="btn btn-ghost" href="/es/book-a-session/">Prefiero que me acompa&ntilde;en</a>
   </div>
-  <p class="center" style="margin-top:40px"><a class="cta" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" target="_blank" rel="noopener">DEPOSITA YA &rarr;</a></p>
-  <p class="center" style="margin-top:12px;color:var(--muted);font-size:14px">&iquest;Ya sabes lo que haces? El bot&oacute;n te lleva directo a la plataforma por nuestro enlace de referencia. &iquest;A&uacute;n no? Los cuatro pasos de abajo te dejan listo.</p>
+  <p class="note">Enlace de dep&oacute;sito de Denise &middot; wisestakes.eth</p>
 </div></section>
 
-<section><div class="wrap">
-  <div class="eyebrow">Por qu&eacute; ganan los primeros</div>
-  <h2>La ventana, en n&uacute;meros claros.</h2>
-  <div class="clock">
-    <h2>Lo que est&aacute; pasando</h2>
-    <ul>
-      <li>Un dep&oacute;sito muy grande tiene fecha de llegar en diciembre. Cuando llegue, <strong style="color:var(--white)">el pool de nodos al 40% APR se cierra</strong> - cerrado a dep&oacute;sitos nuevos.</li>
-      <li>Despu&eacute;s del cierre, quien salga solo puede volver a entrar comprando &oacute;rdenes de venta secundarias - al precio que el mercado pida.</li>
-      <li>El equipo de la plataforma proyecta el pr&oacute;ximo pool en <strong style="color:var(--white)">~60% APR, potencialmente tres d&iacute;gitos</strong> a medida que crece la red Sovren - pero los precios de los nodos suben, as&iacute; que quien entre despu&eacute;s compra a peores precios para un rendimiento similar.</li>
-      <li><strong style="color:var(--white)">Los primeros se llevan la mayor ventaja.</strong> Tasa asegurada, ventana completa, precio m&aacute;s bajo.</li>
-    </ul>
+<div class="stats"><div class="wrap">
+  <div><b>20%</b><span>APY fijo, de por vida del programa</span></div>
+  <div><b>40%</b><span>APR, ventana limitada de nodos</span></div>
+  <div><b>4</b><span>redes: Ethereum, Base, Arbitrum, Robinhood</span></div>
+  <div><b>100%</b><span>moneda estable &middot; t&uacute; guardas las llaves</span></div>
+</div></div>
+
+<section id="earn"><div class="wrap">
+  <div class="eyebrow">De d&oacute;nde sale el rendimiento</div>
+  <h2>Dos pozos. Dos motores de ingresos reales.</h2>
+  <p class="sub">Tu dep&oacute;sito no se presta a extra&ntilde;os ni alimenta promesas. Financia m&aacute;quinas y servicios que ya cobran a clientes de verdad, y el ingreso de ese trabajo es lo que te paga a ti.</p>
+  <div class="dual">
+    <div class="pool-card">
+      <div class="rate">20% <small>APY fijo</small></div>
+      <h3>World Mobile &mdash; el ancla permanente</h3>
+      <p>Un negocio de telecomunicaciones real: gente que paga por servicio de telefonia e internet todos los meses. Esa factura mensual es el ingreso que respalda tu 20% APY &mdash; inter&eacute;s compuesto anual, ganado y acreditado <strong>todos los d&iacute;as</strong>, sin fecha de cierre. Depositas en USDC, USDT o ETH y el inter&eacute;s corre solo.</p>
+      <span class="pill">Este es el producto de siempre. No cierra.</span>
+    </div>
+    <div class="pool-card hot">
+      <div class="rate">40% <small>APR</small></div>
+      <h3>Sovren &mdash; la ventana limitada</h3>
+      <p>Una econom&iacute;a de nodos: tu dep&oacute;sito compra licencias y equipos que sirven internet, almacenamiento y ancho de banda. Los clientes pagan por usar esos servicios, la cadena verifica el trabajo y ese ingreso financia el pozo. Tier 01 paga <strong>40% APR</strong> &mdash; tasa simple, sin componer &mdash; garantizada cinco meses por la plataforma.</p>
+      <span class="pill">Ventana Tier 01 &mdash; se cierra con un dep&oacute;sito grande en diciembre</span>
+    </div>
   </div>
-  <p class="lead" style="margin-top:20px;font-size:15px">Fuentes: anuncios del equipo de la plataforma (25 y 31 de octubre de 2026) y el panel en vivo. Las proyecciones son del equipo, no nuestras - nada aqu&iacute; est&aacute; garantizado, y las tasas cambian.</p>
 </div></section>
 
-<section><div class="wrap steps">
-  <div class="eyebrow">De d&oacute;lares al dep&oacute;sito</div>
-  <h2>Cuatro pasos. Una sola sesi&oacute;n.</h2>
-  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Consigue una wallet no custodial</h3>
-    <p class="lead" style="font-size:16px;margin-top:6px">Instala <strong style="color:var(--white)">MetaMask</strong> o <strong style="color:var(--white)">Rabby</strong> (extensi&oacute;n de navegador + app del tel&eacute;fono). Escribe tu frase semilla en papel - nunca la escribas en un sitio web, nunca le tomes captura, nunca la compartas. Ni siquiera con nosotros. No custodial significa que T&Uacute; tienes las llaves - sin banco, sin empresa, sin Wise Stake Consulting en medio. Ese es el punto.</p></div></div>
-  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Convierte d&oacute;lares en USDC</h3>
-    <p class="lead" style="font-size:16px;margin-top:6px">Tres formas abajo - elige la que te quede. Las tres terminan en el mismo lugar: USDC (una stablecoin d&oacute;lar) en tu wallet, listo para depositar.</p></div></div>
-  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Conoce tu red</h3>
-    <p class="lead" style="font-size:16px;margin-top:6px">Las b&oacute;vedas corren en cuatro redes. Tu USDC necesita estar en la misma red en la que depositas:</p>
-    <div class="chains"><span class="chain">Ethereum</span><span class="chain">Base</span><span class="chain">Arbitrum One</span><span class="chain">Robinhood Chain</span></div>
-    <p class="lead" style="font-size:16px;margin-top:12px">&iquest;Primer dep&oacute;sito? Ethereum es lo m&aacute;s simple - y las herramientas integradas de la app te permiten transferir o intercambiar entre redes despu&eacute;s de entrar.</p></div></div>
-  <div class="step"><div><h3 style="color:var(--gold);font-size:20px">Deposita</h3>
-    <p class="lead" style="font-size:16px;margin-top:6px">Abre la plataforma por nuestro enlace de referencia, conecta tu wallet, elige tu b&oacute;veda y coloca tu dep&oacute;sito. El panel muestra tasas, buffers de recompensas y tu posici&oacute;n en vivo.</p>
-    <p style="margin-top:18px"><a class="cta" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" target="_blank" rel="noopener">DEPOSITA YA &rarr;</a></p></div></div>
+<section id="window" class="tint"><div class="wrap">
+  <div class="eyebrow">La matem&aacute;tica de entrar temprano</div>
+  <h2>Por qu&eacute; los primeros se llevan la mejor tasa.</h2>
+  <p class="sub">El pozo actual de nodos cierra cuando entra un dep&oacute;sito grande en diciembre. Los pozos que vienen despu&eacute;s pagan menos por dise&ntilde;o: a medida que sube el precio de SOVR, cada dep&oacute;sito compra menos infraestructura, as&iacute; que los mismos ingresos de la red rinden una tasa m&aacute;s baja. El temprano es donde est&aacute; el 40%.</p>
+  <p class="sub">Y dicha con claridad: el 40% no es para siempre. Es la ventana Tier 01, garantizada cinco meses. Lo permanente es el 20% de World Mobile &mdash; ese es el ancla; el 40% es el empuj&oacute;n de entrada temprana.</p>
 </div></section>
 
-<section><div class="wrap">
-  <div class="eyebrow">Qui&eacute;n controla el dinero</div>
+<section id="how"><div class="wrap">
+  <div class="eyebrow">El camino completo</div>
+  <h2>Cuatro pasos. Una sola sentada.</h2>
+  <div class="steps">
+    <div class="stepcard"><b>1</b><h3>Baja una billetera</h3><p>MetaMask o Rabby, extensi&oacute;n del navegador o app. Quince segundos, gratis. Tu billetera guarda las llaves: nadie m&aacute;s puede mover tu dinero, ni nosotros.</p></div>
+    <div class="stepcard">
+      <b>2</b><h3>Consigue USDC</h3>
+      <p>USDC es una moneda digital atada al d&oacute;lara: 1 USDC vale 1 d&oacute;lara. Tres caminos conocidos:</p>
+      <div class="routes">
+        <a href="https://www.coinbase.com/" rel="noopener">Coinbase</a>
+        <a href="https://robinhood.com/usd-crypto/HGJ7/USDC" rel="noopener">Robinhood</a>
+        <a href="https://cash.app/" rel="noopener">Cash App</a>
+      </div>
+      <p class="fine">En Robinhood, compra USDC directamente. Si compras Bitcoin primero, convi&eacute;rtelo a USDC <em>antes</em> de salir de la app &mdash; el Bitcoin enviado a una b&oacute;veda de USDC se pierde, y no hay quien lo devuelva.</p>
+    </div>
+    <div class="stepcard"><b>3</b><h3>Elige la red</h3><p>Cuatro caminos, mismo destino: Ethereum, Base, Arbitrum o Robinhood Chain. Si es tu primera vez, quédate en la red donde ya tienes el saldo &mdash; las cuatro llegan al mismo pozo.</p></div>
+    <div class="stepcard"><b>4</b><h3>Deposita</h3><p>Abre la b&oacute;veda, conecta la billetera, elige monto y red, firma. El inter&eacute;s empieza a correr de inmediato y se acredita diario. Retiras cuando t&uacute; quieras.</p></div>
+  </div>
+</div></section>
+
+<section class="tint" id="keys"><div class="wrap">
+  <div class="eyebrow">Auto-custodia</div>
   <h2>Tu dinero. Tus llaves. Tu decisi&oacute;n.</h2>
-  <p class="lead">Aqu&iacute; no hay una "cuenta de dep&oacute;sito" ni nadie a quien pedirle un retiro. Tus fondos nunca est&aacute;n en una empresa - viven en una posici&oacute;n que es tuya, controlada por la llave de tu wallet, en contratos p&uacute;blicos que cualquiera puede auditar.</p>
-  <p class="lead" style="margin-top:14px">Ning&uacute;n administrador de la plataforma puede congelar, mover ni tocar tu posici&oacute;n. Ni Wise Soft, ni Wise Stake Consulting, ni nadie. No podemos ver tu frase semilla, no podemos firmar por ti, no podemos entrar. Colocar fondos es una transacci&oacute;n que solo tu wallet puede hacer. Salir - incluso cuando significa que un comprador toma tu posici&oacute;n - es una transacci&oacute;n que solo tu wallet puede iniciar. La &uacute;nica forma de perder el control de estos fondos es perder o compartir tu propia llave - por eso las reglas de la frase semilla del paso 1 importan m&aacute;s que cualquier contrase&ntilde;a que te hayan dicho proteger.</p>
+  <p class="sub">Nada de esto pasa por una cuenta bancaria ni por nosotros. Tu USDC vive en tu billetera, t&uacute; firmas cada dep&oacute;sito y cada retiro, y las b&oacute;vedas no piden tu nombre, tu direcci&oacute;n ni tu SSN. La contraparte es una: la frase de recuperaci&oacute;n de tu billetera es la &uacute;nica llave que existe. Gu&aacute;rdala escrita en papel, fuera de internet, y nunca se la mandes a nadie.</p>
 </div></section>
 
-<section><div class="wrap">
-  <div class="eyebrow">Paso 2 - elige tu puerta de entrada</div>
-  <h2>D&oacute;lares dentro. Tres puertas.</h2>
-  <div class="ramps">
-    <div class="ramp"><span class="tag">La m&aacute;s f&aacute;cil</span><h3>Coinbase</h3><p>Crea una cuenta, verifica tu identidad, compra USDC con tu tarjeta de d&eacute;bito o cuenta bancaria, y luego ret&iacute;ralo a la direcci&oacute;n de tu wallet en Ethereum. Diez minutos para un principiante.</p><a class="btn" href="https://coinbase.com/join/BZVEJBM?src=ios-link" target="_blank" rel="noopener">Abre Coinbase &rarr;</a></div>
-    <div class="ramp"><span class="tag">Si ya tienes la app</span><h3>Robinhood</h3><p>Compra USDC directamente en la app de Robinhood, y luego ret&iacute;ralo a tu wallet en Robinhood Chain - la misma red donde corre una de las b&oacute;vedas. El paso clave es el retiro a tu propia wallet; no te quedes en "ya lo compr&eacute;".</p><a class="btn" href="https://join.robinhood.com/ramond143" target="_blank" rel="noopener">Abre Robinhood &rarr;</a></div>
-    <div class="ramp"><span class="tag hot">Avanzada</span><h3>Cash App</h3><p>La ruta Bitcoin: compra BTC en Cash App, ret&iacute;ralo a tu propia wallet de Bitcoin, convi&eacute;rtelo en USDC, y luego env&iacute;a el USDC a tu wallet. M&aacute;s pasos - elige esta ruta solo si te sientes c&oacute;modo, o tr&aacute;ela a una sesi&oacute;n gratis y la recorremos contigo.</p><a class="btn" href="https://cash.app/refer/HQPWCNW" target="_blank" rel="noopener">Abre Cash App &rarr;</a></div>
+<section id="faq"><div class="wrap">
+  <div class="eyebrow">Preguntas</div>
+  <h2>Respuestas derechas.</h2>
+  <details><summary>&iquest;El 20% y el 40% est&aacute;n garantizados?</summary><div class="a">El 20% APY lo publica World Mobile como la tasa fija del programa y no lleva fecha de fin. El 40% APR de Sovren est&aacute; garantizado por la plataforma por cinco meses; despu&eacute;s, la tasa del pozo depende de los ingresos reales de la red. Nada en cripto es un CD bancario: deposita lo que puedas dejar trabajando.</div></details>
+  <details><summary>&iquest;Qui&eacute;n guarda mi dinero?</summary><div class="a">T&uacute;. El dep&oacute;sito vive en un contrato p&uacute;blico de la b&oacute;veda, no en una cuenta de nadie. T&uacute; firmas cada movimiento desde tu billetera y puedes retirar cuando quieras. Nosotros no vemos tu saldo ni podemos tocarlo.</div></details>
+  <details><summary>&iquest;El 40% es para siempre?</summary><div class="a">No, y te lo decimos claro: es la ventana Tier 01, con el 40% garantizado cinco meses. Los pozos futuros pagan tasas m&aacute;s bajas por dise&ntilde;o. Lo permanente es el 20% de World Mobile.</div></details>
+  <details><summary>&iquest;Y cuando el pozo de nodos cierre?</summary><div class="a">Los dep&oacute;sitos ya hechos siguen ganando seg&uacute;n las reglas de su pozo. Los nuevos entran al siguiente pozo, con su tasa. Por eso diciembre importa: es la &uacute;ltima llamada del 40%.</div></details>
+  <details><summary>&iquest;Cu&aacute;l es la diferencia entre 20% APY y 40% APR?</summary><div class="a">APY compone: el inter&eacute;s que ganas empieza a ganar inter&eacute;s tambi&eacute;n, y al a&ntilde;o terminas por encima del n&uacute;mero. APR es tasa simple: el mismo porcentaje cada a&ntilde;o sobre lo depositado, sin bola de nieve. El 40% no compone &mdash; puedes retirar y reinvertir t&uacute; mismo si quieres el efecto.</div></details>
+  <details><summary>&iquest;Me acompa&ntilde;an en todo esto?</summary><div class="a">S&iacute;. Reserva una sesi&oacute;n gratis y hacemos el dep&oacute;sito junto, pantalla compartida, t&uacute; firmas. Sin costo y sin compromiso &mdash; prefiero preguntas antes que lamentos.</div></details>
+</div></section>
+
+<section id="switch" class="tint"><div class="wrap">
+  <div class="eyebrow">La invitaci&oacute;n</div>
+  <h2>&iquest;Te gustar&iacute;a que tu plan de tel&eacute;fono te haga due&ntilde;o de la red?</h2>
+  <p class="sub">World Mobile no es solo el pozo donde depositas: es una compa&ntilde;&iacute;a de telefon&iacute;a donde los nodos son de la gente. Cambia tu plan y dejas de rentarle a la torre de al lado &mdash; el mismo servicio, y la red te paga por pertenecer. M&aacute;s de 13,346 nodos en el aire, 3 millones de suscriptores, 3 continentes.</p>
+  <div class="plans">
+    <div class="plan"><div class="pname">Starter</div><div class="pprice">$15<span>/mes</span></div><ul><li>2 GB de datos r&aacute;pidos</li><li>Llamadas y textos ilimitados</li><li>eSIM en minutos</li></ul><a class="btn btn-ghost" href="https://worldmobile.com/" rel="noopener">Ver plan</a></div>
+    <div class="plan hot"><div class="ptag">El m&aacute;s tomado</div><div class="pname">Standard</div><div class="pprice">$25<span>/mes</span></div><ul><li>8 GB de datos r&aacute;pidos</li><li>Llamadas y textos ilimitados</li><li>eSIM en minutos</li></ul><a class="btn btn-ghost" href="https://worldmobile.com/" rel="noopener">Ver plan</a></div>
+    <div class="plan"><div class="pname">Unlimited</div><div class="pprice">$40<span>/mes</span></div><ul><li>25 GB de datos r&aacute;pidos, luego lento</li><li>Llamadas y textos ilimitados</li><li>eSIM en minutos</li></ul><a class="btn btn-ghost" href="https://worldmobile.com/" rel="noopener">Ver plan</a></div>
+    <div class="plan"><div class="pname">Unlimited+</div><div class="pprice">$55<span>/mes</span></div><ul><li>50 GB de datos r&aacute;pidos, luego lento</li><li>Llamadas y textos ilimitados</li><li>eSIM en minutos</li></ul><a class="btn btn-ghost" href="https://worldmobile.com/" rel="noopener">Ver plan</a></div>
   </div>
-  <div class="warnbox"><strong>Lee esto antes de la ruta de Cash App:</strong> Bitcoin es una red distinta. Nunca env&iacute;es BTC a una direcci&oacute;n de Ethereum (como tu direcci&oacute;n de MetaMask) - se perder&aacute; para siempre. El BTC primero debe convertirse en USDC en un servicio de intercambio, y solo entonces enviarse a tu wallet. Si alg&uacute;n paso de esa oraci&oacute;n fue nuevo para ti, usa Coinbase. En cripto no hay deshacer.</div>
-</div></section>
-
-<section><div class="wrap faq">
-  <div class="eyebrow">Preguntas que todos hacen</div>
-  <h2>Respuestas directas.</h2>
-  <div><h3>&iquest;Est&aacute; garantizado mi dep&oacute;sito?</h3><p>Con honestidad: tu dep&oacute;sito es USDC, una stablecoin d&oacute;lar - tu capital no se mueve con los precios de los tokens. Ese es el punto fuerte: el 40% paga sobre dinero estable. No es libre de riesgo: USDC est&aacute; dise&ntilde;ado para mantener $1 pero lo emite una empresa y ha temblado antes; el rendimiento depende del buffer de recompensas de la plataforma y de los ingresos reales de los activos; las salidas pueden tener fila; y los contratos, aunque exactos, siguen siendo software. Estable describe tu dep&oacute;sito, no el futuro. Haz tu propia investigaci&oacute;n, y nunca depongas dinero que necesites recuperar en una fecha fija.</p></div>
-  <div><h3>&iquest;Ustedes guardan mi dinero?</h3><p>No. Wise Stake Consulting nunca toca tus fondos. Depositas desde tu propia wallet al protocolo. Ganamos comisi&oacute;n de referencia de la plataforma por los dep&oacute;sitos hechos por nuestro enlace - esa es nuestra divulgaci&oacute;n, de entrada.</p></div>
-  <div><h3>&iquest;Qu&eacute; pasa cuando el pool se cierra?</h3><p>Las posiciones existentes siguen ganando su tasa asegurada por lo que queda de la ventana. Las entradas nuevas se cierran. El equipo de la plataforma ha declarado que el pr&oacute;ximo pool abrir&aacute; con una tasa distinta y precios de nodos m&aacute;s altos - su proyecci&oacute;n es ~60% APR, potencialmente tres d&iacute;gitos a medida que crece la red. Nada est&aacute; escrito hasta que el capital llegue.</p></div>
-  <div><h3>&iquest;D&oacute;nde hablo con una persona?</h3><p>&Uacute;nete a una sesi&oacute;n gratis de 40 minutos o reserva una consulta en <a href="/es/">wisestake.consulting</a>. Recorremos wallets, redes y dep&oacute;sitos contigo - ese es el trabajo.</p></div>
+  <div class="strip">
+    <div><b>13,346+</b><span>AirNodes en el aire</span></div>
+    <div><b>3M+</b><span>suscriptores</span></div>
+    <div><b>3</b><span>continentes</span></div>
+    <div><b>$165</b><span>nodo desde</span></div>
+  </div>
+  <p class="sub" style="margin-top:24px">Los planes te dejan escuchar la red desde adentro. Los nodos &mdash; desde $165 &mdash; son la parte que te hace due&ntilde;o: tu equipo atiende usuarios reales y cobra por ello. Y Stratomast, la torre estratosf&eacute;rica a 60,000 pies, llega a finales de 2027.</p>
 </div></section>
 
 <section id="stay"><div class="wrap">
-  <div class="eyebrow">&iquest;A&uacute;n no est&aacute;s listo para depositar? Mantente cerca.</div>
-  <h2>Dos formas de entrar - las dos sin presi&oacute;n.</h2>
-  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:26px">
-    <div class="ramp"><span class="tag">El ciclo</span><h3>S&eacute; parte de la pr&oacute;xima sesi&oacute;n</h3><p>Un webinar gratis en vivo que explica el cuadro completo - stakes, b&oacute;vedas, el cierre, las matem&aacute;ticas - con preguntas abiertas al final. &Uacute;nete a la lista y la invitaci&oacute;n llega a tu correo. Pregunta lo que quieras; sin gui&oacute;n de venta.</p>
-      <div class="notify" style="max-width:100%;margin:18px 0 0"><div class="ml-embedded" data-form="W06wws"></div></div></div>
-    <div class="ramp"><span class="tag hot">Directo</span><h3>Reserva una sesi&oacute;n</h3><p>&iquest;Quieres uno a uno? Escr&iacute;benos con lo que intentas hacer y lo organizamos - recorrido gratis de 40 minutos para empezar, o una consulta completa para stakes, paquetes y programas.</p>
-      <p style="margin-top:18px"><a class="btn" href="mailto:dm@wisestake.consulting?subject=Sesi%C3%B3n%20con%20Wise%20Stake">Escr&iacute;benos para reservar &rarr;</a></p>
-      <p style="margin-top:12px;color:var(--muted);font-size:13px">&iquest;Prefieres paso a paso con una persona? Cada correo de la lista tiene bot&oacute;n de respuesta que tambi&eacute;n nos llega.</p></div>
-  </div>
+  <div class="eyebrow">Compa&ntilde;&iacute;a</div>
+  <h2>Nadie deber&iacute;a hacer esto solo.</h2>
+  <p class="sub">Sesi&oacute;n en vivo, sin costo: revisamos tu billetera, tu USDC y tu red juntos, en pantalla compartida, y t&uacute; firmas cada paso. O simplemente ven a preguntar &mdash; tambi&eacute;n vale.</p>
+  <a class="btn btn-gold" href="/es/book-a-session/">Reserva tu sesi&oacute;n gratis</a>
 </div></section>
 
-
-<section><div class="wrap">
-  <div class="eyebrow">M&aacute;s puertas en este sitio</div>
-  <h2>Las mismas b&oacute;vedas, otras dos ventanas.</h2>
-  <div class="ramps">
-    <div class="ramp"><span class="tag">20% APY</span><h3>World Mobile</h3><p>La compa&ntilde;&iacute;a de su gente. La estrategia de stablecoins de World Mobile paga 20% APY, compuesto - y el bot&oacute;n de dep&oacute;sito en esa p&aacute;gina lleva nuestro enlace de referencia, igual que aqu&iacute;.</p><a class="btn" href="/world-mobile/es/">Ver World Mobile &rarr;</a></div>
-    <div class="ramp"><span class="tag hot">40% APR</span><h3>Sovren Nodes</h3><p>El pool respaldado por nodos - la ventana del 40% descrita arriba. Las matem&aacute;ticas detr&aacute;s de la tasa, la cuenta regresiva del Tier 01, y la gu&iacute;a para quedar listo para depositar.</p><a class="btn" href="/sovren/es/">Ver Sovren &rarr;</a></div>
-  </div>
+<section class="final"><div class="wrap">
+  <h2>El 20% est&aacute; siempre encendido. La ventana del 40%, no.</h2>
+  <p class="sub">Diciembre cierra el pozo Tier 01. Despu&eacute;s de eso, los nodos ser&aacute;n de los que entraron primero.</p>
+  <a class="btn btn-gold" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" rel="noopener">Deposita ahora &rarr;</a>
 </div></section>
 
-<section class="center"><div class="wrap">
-  <h2 style="margin-bottom:10px">La ventana est&aacute; abierta. No seguir&aacute; abierta.</h2>
-  <p class="lead" style="margin:0 auto 26px">Prep&aacute;rate para depositar y mu&eacute;vete - o espera el pr&oacute;ximo pool a peores precios. De cualquier forma, ahora ya lo sabes.</p>
-  <a class="cta" href="https://app.wisetoken.com/?ref=0x84EBf885B2655e8be3D3492ca81DFaCad04B5e7f" target="_blank" rel="noopener">DEPOSITA YA &rarr;</a>
-</div></section>
-
-<div class="wrap disclaimer">
-No es asesor&iacute;a financiera. Nada en esta p&aacute;gina es una recomendaci&oacute;n de comprar, vender o mantener ning&uacute;n activo. Wise Stake Consulting es un negocio de educaci&oacute;n y consultor&iacute;a, no un corredor, distribuidor, asesor de inversi&oacute;n ni banco. Las tasas (20% APY en b&oacute;vedas de stablecoins compuestas; 40% APR en el pool de nodos que no compone; ~60% APR proyectados en un pool futuro) son mostradas por la plataforma al momento de escribir esto (1 de noviembre de 2026), no est&aacute;n garantizadas y cambian con el tiempo. El dep&oacute;sito de diciembre, el cierre del pool y los tiempos son declaraciones p&uacute;blicas del equipo de la plataforma, no compromisos. USDC busca mantener $1 pero no est&aacute; garantizado (riesgo de despegue); el rendimiento depende del buffer de recompensas de la plataforma y de los ingresos reales de los activos; la salida puede estar sujeta a fila; aplican riesgos de contratos inteligentes y de plataforma. Wise Stake Consulting gana comisi&oacute;n de referencia por los dep&oacute;sitos hechos por los enlaces de esta p&aacute;gina y puede tener posiciones propias. Haz tu propia investigaci&oacute;n.
-</div>
-<footer><div class="wrap">Wise Stake Consulting, LLC &middot; wisestake.consulting &middot; <a href="/es/" style="color:#6b7590">Inicio</a><br>Espa&ntilde;ol: <a href="mailto:dm@wisestake.consulting" style="color:#6b7590">dm@wisestake.consulting</a> (Denise)</div></footer>
+<footer class="site"><div class="wrap">
+  <p class="fnote">Wise Stake Consulting, LLC ofrece consultor&iacute;a y educaci&oacute;n de negocios solamente. Nada aqu&iacute; es consejo financiero, legal o de impuestos, y no se promete ning&uacute;n rendimiento. Las tasas son las publicadas por las plataformas al momento de escribir y cambian con el tiempo. Los activos digitales tienen riesgo, incluyendo la p&eacute;rdida del capital. Los enlaces de referido generan cr&eacute;dito para Wise Stake Consulting sin costo para ti. El b&uacute;ho es un homenaje a la herencia de la comunidad de Wise y una marca independiente de Wise Stake Consulting, LLC. &copy; 2026 Wise Stake Consulting LLC &middot; wisestake.consulting &middot; wisestake.eth</p>
+</div></footer>
 </body>
 </html>
