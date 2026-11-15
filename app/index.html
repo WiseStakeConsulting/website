@@ -168,7 +168,11 @@ if(window.ethereum){
   });
 }
 
+let _connecting=false;
 async function connect(){
+  if(_connecting)return;
+  _connecting=true;
+  try{
   if(!window.ethereum){alert('Install MetaMask to use the console.');return;}
   provider=new ethers.providers.Web3Provider(window.ethereum);
   await provider.send('eth_requestAccounts',[]);
@@ -184,6 +188,7 @@ async function connect(){
   await loadBundles();
   await loadV3();
   if(allowed)await loadPickers();
+  }finally{_connecting=false;}
 }
 
 async function loadBundles(){
@@ -245,7 +250,8 @@ async function loadPickers(){
   ss.innerHTML='';
   try{
     const stakes=await sigC.walletOfOwner(acct);
-    stakes.forEach(t=>{const o=document.createElement('option');o.value=t.toString();o.textContent='Signature Stake #'+t.toString();ss.appendChild(o);});
+    const seen=new Set();
+    stakes.forEach(t=>{const v=t.toString();if(seen.has(v))return;seen.add(v);const o=document.createElement('option');o.value=v;o.textContent='Signature Stake #'+v;ss.appendChild(o);});
     if(!stakes.length){const o=document.createElement('option');o.textContent='No stakes in this wallet';ss.appendChild(o);}
   }catch(e){ss.innerHTML='<option>Could not read stakes</option>';}
 }
@@ -372,7 +378,7 @@ async function loadV3(){
       const mine=acct&&owner.toLowerCase()===acct;
       const relTs=rel&&rel.gt(0)?rel.toNumber():0;
       const relNow=relTs*1000, relDone=relTs&&Date.now()>=relNow;
-      const relTxt=relTs?(relDone?new Date(relNow).toLocaleString()+' UTC - window OPEN':'window opens '+new Date(relNow).toLocaleString()+' UTC'):'not requested';
+      const relTxt=relTs?(relDone?new Date(relNow).toLocaleString([],{timeZone:'UTC'})+' UTC - window OPEN':'window opens '+new Date(relNow).toLocaleString([],{timeZone:'UTC'})+' UTC'):'not requested';
       let patrons=b.patron?`<div class="kv"><span>Patron</span><b class="gold">${label(b.patron)} - ${(b.patronBps/100)}%</b></div>`:'<div class="kv"><span>Patrons</span><b>none - yield follows the receipt owner</b></div>';
       html+=`<div class="panel"><h3>Bundle #${i} <span class="badge ${b.active?'live':'off'}">${b.active?'Active':'Closed'}</span><span class="badge">V3</span></h3>
       <div class="kv"><span>Receipt owner</span><b>${label(owner)}</b></div>
