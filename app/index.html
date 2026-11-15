@@ -331,7 +331,7 @@ async function bundleRaw(i){
   const data='0x'+ethers.utils.id('bundles(uint256)').slice(2,10)+i.toString(16).padStart(64,'0');
   const r=await provider.call({to:V3,data:data});
   const words=[];for(let k=2;k<r.length;k+=64)words.push(r.substr(k,64));
-  const dec=h=>new ethers.BigNumber(h,16);
+  const dec=h=>ethers.BigNumber.from(h);
   if(words.length>=18){
     return {cardId:dec(words[0]),patrons:words.slice(2,8).map(w=>'0x'+w.slice(24)),
             patronBps:words.slice(8,14).map(w=>dec(w).toNumber()),
